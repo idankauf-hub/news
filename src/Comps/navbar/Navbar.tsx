@@ -1,7 +1,7 @@
 import React from 'react'
 import "./navbar.css"
 import { ReactComponent as Logo } from '../../Assets/Dispatcher Logo.svg';
-
+import Search from '../search/Search';
 
 export const Navbar = () => {
   return (
@@ -9,9 +9,7 @@ export const Navbar = () => {
       <div className='logo'>
         <Logo/>
       </div>
-      <div className='search'>
-        search comp here
-      </div>
+        <Search/>
     </div>
   )
 }
