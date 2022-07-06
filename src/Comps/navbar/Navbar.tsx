@@ -1,15 +1,21 @@
 import React from 'react'
-import "./navbar.css"
-import { ReactComponent as Logo } from '../../Assets/Dispatcher Logo.svg';
+import {NavBarContainer,Logo} from './style'
+import { ReactComponent as LogoIcon } from '../../Assets/Dispatcher Logo.svg';
 // import Search from '../search/Search';
 
-export const Navbar = () => {
+export interface NavbarProps {
+  title: string;
+  body: string;
+  withFooter: boolean;
+}
+
+export const Navbar = ({ title, body, withFooter }: NavbarProps) => {
   return (
-    <div className='navbar'>
-      <div className='logo'>
-        <Logo/>
-      </div>
+    <NavBarContainer>
+      <Logo>
+        <LogoIcon/>
+      </Logo>
         {/* <Search/> */}
-    </div>
+    </NavBarContainer>
   )
 }

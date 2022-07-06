@@ -4,7 +4,7 @@ import './App.css';
 import { Navbar } from './Comps/navbar/Navbar';
 function App() {
   return (
-    <Navbar/>
+    <Navbar title={'saddsfsdfdsffsdf'} body={''} withFooter={false}/>
   );
 }
 
