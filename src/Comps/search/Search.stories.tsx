@@ -1,12 +1,12 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
-import {Navbar} from "./Navbar";
+import Search from "./Search";
 
 export default {
-  component: Navbar,
-  title: "Components/Navbar",
+  component: Search,
+  title: "Components/Search",
 } as Meta;
 
-const Template: Story = () => <Navbar />;
+const Template: Story = () => <Search />;
 
 export const Primary = Template.bind({});

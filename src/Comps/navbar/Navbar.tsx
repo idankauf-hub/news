@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavBarContainer,Logo} from './style'
-import { LogoIcon } from '../../Icons/index';
-// import Search from '../search/Search';
+import { LogoIcon } from '../../Icons'
+import Search from '../search/Search';
 
 
 
@@ -11,7 +11,7 @@ export const Navbar = () => {
       <Logo>
         <LogoIcon/>
       </Logo>
-        {/* <Search/> */}
+        <Search/>
     </NavBarContainer>
   )
 }
