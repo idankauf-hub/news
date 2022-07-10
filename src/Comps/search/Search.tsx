@@ -6,9 +6,22 @@ import {
   Input,
   VerticalLine,
 } from "./style";
-import { useDebounce } from 'usehooks-ts'
 
 // import DropDown from '../dropdown/DropDown';
+
+function useDebounce<T>(value: T, delay?: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [value, delay])
+
+  return debouncedValue
+}
 
 const Search = () => {
   const [input, setInput] = useState<string>("");
@@ -18,7 +31,7 @@ const Search = () => {
     setInput(event.currentTarget.value)
     console.log(input)
   };
-  
+
   useEffect(() => {
    console.log(input)
   }, [debouncedValue])
