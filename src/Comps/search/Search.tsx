@@ -11,6 +11,8 @@ import {
 // import DropDown from '../dropdown/DropDown';
 interface SearchProps{
   placeholder:string;
+  recentSearches:string[]; //last searches per user - local storage
+
 
 }
 
