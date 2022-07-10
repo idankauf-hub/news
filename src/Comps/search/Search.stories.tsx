@@ -7,6 +7,6 @@ export default {
   title: "Components/Search",
 } as Meta;
 
-const Template: Story = () => <Search />;
+const Template: Story = () => <Search placeholder="Search" searchFunction={()=>{console.log("df")}} />;
 
 export const Primary = Template.bind({});
