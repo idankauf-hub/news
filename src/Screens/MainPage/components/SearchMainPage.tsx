@@ -13,7 +13,7 @@ export const SearchMainPage = () => {
 
   useEffect(() => {
     //call api
-    console.log(input); //do Http Query
+    console.log(input); 
   }, [debouncedValue]);
 
   return (

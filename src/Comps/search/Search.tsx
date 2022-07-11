@@ -1,6 +1,4 @@
-import React, { ChangeEvent, useState, useEffect, useRef } from "react";
-import { SearchIcon } from "../../Icons";
-import useDebounce from "../../Hooks/useDebounce";
+import React, { ChangeEvent} from "react";
 import {
   SearchFormContainer,
   SearchButton,
@@ -9,6 +7,7 @@ import {
 } from "./style";
 
 // import DropDown from '../dropdown/DropDown';
+
 interface SearchProps {
   placeholder?: string;
   searchFunction: (e: string) => void;
