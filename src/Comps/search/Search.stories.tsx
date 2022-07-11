@@ -1,13 +1,12 @@
-// import React from "react";
-// import { Meta, Story } from "@storybook/react";
-// import Search from "./Search";
+ import React from "react";
+ import { Meta, Story } from "@storybook/react";
+ import Search from "./Search";
 
-// export default {
-//   component: Search,
-//   title: "Components/Search",
-// } as Meta;
+ export default {
+   component: Search,
+   title: "Components/Search",
+ } as Meta;
 
-// const Template: Story = () => <Search placeholder="Search" searchFunction={()=>{console.log("df")}} />;
+ const Template: Story = () => <Search placeholder="Search" input="" searchFunction={()=>{console.log("df")}} />;
 
-// export const Primary = Template.bind({});
-export{}
+ export const Primary = Template.bind({});

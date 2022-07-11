@@ -8,12 +8,12 @@ export const SearchMainPage = () => {
   const debouncedValue = useDebounce<string>(input, 500);
 
   const handleChange = (value: string) => {
-    setInput(value.toUpperCase());
+    setInput(value);
   };
 
   useEffect(() => {
     //call api
-    console.log(input); 
+    console.log(input); //do Http Query
   }, [debouncedValue]);
 
   return (
