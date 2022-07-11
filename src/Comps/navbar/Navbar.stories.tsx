@@ -7,3 +7,6 @@ export default {
   title: "Components/Navbar",
 } as Meta;
 
+const Template: Story = () => <Navbar />;
+
+export const Primary = Template.bind({});
