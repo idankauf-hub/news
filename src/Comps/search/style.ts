@@ -21,10 +21,10 @@ left: 16.75px;
 top: 13px;
 `;
 
-export const Input = styled.input.attrs({ 
-    type: 'input',
-    placeholder:"Search"
-})`
+export const Input = styled.input.attrs(({ placeholder }) => ({
+  type:  "input",
+  placeholder:placeholder
+}))`
 width: 100%;
 border-radius: 10px;
 padding: 9px 4px 9px 56px;
