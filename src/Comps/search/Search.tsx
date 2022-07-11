@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState ,useEffect,useRef} from 'react';
+import React, { ChangeEvent, useState, useEffect, useRef } from "react";
 import { SearchIcon } from "../../Icons";
-import useDebounce from '../../Hooks/useDebounce'
+import useDebounce from "../../Hooks/useDebounce";
 import {
   SearchFormContainer,
   SearchButton,
@@ -9,35 +9,32 @@ import {
 } from "./style";
 
 // import DropDown from '../dropdown/DropDown';
-interface SearchProps{
-  placeholder:string;
-  debounceTime?:number;
-  searchFunction: (e: string) => void
+interface SearchProps {
+  placeholder?: string;
+  searchFunction: (e: string) => void;
+  input: string;
+  Icon?: () => JSX.Element;
   //recentSearches:string[]; //last searches per user - local storage
 }
 
-const Search:React.FC<SearchProps> = ({placeholder,searchFunction,debounceTime}) => {
-  const [input, setInput] = useState<string>("");
-  const debouncedValue = useDebounce<string>(input, debounceTime)
-
-  const handleSubmit=(event:React.FormEvent<HTMLFormElement>)=>{
-    event.preventDefault();
-    searchFunction(input);
+const Search: React.FC<SearchProps> = ({
+  Icon,
+  placeholder = "Search",
+  input,
+  searchFunction,
+}) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    searchFunction(event.currentTarget.value);
   };
 
-  const handleChange=(event: ChangeEvent<HTMLInputElement>)=>{
-    setInput(event.currentTarget.value)
-  };
-
-  useEffect(() => {
-      searchFunction(debouncedValue);
-  }, [debouncedValue])
   return (
-    <SearchFormContainer onSubmit={handleSubmit}>
-      <SearchButton>
-        <SearchIcon />
-      </SearchButton>
-      <Input placeholder={placeholder} onChange={handleChange}></Input>
+    <SearchFormContainer>
+      <SearchButton>{Icon && <Icon />}</SearchButton>
+      <Input
+        placeholder={placeholder}
+        onChange={handleChange}
+        value={input}
+      ></Input>
       <VerticalLine></VerticalLine>
       {/* <DropDown/> */}
     </SearchFormContainer>

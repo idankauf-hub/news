@@ -1,22 +1,18 @@
-import React, { ChangeEvent, useState ,useEffect,useRef} from 'react';
-import {NavBarContainer,Logo} from './style'
-import { LogoIcon } from '../../Icons'
-import Search from '../search/Search';
-
-
+import React, { ChangeEvent, useState, useEffect, useRef } from "react";
+import { NavBarContainer, Logo } from "./style";
+import { LogoIcon } from "../../Icons";
+import Search from "../search/Search";
+import useDebounce from "../../Hooks/useDebounce";
+import { SearchMainPage } from "../../Screens/MainPage/components/SearchMainPage";
 
 export const Navbar = () => {
-
-  const searchApi=(query:string)=>{
-    console.log(query) //do Http Query
-  };
-
   return (
     <NavBarContainer>
       <Logo>
-        <LogoIcon/>
+        <LogoIcon />
       </Logo>
-        <Search placeholder='Search' searchFunction={searchApi} debounceTime={1000}/>
+      <SearchMainPage />
     </NavBarContainer>
-  )
-}
+  );
+};
+//  drop down - pass all types of data (string[], {Icon, value}[])
