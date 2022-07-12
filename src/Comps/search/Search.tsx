@@ -6,7 +6,7 @@ import {
   VerticalLine,
 } from "./style";
 
-// import DropDown from '../dropdown/DropDown';
+import DropDown from '../select/DropDown';
 
 interface SearchProps {
   placeholder?: string;
@@ -35,7 +35,7 @@ const Search: React.FC<SearchProps> = ({
         value={input}
       ></Input>
       <VerticalLine></VerticalLine>
-      {/* <DropDown/> */}
+      <DropDown/>
     </SearchFormContainer>
   );
 };
