@@ -19,7 +19,7 @@ interface CardProps {
   author?: string;
   title?: string;
   urlToImage?: string;
-  urlToNews?:string
+  urlToNews?:string|undefined;
 }
 const Card: React.FC<CardProps> = ({
   description,
@@ -44,7 +44,7 @@ const Card: React.FC<CardProps> = ({
         </Description>
         <BtnDiv>
           <Button
-            href={mockData.articles[0].url}
+            href={urlToNews || ""}
             target="_blank"
             variant="contained"
             endIcon={<RightArrow />}
