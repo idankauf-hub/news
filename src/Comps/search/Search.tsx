@@ -22,6 +22,7 @@ const Search: React.FC<SearchProps> = ({
   input,
   searchFunction,
 }) => {
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     searchFunction(event.currentTarget.value);
   };
@@ -35,7 +36,10 @@ const Search: React.FC<SearchProps> = ({
         value={input}
       ></Input>
       <VerticalLine></VerticalLine>
-      <DropDown/>
+      <DropDown data={[{value:"hey",Icon:() => (<p>dsf</p>)},{value:"hey",Icon:() => (<p>dsf</p>)},{value:"hey",Icon:() => (<p>dsf</p>)}]} 
+  
+      
+      />
     </SearchFormContainer>
   );
 };
