@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { ForwardIcon } from "../../Icons";
@@ -14,19 +14,16 @@ interface SelectProps<T> {
   // SelectedElement?: ({item}:{item:T}) => JSX.Element;
 }
 
-
-
 const DropDown = <T,>({
   selectedLabel,
   getDropDownValue,
   data,
   ListElement,
-}: // SelectedElement = ListElement
-SelectProps<T>) => {
+}: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // const [label, setLabel] = useState<string>(selectedLabel);
-  const handleClick = (value:T) => {
-    console.log(value)
+  const handleClick = (value: T) => {
+    console.log(value);
     // setLabel(value)
     getDropDownValue(value);
   };
@@ -35,7 +32,7 @@ SelectProps<T>) => {
     <DropDownContainer>
       <FormControl fullWidth>
         <CustomeSelect
-          onClick={()=>setIsOpen(!isOpen)}
+          onClick={() => setIsOpen(!isOpen)}
           fullWidth
           displayEmpty
           open={isOpen}
@@ -52,9 +49,9 @@ SelectProps<T>) => {
           }}
           IconComponent={ForwardIcon}
           // onChange={() => handleChange}
-          value={selectedLabel}
+          value={""}
         >
-          {data.map((item:T) => {
+          {data.map((item: T) => {
             return (
               <div onClick={() => handleClick(item)}>
                 <ListElement item={item}></ListElement>

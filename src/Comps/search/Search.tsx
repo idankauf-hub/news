@@ -23,7 +23,7 @@ interface Item {
 }
 
 const data: Item[] = [
-  { Icon: "f", title: " Everything" },
+  { Icon: "f", title: "Everything" },
   { title: "Top Headline" },
 ];
 
@@ -59,7 +59,6 @@ const Search: React.FC<SearchProps> = ({
       ></Input>
       <VerticalLine></VerticalLine>
       <DropDown
-        
         data={data}
         ListElement={ListElement}
         getDropDownValue={handleDropDown}
