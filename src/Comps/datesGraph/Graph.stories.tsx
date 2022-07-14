@@ -7,6 +7,6 @@ export default {
   title: "Components/Graph",
 } as Meta;
 
-const Template: Story = () => <Graph/>;
+// const Template: Story = () => <Graph/>;
 
 export const Primary = Template.bind({});
