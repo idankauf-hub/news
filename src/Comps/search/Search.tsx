@@ -1,12 +1,13 @@
-import React, { ChangeEvent} from "react";
+import React, { ChangeEvent, useState } from "react";
 import {
   SearchFormContainer,
   SearchButton,
   Input,
   VerticalLine,
 } from "./style";
+import MenuItem from "@mui/material/MenuItem";
 
-import DropDown from '../select/DropDown';
+import DropDown from "../select/DropDown";
 
 interface SearchProps {
   placeholder?: string;
@@ -16,13 +17,34 @@ interface SearchProps {
   //recentSearches:string[]; //last searches per user - local storage
 }
 
+interface Item {
+  Icon?: string; // jsx element
+  title: string;
+}
+
+const data: Item[] = [
+  { Icon: "f", title: " Everything" },
+  { title: "Top Headline" },
+];
+
+const ListElement = ({ item }: { item: Item }) => {
+  const { Icon, title } = item;
+  return <MenuItem value={title}>{title}</MenuItem>;
+};
+
+
+
 const Search: React.FC<SearchProps> = ({
   Icon,
   placeholder = "Search",
   input,
   searchFunction,
 }) => {
+  const [label, setLabel] = useState<string>();
 
+  const handleDropDown = (value: Item) => {
+    setLabel(value.title);
+  };
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     searchFunction(event.currentTarget.value);
   };
@@ -36,9 +58,11 @@ const Search: React.FC<SearchProps> = ({
         value={input}
       ></Input>
       <VerticalLine></VerticalLine>
-      <DropDown data={[{value:"hey",Icon:() => (<p>dsf</p>)},{value:"hey",Icon:() => (<p>dsf</p>)},{value:"hey",Icon:() => (<p>dsf</p>)}]} 
-  
-      
+      <DropDown
+        
+        data={data}
+        ListElement={ListElement}
+        getDropDownValue={handleDropDown}
       />
     </SearchFormContainer>
   );

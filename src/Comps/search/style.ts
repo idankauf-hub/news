@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import  {COLORS}  from "../../globalStyle";
 
+// export const FlexedRow = styled.div`
+// dis flex
+// flex-dir row
+// `
+// export const FlexedRowCenter = styled(FlexedRow)`
+// align items cemter
+// `
+
 export const SearchFormContainer = styled.form`
   display: flex;
   width: 424px;

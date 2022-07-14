@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Search from "../../../Comps/search/Search";
 import useDebounce from "../../../Hooks/useDebounce";
 import { SearchIcon } from "../../../Icons";
+import DropDown from "../../../Comps/select/DropDown";
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
@@ -17,14 +18,16 @@ export const SearchMainPage = () => {
   }, [debouncedValue]);
 
   return (
-    <Search
-      input={input}
-      searchFunction={handleChange}
-      Icon={() => (
-        <>
-          <SearchIcon />
-        </>
-      )}
-    />
+    <>
+      <Search
+        input={input}
+        searchFunction={handleChange}
+        Icon={() => (
+          <>
+            <SearchIcon />
+          </>
+        )}
+      />
+    </>
   );
 };
