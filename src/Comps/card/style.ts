@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { COLORS } from "../../globalStyle";
+import { DisplayRow ,DisplayCenterRow} from "../../layouts";
+
 interface ImageProps{
     urlImage:string | undefined;
 }
-export const CardContainer = styled.div`
-display: flex;
+export const CardContainer = styled(DisplayCenterRow)`
+
 position:relative;
-flex-direction: row;
-align-items: center;
 padding: 0px;
 width: 988px;
 height: 242px;
@@ -39,9 +39,8 @@ height: 226px;
 flex: 1;
 justify-content: space-between;
 `;
-export const DateDiv = styled.div`
-display: flex;
-flex-direction: row;
+export const DateDiv = styled(DisplayRow)`
+
 justify-content: space-between;
 align-items: flex-start;
 padding: 0px;
