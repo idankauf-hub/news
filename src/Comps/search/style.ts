@@ -33,7 +33,6 @@ padding: 9px 4px 9px 56px;
 export const VerticalLine = styled.div`
 position:absolute;
 border-left: 0.5px solid ${COLORS.lightgray};
-
 opacity: 0.5;
 width: 40px;
 height: 30px;

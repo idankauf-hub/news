@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { COLORS } from "../../globalStyle";
-export const NavBarContainer = styled.div`
+import { DisplayRow } from "../../layouts";
+
+
+export const NavBarContainer = styled(DisplayRow)`
 height:74px;
 width: 100%;
 background-color:${COLORS.darkblue} ;
-display: flex;
-flex-direction: row;
 align-items: center;
 gap: 250px;
 border: 1px solid ${COLORS.darkblue};
