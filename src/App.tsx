@@ -37,7 +37,7 @@ function App() {
   ];
   return (<>
     <Navbar/>
-    <Graph data={data as any}/>
+    <Graph data={data}/>
     </>
   );
 }
