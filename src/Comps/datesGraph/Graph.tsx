@@ -11,54 +11,17 @@ import {
   AreaChart,
   Area,
 } from "recharts";
-type DataProps = {
-  dates: string;
+
+type Data = {
+  month:string;
+  frequency:string|number;
 };
-const Graph: React.FC<DataProps> = ({ dates }) => {
-  const data = [
-    {
-      name: "MAR",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "APR",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "MAY",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "JUN",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "JUL",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "AUG",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "SEP",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
+interface GraphProps{
+  data:Data[];
+}
+
+const Graph: React.FC<GraphProps> = ({ data }) => {
+
   return (
     <div style={{ height: "149px", width: "412.19px" }}>
       <ResponsiveContainer width="100%" height="100%">
@@ -73,7 +36,7 @@ const Graph: React.FC<DataProps> = ({ dates }) => {
             </linearGradient>
           </defs>
           <XAxis
-            dataKey="name"
+            dataKey="month"
             axisLine={false}
             tickLine={false}
             stroke="#5A5A89"
@@ -84,7 +47,7 @@ const Graph: React.FC<DataProps> = ({ dates }) => {
           {/* <Tooltip /> */}
           <Area
             type="monotone"
-            dataKey="uv"
+            dataKey="frequency"
             stroke="#0058B9"
             strokeWidth={4}
             fillOpacity={1}
