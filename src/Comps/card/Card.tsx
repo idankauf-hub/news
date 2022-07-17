@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <CardContainer>
-      <CardImage urlImage={urlToImage}>df</CardImage>
+      <CardImage urlImage={urlToImage}></CardImage>
       <DataContainer>
         <DateDiv>
           <DateText>{publishedAt}</DateText>
