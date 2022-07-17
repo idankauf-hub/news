@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { ForwardIcon } from "../../Icons";
+import { SelectChangeEvent } from "@mui/material";
 
 import { COLORS } from "../../globalStyle";
 import { CustomeSelect, DropDownContainer } from "./style";
@@ -11,7 +12,7 @@ interface SelectProps<T> {
   getDropDownValue: (e: T) => void;
   data: T[]; // T = {Icon , title}
   ListElement: ({ item }: { item: T }) => JSX.Element;
-  // SelectedElement?: ({item}:{item:T}) => JSX.Element;
+  SelectedElement?: ({ item }: { item: T }) => JSX.Element;
 }
 
 const DropDown = <T,>({
@@ -19,20 +20,30 @@ const DropDown = <T,>({
   getDropDownValue,
   data,
   ListElement,
+  SelectedElement = ListElement,
 }: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const [label, setLabel] = useState<string>(selectedLabel);
+
+  const [label, setLabel] = useState<string>(selectedLabel!);
+
   const handleClick = (value: T) => {
-    console.log(value);
     // setLabel(value)
     getDropDownValue(value);
+  };
+  const handleChange = (
+    event: SelectChangeEvent<any>,
+    child: React.ReactNode
+  ) => {
+    console.log(event);
   };
 
   return (
     <DropDownContainer>
       <FormControl fullWidth>
         <CustomeSelect
+          value={({ item }: any) => <ListElement item={item} />}
           onClick={() => setIsOpen(!isOpen)}
+          onChange={handleChange}
           fullWidth
           displayEmpty
           open={isOpen}
@@ -48,13 +59,17 @@ const DropDown = <T,>({
             },
           }}
           IconComponent={ForwardIcon}
-          // onChange={() => handleChange}
-          value={""}
+          native={false}
+          renderValue={(value: any) => {
+            console.log(value);
+            return <ListElement item={value}/>;
+          }}
+          // value={label}
         >
           {data.map((item: T) => {
             return (
               <div onClick={() => handleClick(item)}>
-                <ListElement item={item}></ListElement>
+                <ListElement item={item} />
               </div>
             );
           })}

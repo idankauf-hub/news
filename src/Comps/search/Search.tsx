@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   SearchFormContainer,
   SearchButton,
@@ -40,14 +40,17 @@ const Search: React.FC<SearchProps> = ({
   input,
   searchFunction,
 }) => {
-  const [label, setLabel] = useState<string>();
+  // const [label, setLabel] = useState<string>();
 
   const handleDropDown = (value: Item) => {
-    setLabel(value.title);
+    console.log(value.title)
+    // setLabel(value.title);
+    // console.log(label)
   };
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     searchFunction(event.currentTarget.value);
   };
+
 
   return (
     <SearchFormContainer>
@@ -59,6 +62,7 @@ const Search: React.FC<SearchProps> = ({
       ></Input>
       <VerticalLine></VerticalLine>
       <DropDown
+        // selectedLabel={label}
         data={data}
         ListElement={ListElement}
         getDropDownValue={handleDropDown}
