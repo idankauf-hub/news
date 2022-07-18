@@ -16,29 +16,28 @@ background: ${COLORS.white};
 border: 1px solid ${COLORS.ghostwhite};
 box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
 border-radius: 20px;
-
-
 `;
 
+
 export const CardImage = styled.div<ImageProps>`
-display: inline-block;
-width: 244px;
-height: 242px;
-border-radius: 20px 0px 0px 20px;
-border: 1px solid ${COLORS.paleblue};
-background: url(${props => props.urlImage});
-background-size: 100% 100%;
+  display: inline-block;
+  width: 244px;
+  height: 242px;
+  border-radius: 20px 0px 0px 20px;
+  border: 1px solid ${COLORS.paleblue};
+  background: url(${(props) => props.urlImage});
+  background-size: 100% 100%;
 `;
 
 export const DataContainer = styled.div`
-display: inline-block;
-flex-direction: column;
-align-items: flex-end;
-padding: 0px 16px;
-width: 744px;
-height: 226px;
-flex: 1;
-justify-content: space-between;
+  display: inline-block;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px 16px;
+  width: 744px;
+  height: 226px;
+  flex: 1;
+  justify-content: space-between;
 `;
 export const DateDiv = styled(DisplayRow)`
 

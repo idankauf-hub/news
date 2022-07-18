@@ -3,7 +3,7 @@ import {
   COLORS,
 } from "../../globalStyle";
 import { DisplayRow ,DisplayCenterRow} from "../../layouts";
-import { BoldTitle } from "../../typography";
+import { BigBoldTitle, BoldTitle } from "../../typography";
 
 export const CardContainer = styled.div`
   position: relative;
