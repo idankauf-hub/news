@@ -26,7 +26,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
           paddingAngle={0}
           dataKey="value"
         >
-          <Label value={placeholder} position="center" />
+          <Label value={placeholder} position="center" style={{ fontFamily:"Mulish" ,fontSize: '12px', fill: '#030035',fontWeight:"400",lineHeight:"16px"}}/>
         </Pie>
       </PieChart>
       <CustomeLegend>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { COLORS } from "../../globalStyle";
+import { Label } from "recharts";
 
 interface ColorProps {
   color: string | undefined;
@@ -60,3 +61,5 @@ export const LiText = styled.text`
   letter-spacing: 0.2px;
   color: ${COLORS.darkpurpleblack};
 `;
+
+
