@@ -17,14 +17,7 @@ const data = [
     <text x={125} y={207} textAnchor="middle" dominantBaseline="middle">
     Sum
    </text>
-    <Legend
-      height={36}
-      iconType="circle"
-      layout="vertical"
-      verticalAlign="middle"
-      iconSize={10}
-
-    />
+ 
     <Pie
       data={data}
       cx={120}
@@ -37,7 +30,15 @@ const data = [
     >
      
     </Pie>
+    <Legend
+      height={36}
+      iconType="circle"
+      layout="vertical"
+      verticalAlign="bottom"
+      align='left'
+      iconSize={5}
 
+    />
   </PieChart>  )
 }
 
