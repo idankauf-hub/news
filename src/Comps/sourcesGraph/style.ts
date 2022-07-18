@@ -1,13 +1,62 @@
 import styled from "styled-components";
 import { COLORS } from "../../globalStyle";
 
-export const CardContainer = styled.div`
-  position:relative;
+interface ColorProps {
+  color: string | undefined;
+}
+export const CustomeLegend = styled.div`
+  display: flex;
+  flex-direction: column;
 
-  width: 412px;
-  height: 355px;
-  background: #ffffff;
-  border: 1px solid #d9dbe9;
-  box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
-  border-radius: 20px;
+  width: 372px;
+  height: 143px;
+`;
+export const GraphT = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0px;
+  width: 372px;
+  height: 275px;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+`;
+export const Span = styled.span`
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+
+  letter-spacing: 0.3px;
+  color: ${COLORS.gray};
+`;
+
+export const Li = styled.li<ColorProps>`
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+
+  letter-spacing: 0.3px;
+  color: ${(props) => props.color};
+`;
+
+export const LiText = styled.text`
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  letter-spacing: 0.2px;
+  color: ${COLORS.darkpurpleblack};
 `;

@@ -1,45 +1,47 @@
-import React from 'react'
-import { PieChart, Pie, Legend } from "recharts";
+import React from "react";
+import { PieChart, Pie, Legend, Label } from "recharts";
+import { CustomeLegend, GraphT, Row, Span, Li, LiText } from "./style";
 
-
-const SourcesGraph = () => {
-
-const data = [
-    { name: "Group A", value: 400, fill: "#0088FE" },
-    { name: "Group B", value: 300, fill: "#00C49F" },
-    { name: "Group C", value: 300, fill: "#FFBB28" },
-    { name: "Group D", value: 200, fill: "#FF8042" }
-  ];
-
-  
-  return (
-    <PieChart width={800} height={400} >
-    <text x={125} y={207} textAnchor="middle" dominantBaseline="middle">
-    Sum
-   </text>
- 
-    <Pie
-      data={data}
-      cx={120}
-      cy={200}
-      innerRadius={60}
-      outerRadius={70}
-      fill="#FFFFFF"
-      paddingAngle={0}
-      dataKey="value"
-    >
-     
-    </Pie>
-    <Legend
-      height={36}
-      iconType="circle"
-      layout="vertical"
-      verticalAlign="bottom"
-      align='left'
-      iconSize={5}
-
-    />
-  </PieChart>  )
+type Data = {
+  name: string;
+  value: string | number;
+};
+interface GraphProps {
+  placeholder?: string;
+  data: Data[];
 }
 
-export default SourcesGraph
+const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
+  return (
+    <GraphT>
+      <PieChart width={200} height={124}>
+        <Pie
+          cx={"60%"}
+          cy={"50%"}
+          data={data}
+          innerRadius={50}
+          outerRadius={60}
+          fill="#FFFFFF"
+          paddingAngle={0}
+          dataKey="value"
+        >
+          <Label value={placeholder} position="center" />
+        </Pie>
+      </PieChart>
+      <CustomeLegend>
+        <ul>
+          {data.map((item) => (
+            <Row>
+              <Li color={item.fill}>
+                <LiText>{item.name}</LiText>
+              </Li>
+              <Span>{item.value}</Span>
+            </Row>
+          ))}
+        </ul>
+      </CustomeLegend>
+    </GraphT>
+  );
+};
+
+export default SourcesGraph;
