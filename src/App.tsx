@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import  {Navbar} from './Comps/navbar/Navbar';
 import Graph from './Comps/datesGraph/Graph';
+import { SearchMainPage } from './Screens/MainPage/components/SearchMainPage';
+import Underline from './Comps/underline/Underline';
+import Card from './Comps/card/Card';
 function App() {
   const data = [
     {
@@ -37,7 +40,7 @@ function App() {
   ];
   return (<>
     <Navbar/>
-    <Graph data={data}/>
+    <Underline/>
     </>
   );
 }
