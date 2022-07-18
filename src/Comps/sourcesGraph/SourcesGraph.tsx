@@ -5,6 +5,7 @@ import { CustomeLegend, GraphT, Row, Span, Li, LiText } from "./style";
 type Data = {
   name: string;
   value: string | number;
+  fill: string
 };
 interface GraphProps {
   placeholder?: string;
