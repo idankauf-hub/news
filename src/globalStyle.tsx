@@ -8,5 +8,6 @@ export const COLORS = {
   paleblue: "#D9DBE9",
   bluishblack: "#14142B",
   darkpurple: "#5A5A89",
+
 };
 

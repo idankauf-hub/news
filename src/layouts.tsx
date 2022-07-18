@@ -5,7 +5,8 @@ display: flex;
 flex-direction: row;
 `;
 
-export const DisplayCenterRow = styled(DisplayRow)`
-justify-content: center;
+export const DisplayCenterRow = styled.div`
+display: flex;
+flex-direction: row;
 align-items: center;
 `;
