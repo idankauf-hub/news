@@ -7,6 +7,6 @@ export default {
   title: "Components/Card",
 } as Meta;
 
-const Template: Story = () => <Card title="sdfsdf" />;
+const Template: Story = () => <Card title="sdfsdf"  description="dssdf" publishedAt="dsf" author="sdfdsf" />;
 
 export const Primary = Template.bind({});

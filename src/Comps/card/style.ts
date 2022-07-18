@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../globalStyle";
 import { DisplayRow ,DisplayCenterRow} from "../../layouts";
+import {BoldTitle, Text,BoldTitleBluishBlack,TextLightGray,TextDarkPurple} from "../../typography"
 
 interface ImageProps{
     urlImage:string | undefined;
@@ -50,74 +51,39 @@ height: 22px;
 margin-bottom: 19.25px;
 
 `;
-export const DateText = styled.p`
+export const DateText = styled(TextLightGray)`
 width: 126px;
 height: 22px;
-
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 22px;
-display: flex;
 align-items: center;
 letter-spacing: 0.25px;
-color: rgba(90, 90, 137, 0.5);
-
 `;
-export const Title = styled.p`
+export const Title = styled(BoldTitleBluishBlack)`
 width: 470px;
 height: 21px;
 margin-up:19.25px;
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 700;
-font-size: 18px;
-line-height: 21px;
-color: ${COLORS.bluishblack};
+
 flex: none;
 order: 1;
 flex-grow: 0;
 margin-bottom: 19.25px;
 `;
-export const AuthorName = styled.p`
+export const AuthorName = styled(TextLightGray)`
 width: 67px;
 height: 22px;
-
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 22px;
-
 display: flex;
 align-items: center;
 letter-spacing: 0.25px;
-
-color: rgba(90, 90, 137, 0.5);
-
 `;
-export const Description = styled.p`
+export const Description = styled(TextDarkPurple)`
 width: 711px;
 height: 32px;
-
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
 line-height: 16px;
-color:${COLORS.darkpurple};
-
 `;
 
-export const BtnDiv = styled.div`
-display: flex;
-flex-direction: row;
+export const BtnDiv = styled(DisplayCenterRow)`
 justify-content: flex-end;
-align-items: center;
 padding: 0px;
 gap: 10px;
-
 width: 711px;
 height: 36px;
 `;

@@ -31,7 +31,6 @@ export const UnderLine = styled.div`
   bottom: 82.48%;
   border-radius: 10px;
   background: ${COLORS.darkpurple};
-
   border: 4px solid ${COLORS.darkpurple};
 `;
 
