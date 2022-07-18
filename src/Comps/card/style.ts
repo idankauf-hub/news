@@ -8,9 +8,9 @@ interface ImageProps{
 }
 export const CardContainer = styled(DisplayCenterRow)`
 
-position:relative;
+// position:relative;
 padding: 0px;
-width: 988px;
+width: 100%;
 height: 242px;
 background: ${COLORS.white};
 border: 1px solid ${COLORS.ghostwhite};

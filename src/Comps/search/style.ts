@@ -7,6 +7,7 @@ export const SearchFormContainer = styled.form`
   left: 1px;
   height: 50px;
   position: relative;
+  
 `;
 
 export const SearchButton = styled.button.attrs({ 
