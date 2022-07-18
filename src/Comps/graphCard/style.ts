@@ -13,6 +13,8 @@ export const CardContainer = styled.div`
   border: 1px solid ${COLORS.lightgray};
   box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
+  // padding: 25px 15px 25px 25px;
+  // gap: 8px;
 `;
 
 export const Title = styled(BoldTitle)`
@@ -27,7 +29,6 @@ export const UnderLine = styled.div`
   position: absolute;
   left: 5.07%;
   right: 89.08%;
-  top: 20.52%;
   bottom: 82.48%;
   border-radius: 10px;
   background: ${COLORS.darkpurple};
@@ -38,4 +39,5 @@ export const TitleContainer = styled(DisplayRow)`
   height: 23%;
   width: 100%;
 `;
-export const GraphContainer = styled(DisplayCenterRow)``;
+export const GraphContainer = styled(DisplayCenterRow)`
+`;

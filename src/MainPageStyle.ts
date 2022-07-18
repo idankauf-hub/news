@@ -13,6 +13,7 @@ export const Container = styled(DisplayColumn)`
 justify-content: center;
 padding: 0px 240px 10px;
 gap: 20px;
+
 `;
 export const Row = styled(DisplayRow)`
 display: flex;
@@ -23,21 +24,18 @@ gap: 15px;
 
 `;
 export const ColumnGraphs = styled(DisplayColumn)`
-
 align-items: flex-start;
-padding: 0px;
+padding: 20px 0px 0px;;
 gap: 24px;
-
-width: 412px;
+width: 40%;
 height: 757px;
 `;
 export const ColumnCards = styled(DisplayColumn)`
 
 align-items: flex-start;
 padding: 0px;
-// gap: 24px;
-
-// width: 988px;
-// height: 1231px;
+gap: 24px;
+width: 60%;
+height: 1231px;
 
 `;

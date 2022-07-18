@@ -8,8 +8,7 @@ interface ColorProps {
 export const CustomeLegend = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: 372px;
+  width: 80%;
   height: 143px;
 `;
 export const GraphT = styled.div`
@@ -19,7 +18,7 @@ export const GraphT = styled.div`
   align-items: center;
 
   padding: 0px;
-  width: 372px;
+  width: 100%;
   height: 275px;
 `;
 
