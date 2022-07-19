@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import {
   COLORS,
-} from "../../globalStyle";
-import { DisplayRow ,DisplayCenterRow} from "../../layouts";
-import { BigBoldTitle, BoldTitle } from "../../typography";
+} from "../../styles/colors";
+import { DisplayRow ,DisplayCenterRow} from "../../styles/layouts";
+import { BigBoldTitle, BoldTitle } from "../../styles/typography";
 
 export const CardContainer = styled.div`
   position: relative;

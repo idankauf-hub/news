@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { COLORS } from "../../globalStyle";
-import { DisplayRow, DisplayCenterRow,DisplayColumn } from "../../layouts";
+import { COLORS } from "../../styles/colors";
+import { DisplayRow, DisplayCenterRow,DisplayColumn } from "../../styles/layouts";
 import {
   BoldTitle,
   Text,
   BoldTitleBluishBlack,
   TextLightGray,
   TextDarkPurple,
-} from "../../typography";
+} from "../../styles/typography";
 
 export const CardsContainer = styled(DisplayColumn)`
 

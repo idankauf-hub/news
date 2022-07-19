@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { COLORS } from "../../globalStyle";
-import {DisplayCenterRow} from "../../layouts"
+import { COLORS } from "../../styles/colors";
+import {DisplayCenterRow} from "../../styles/layouts"
 export const NavBarContainer = styled(DisplayCenterRow)`
 height:74px;
 width: 100%;

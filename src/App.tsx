@@ -4,9 +4,8 @@ import "./App.css";
 import { Navbar } from "./Comps/navbar/Navbar";
 import Graph from "./Comps/datesGraph/Graph";
 import { SearchMainPage } from "./Screens/MainPage/components/SearchMainPage";
-import Underline from "./Comps/underline/Underline";
 import Card from "./Comps/card/Card";
-import MainPage from "./Screens/MainPage/MainPage";
+import MainPage from "./Screens/MainPage/components/MainPage";
 function App() {
   // const data = [
   //   {

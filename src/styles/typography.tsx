@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "./globalStyle";
+import { COLORS } from "./colors";
 
 export const Text = styled.p`
   font-family: "Roboto";
@@ -14,7 +14,6 @@ export const TextLightGray = styled(Text)`
 `;
 export const TextDarkPurple = styled(Text)`
 color:${COLORS.darkpurple};
-
 `;
 
 export const Paragraph = styled.p`

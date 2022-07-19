@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { COLORS } from "../../globalStyle";
-import { DisplayRow, DisplayCenterRow } from "../../layouts";
+import { COLORS } from "../../styles/colors";
+import { DisplayRow, DisplayCenterRow } from "../../styles/layouts";
 import {
   BoldTitle,
   Text,
   BoldTitleBluishBlack,
   TextLightGray,
   TextDarkPurple,
-} from "../../typography";
+} from "../../styles/typography";
 
 interface ImageProps {
   urlImage: string | undefined;
