@@ -40,7 +40,7 @@ export const Li = styled.li<ColorProps>`
   color: ${(props) => props.color};
 `;
 
-export const LiText = styled.text`
+export const LiText = styled.p`
   font-family: "Mulish";
   font-style: normal;
   font-weight: 400;

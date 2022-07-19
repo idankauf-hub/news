@@ -13,6 +13,7 @@ export const Container = styled(DisplayColumn)`
 justify-content: center;
 padding: 0px 240px 10px;
 gap: 20px;
+background:${COLORS.ghostwhite};
 
 `;
 export const Row = styled(DisplayRow)`

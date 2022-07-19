@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "./colors";
 
-export const Text = styled.p`
+export const Text = styled.div`
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
