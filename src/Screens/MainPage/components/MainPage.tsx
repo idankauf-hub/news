@@ -1,11 +1,9 @@
 import React from "react";
-import Card from "../../../Comps/card/Card";
 import Cards from "../../../Comps/cards/Cards";
 import Graph from "../../../Comps/datesGraph/Graph";
 import GraphCard from "../../../Comps/graphCard/GraphCard";
 import { Navbar } from "../../../Comps/navbar/Navbar";
 import SourcesGraph from "../../../Comps/sourcesGraph/SourcesGraph";
-// import Underline from "../../../Comps/underline/Underline";
 import { ColumnGraphs, Container,ColumnCards, Row,UnderLine } from "./MainPageStyle";
 
 const MainPage = () => {
