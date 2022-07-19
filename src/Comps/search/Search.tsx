@@ -17,22 +17,7 @@ interface SearchProps {
   //recentSearches:string[]; //last searches per user - local storage
 }
 
-interface Item {
-  Icon?: string; // jsx element
-  title: string;
-}
-
-const data: Item[] = [
-  { Icon: "f", title: "Everything" },
-  { title: "Top Headline" },
-];
-
-const ListElement = ({ item }: { item: Item }) => {
-  const { Icon, title } = item;
-  return <MenuItem value={title}>{title}</MenuItem>;
-};
-
-
+const data = ["Top Headlines", "Everything"];
 
 const Search: React.FC<SearchProps> = ({
   Icon,
@@ -40,17 +25,14 @@ const Search: React.FC<SearchProps> = ({
   input,
   searchFunction,
 }) => {
-  // const [label, setLabel] = useState<string>();
 
-  const handleDropDown = (value: Item) => {
-    console.log(value.title)
-    // setLabel(value.title);
-    // console.log(label)
+  const handleDropDown = (value: string) => {
+    console.log(value);
+
   };
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     searchFunction(event.currentTarget.value);
   };
-
 
   return (
     <SearchFormContainer>
@@ -62,9 +44,7 @@ const Search: React.FC<SearchProps> = ({
       ></Input>
       <VerticalLine></VerticalLine>
       <DropDown
-        // selectedLabel={label}
         data={data}
-        ListElement={ListElement}
         getDropDownValue={handleDropDown}
       />
     </SearchFormContainer>

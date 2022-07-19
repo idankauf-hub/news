@@ -8,43 +8,27 @@ import { COLORS } from "../../globalStyle";
 import { CustomeSelect, DropDownContainer } from "./style";
 
 interface SelectProps<T> {
-  selectedLabel?: string;
-  getDropDownValue: (e: T) => void;
-  data: T[]; // T = {Icon , title}
-  ListElement: ({ item }: { item: T }) => JSX.Element;
-  SelectedElement?: ({ item }: { item: T }) => JSX.Element;
+  getDropDownValue: (e: string) => void;
+  data: string[];
 }
 
-const DropDown = <T,>({
-  selectedLabel,
-  getDropDownValue,
-  data,
-  ListElement,
-  SelectedElement = ListElement,
-}: SelectProps<T>) => {
+const DropDown = <T,>({ getDropDownValue, data }: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [val, setVal] = useState<any>("");
+  const [val, setVal] = useState<any>("Top Headlines");
 
-  const [label, setLabel] = useState<string>(selectedLabel!);
-
-  const handleClick = (value: T) => {
-    // setLabel(value)
+  const handleClick = (value: string) => {
     getDropDownValue(value);
     setVal(value);
-  };
-  const handleChange = (e: SelectChangeEvent<any>) => {
-    console.log("e", e);
   };
 
   return (
     <DropDownContainer>
       <FormControl fullWidth>
         <CustomeSelect
-          value={"val"}
+          defaultValue={""}
+          value={val}
           onClick={() => setIsOpen(!isOpen)}
-          // onChange={(e)=>handleChange(e)}
           fullWidth
-          // displayEmpty
           open={isOpen}
           sx={{
             alignItems: "center",
@@ -58,17 +42,17 @@ const DropDown = <T,>({
             },
           }}
           IconComponent={ForwardIcon}
-          // native={false}
-          // renderValue={(value: any) => {
-          //   console.log('value',value);
-          //   return <ListElement item={value} />;
-          // }}
-          // value={label}
+          native={false}
+          renderValue={(value: any) => {
+            return <div>{value}</div>;
+          }}
         >
-          {data.map((item: T) => {
+          {data.map((item, i) => {
             return (
-              <div onClick={() => handleClick(item)}>
-                <ListElement item={item} />
+              <div key={i} onClick={() => handleClick(item)}>
+                <MenuItem key={i} value={item}>
+                  {item}
+                </MenuItem>
               </div>
             );
           })}
