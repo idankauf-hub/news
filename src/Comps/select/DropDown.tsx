@@ -23,29 +23,28 @@ const DropDown = <T,>({
   SelectedElement = ListElement,
 }: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [val, setVal] = useState<any>("");
 
   const [label, setLabel] = useState<string>(selectedLabel!);
 
   const handleClick = (value: T) => {
     // setLabel(value)
     getDropDownValue(value);
+    setVal(value);
   };
-  const handleChange = (
-    event: SelectChangeEvent<any>,
-    child: React.ReactNode
-  ) => {
-    console.log(event);
+  const handleChange = (e: SelectChangeEvent<any>) => {
+    console.log("e", e);
   };
 
   return (
     <DropDownContainer>
       <FormControl fullWidth>
         <CustomeSelect
-          value={({ item }: any) => <ListElement item={item} />}
+          value={"val"}
           onClick={() => setIsOpen(!isOpen)}
-          onChange={handleChange}
+          // onChange={(e)=>handleChange(e)}
           fullWidth
-          displayEmpty
+          // displayEmpty
           open={isOpen}
           sx={{
             alignItems: "center",
@@ -53,17 +52,17 @@ const DropDown = <T,>({
             fontWeight: 500,
             fontSize: 14,
             letterSpacing: 0.25,
-            color: COLORS.purpleblue,
+            // color: COLORS.purpleblue,
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: "white",
             },
           }}
           IconComponent={ForwardIcon}
-          native={false}
-          renderValue={(value: any) => {
-            console.log(value);
-            return <ListElement item={value}/>;
-          }}
+          // native={false}
+          // renderValue={(value: any) => {
+          //   console.log('value',value);
+          //   return <ListElement item={value} />;
+          // }}
           // value={label}
         >
           {data.map((item: T) => {
