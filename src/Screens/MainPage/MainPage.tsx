@@ -51,7 +51,7 @@ const MainPage = () => {
         <ColumnCards><Cards /></ColumnCards>
         <ColumnGraphs>
         <GraphCard
-          title="Dates"
+          title="Sources"
           GraphElement={() => (
             <SourcesGraph data={[
               { name: "NBC", value: 200, fill: "#0088FE" },
@@ -72,7 +72,7 @@ const MainPage = () => {
                 },
                 {
                   month: "MAY",
-                  frequency: 3000,
+                  frequency: 2600,
                 },
               ]}
             />

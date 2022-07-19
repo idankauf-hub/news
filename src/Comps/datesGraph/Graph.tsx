@@ -23,7 +23,7 @@ interface GraphProps{
 const Graph: React.FC<GraphProps> = ({ data }) => {
 
   return (
-    <div style={{ height: "149px", width: "412.19px" }}>
+    <div style={{ height: "149px", width: "412.19px",marginTop:"22%",padding:10}}>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={data}
