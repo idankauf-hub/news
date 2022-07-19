@@ -3,11 +3,8 @@ import {
   SearchFormContainer,
   SearchButton,
   Input,
-  VerticalLine,
 } from "./style";
-import MenuItem from "@mui/material/MenuItem";
 
-import DropDown from "../select/DropDown";
 
 interface SearchProps {
   placeholder?: string;
@@ -17,7 +14,7 @@ interface SearchProps {
   //recentSearches:string[]; //last searches per user - local storage
 }
 
-const data = ["Top Headlines", "Everything"];
+
 
 const Search: React.FC<SearchProps> = ({
   Icon,
@@ -42,11 +39,6 @@ const Search: React.FC<SearchProps> = ({
         onChange={handleChange}
         value={input}
       ></Input>
-      <VerticalLine></VerticalLine>
-      <DropDown
-        data={data}
-        getDropDownValue={handleDropDown}
-      />
     </SearchFormContainer>
   );
 };

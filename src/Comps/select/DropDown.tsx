@@ -1,11 +1,9 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import { ForwardIcon } from "../../Icons";
-import { SelectChangeEvent } from "@mui/material";
 
 import { COLORS } from "../../globalStyle";
-import { CustomeSelect, DropDownContainer } from "./style";
+import { CustomeSelect } from "./style";
 
 interface SelectProps<T> {
   getDropDownValue: (e: string) => void;
@@ -22,9 +20,8 @@ const DropDown = <T,>({ getDropDownValue, data }: SelectProps<T>) => {
   };
 
   return (
-    <DropDownContainer>
-      <FormControl fullWidth>
         <CustomeSelect
+        id="select"
           defaultValue={""}
           value={val}
           onClick={() => setIsOpen(!isOpen)}
@@ -35,6 +32,7 @@ const DropDown = <T,>({ getDropDownValue, data }: SelectProps<T>) => {
             justifyContent: "center",
             fontWeight: 500,
             fontSize: 14,
+            width:"37%",
             letterSpacing: 0.25,
             // color: COLORS.purpleblue,
             "& .MuiOutlinedInput-notchedOutline": {
@@ -57,8 +55,6 @@ const DropDown = <T,>({ getDropDownValue, data }: SelectProps<T>) => {
             );
           })}
         </CustomeSelect>
-      </FormControl>
-    </DropDownContainer>
   );
 };
 
