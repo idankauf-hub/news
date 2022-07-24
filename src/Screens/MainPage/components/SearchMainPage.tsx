@@ -13,7 +13,7 @@ import { Container } from "./style";
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
   const debouncedValue = useDebounce<string>(input, 500);
-  const data = ["Top Headlines", "Everything"];
+  const placeholders = ["Top Headlines", "Everything"];
 
   const handleChange = (value: string) => {
     setInput(value);
@@ -43,8 +43,9 @@ export const SearchMainPage = () => {
       />
        <VerticalLine/>
       <DropDown
-        data={data}
-        getDropDownValue={handleDropDown}
+        data={placeholders}
+        onSelect={handleDropDown}
+        placeholder={placeholders[0]}
       />
       </Container>
        </FormControl>
