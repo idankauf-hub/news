@@ -1,48 +1,27 @@
-import React from "react";
-import Card from "../../../Comps/card/Card";
+import React, { useEffect, useState } from "react";
 import Cards from "../../../Comps/cards/Cards";
 import Graph from "../../../Comps/datesGraph/Graph";
 import GraphCard from "../../../Comps/graphCard/GraphCard";
 import { Navbar } from "../../../Comps/navbar/Navbar";
 import SourcesGraph from "../../../Comps/sourcesGraph/SourcesGraph";
-// import Underline from "../../../Comps/underline/Underline";
 import { ColumnGraphs, Container,ColumnCards, Row,UnderLine } from "./MainPageStyle";
 
+import { dateData,sourcesData } from "../../../mockData";
+
+
+
 const MainPage = () => {
-  const data = [
-    {
-      month: "MAR",
-      frequency: 4000,
-    },
-    {
-      month: "APR",
-      frequency: 2000,
-    },
-    {
-      month: "MAY",
-      frequency: 3000,
-    },
-    {
-      month: "JUN",
-      frequency: 2780,
-    },
-    {
-      month: "JUL",
-      frequency: 1890,
-    },
-    {
-      month: "AUG",
-      frequency: 2390,
-    },
-    {
-      month: "SEP",
-      frequency: 3490,
-    },
-  ];
+  const [dates, setDates] = useState<{ month: string; frequency: number; }[]>(dateData);
+  const [sources, setSources] = useState<{ name: string; value: number; fill: string; }[]>(sourcesData);
+
+  useEffect(() => {
+    //call api and set all data and pass it to store of search query
+    //
+  }, []);
+
   return (
     <>
       <Navbar />
-
       {/* <DropDowns/> */}
       <UnderLine></UnderLine>
       <Container>
@@ -53,28 +32,14 @@ const MainPage = () => {
         <GraphCard
           title="Sources"
           GraphElement={() => (
-            <SourcesGraph data={[
-              { name: "NBC", value: 200, fill: "#0088FE" },
-              { name: "WALLA", value: 300, fill: "#00C49F" },
-              { name: "Group C", value: 300, fill: "#FFBB28" },
-              { name: "Group D", value: 200, fill: "#FF8042" },
-            ]}  />
+            <SourcesGraph data={sources}  />
           )}
         />
         <GraphCard
           title="Dates"
           GraphElement={() => (
             <Graph
-              data={[
-                {
-                  month: "MAY",
-                  frequency: 3000,
-                },
-                {
-                  month: "MAY",
-                  frequency: 2600,
-                },
-              ]}
+              data={dates}
             />
           )}
         /></ColumnGraphs>

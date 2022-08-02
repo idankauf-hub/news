@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
 import { Label } from "recharts";
 import {DisplayColumn,DisplayCetnerColumn,DisplayRow} from "../../styles/layouts"
+
 interface ColorProps {
   color: string | undefined;
 }
@@ -36,7 +37,7 @@ export const Li = styled.li<ColorProps>`
   font-size: 15px;
   line-height: 20px;
   letter-spacing: 0.3px;
-
+  margin-bottom: 10px;  
   color: ${(props) => props.color};
 `;
 
@@ -46,7 +47,6 @@ export const LiText = styled.p`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-
   letter-spacing: 0.2px;
   color: ${COLORS.darkpurpleblack};
 `;

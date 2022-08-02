@@ -2,11 +2,9 @@ import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
 import { DisplayRow, DisplayCenterRow } from "../../styles/layouts";
 import {
-  BoldTitle,
-  Text,
   BoldTitleBluishBlack,
-  TextLightGray,
-  TextDarkPurple,
+  H1LightGray,
+  H1DarkPurple,
 } from "../../styles/typography";
 
 interface ImageProps {
@@ -55,7 +53,7 @@ export const DateDiv = styled(DisplayRow)`
   width: 80%;
   height: 22px;
 `;
-export const DateText = styled(TextLightGray)`
+export const DateText = styled(H1LightGray)`
   width: 100%;
   height: 22px;
   align-items: center;
@@ -71,13 +69,13 @@ export const Title = styled(BoldTitleBluishBlack)`
   flex-grow: 0;
   margin-bottom: 19.25px;
 `;
-export const AuthorName = styled(TextLightGray)`
+export const AuthorName = styled(H1LightGray)`
   height: 22px;
   display: flex;
   align-items: center;
   letter-spacing: 0.25px;
 `;
-export const Description = styled(TextDarkPurple)`
+export const Description = styled(H1DarkPurple)`
   height: 32px;
   line-height: 16px;
   overflow: hidden;

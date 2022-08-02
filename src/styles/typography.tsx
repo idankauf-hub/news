@@ -1,41 +1,33 @@
 import styled from "styled-components";
 import { COLORS } from "./colors";
+import { FONTWEIGHT } from "./fontWeight";
+import { FONTSIZE } from "./fontSize";
 
-export const Text = styled.div`
+export const H2 = styled.h1`
   font-family: "Roboto";
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: ${FONTWEIGHT.regular};
+  font-size: ${FONTSIZE.text};
   line-height: 22px;
 `;
-export const TextLightGray = styled(Text)`
+export const H1LightGray = styled(H2)`
   color: rgba(90, 90, 137, 0.5);
 
 `;
-export const TextDarkPurple = styled(Text)`
+export const H1DarkPurple = styled(H2)`
 color:${COLORS.darkpurple};
 `;
 
-export const Paragraph = styled.p`
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 22px;
-  display: flex;
-  align-items: center;
-`;
-
-export const BoldTitle = styled(Text)`
-  font-weight: 700;
-  font-size: 18px;
+export const BoldCardTitle = styled(H2)`
+  font-weight: ${FONTWEIGHT.bold};
+  font-size: ${FONTSIZE.cardtitle};
   line-height: 21px;
 `;
-export const BoldTitleBluishBlack = styled(BoldTitle)`
+export const BoldTitleBluishBlack = styled(BoldCardTitle)`
 color: ${COLORS.bluishblack};
 `;
-export const BigBoldTitle = styled(Text)`
-  font-weight: 700;
-  font-size: 24px;
+export const H1Bold = styled(H2)`
+  font-weight: ${FONTWEIGHT.bold};
+  font-size: ${FONTSIZE.graphtitle};
   line-height: 32px;
 `;
