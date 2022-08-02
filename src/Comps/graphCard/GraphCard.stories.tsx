@@ -7,6 +7,6 @@ export default {
   title: "Components/GraphCard",
 } as Meta;
 
-const Template: Story = () => <GraphCard title="Dates" GraphElement={()=><div>d</div>}/>;
+const Template: Story = () => <GraphCard title="Dates" GraphElement={()=><div>fdssssdd</div>}/>;
 
 export const Primary = Template.bind({});

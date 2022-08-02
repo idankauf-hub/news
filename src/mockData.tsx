@@ -327,3 +327,40 @@ export const mockData = {
       },
     ],
   };
+
+export const dateData=[
+  {
+    month: "MAR",
+    frequency: 4000,
+  },
+  {
+    month: "APR",
+    frequency: 2000,
+  },
+  {
+    month: "MAY",
+    frequency: 3000,
+  },
+  {
+    month: "JUN",
+    frequency: 2780,
+  },
+  {
+    month: "JUL",
+    frequency: 1890,
+  },
+  {
+    month: "AUG",
+    frequency: 2390,
+  },
+  {
+    month: "SEP",
+    frequency: 3490,
+  },
+];
+export const sourcesData =[
+  { name: "NBC", value: 200, fill: "#0088FE" },
+  { name: "WALLA", value: 300, fill: "#00C49F" },
+  { name: "Group C", value: 300, fill: "#FFBB28" },
+  { name: "Group D", value: 200, fill: "#FF8042" },
+]

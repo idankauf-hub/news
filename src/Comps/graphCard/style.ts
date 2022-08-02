@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
 import { DisplayRow, DisplayCenterRow } from "../../styles/layouts";
-import { BigBoldTitle, BoldTitle } from "../../styles/typography";
+import { BoldTitle } from "../../styles/typography";
 
 export const CardContainer = styled.div`
   position: relative;
@@ -19,8 +19,8 @@ export const Title = styled(BoldTitle)`
   left: 4.46%;
   right: 74.68%;
   top: 6.04%;
-  bottom: 83.94%; ;
-`;
+  bottom: 83.94%;
+  `;
 
 export const UnderLine = styled.div`
   position: absolute;

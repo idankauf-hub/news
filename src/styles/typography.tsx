@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "./colors";
+import { FONTWEIGHT } from "./fontWeight";
+import { FONTSIZE } from "./fontSize";
 
 export const Text = styled.div`
   font-family: "Roboto";
