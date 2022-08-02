@@ -22,7 +22,9 @@ const querySlice = createSlice({
   } as IQuery,
   reducers: {
     addInput:(state,action)=>{
-        state.input = action.payload
+        state.input.query = action.payload.query
+        state.input.endpoint = action.payload.endpoint
+
     }
   },
 });

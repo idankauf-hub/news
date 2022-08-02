@@ -16,7 +16,8 @@ export const SearchMainPage = () => {
 
   const handleChange = (value: string) => {
     setInput(value);
-    dispatch(addInput(value));
+    dispatch(addInput({query:value,endpoint:""}));
+    console.log(storeInput)
   };
 
   useEffect(() => {
