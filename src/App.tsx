@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import  {Navbar} from './Comps/navbar/Navbar';
 import Graph from './Comps/datesGraph/Graph';
+import {Provider} from 'react-redux'
+import {store} from './store/store'
 function App() {
   const data = [
     {
@@ -36,8 +38,10 @@ function App() {
     },
   ];
   return (<>
+  <Provider store={store}>
     <Navbar/>
-    <Graph data={data}/>
+    {/* <Graph data={data}/> */}
+    </Provider>
     </>
   );
 }
