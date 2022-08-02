@@ -35,8 +35,8 @@ export const Input = styled.input.attrs(({ placeholder }) => ({
 
 export const VerticalLine = styled.div`
   border: 0.5px solid ${COLORS.lightgray};
-  position: absolute;
-  left: 22%; 
+  position: relative;
+  left: 57%; 
   top: 50%;
   width: 40px;
   height: 0px;

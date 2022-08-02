@@ -23,10 +23,6 @@ const Search: React.FC<SearchProps> = ({
   searchFunction,
 }) => {
 
-  const handleDropDown = (value: string) => {
-    console.log(value);
-
-  };
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     searchFunction(event.currentTarget.value);
   };
