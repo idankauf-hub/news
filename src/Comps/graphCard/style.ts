@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
 import { DisplayRow, DisplayCenterRow } from "../../styles/layouts";
-import { BoldTitle } from "../../styles/typography";
+import { H1Bold} from "../../styles/typography";
 
 export const CardContainer = styled.div`
   position: relative;
@@ -14,12 +14,13 @@ export const CardContainer = styled.div`
   padding: 20px 15px 25px 5px;
 `;
 
-export const Title = styled(BoldTitle)`
+export const Title = styled(H1Bold)`
   position: relative;
   left: 4.46%;
   right: 74.68%;
   top: 6.04%;
   bottom: 83.94%;
+
   `;
 
 export const UnderLine = styled.div`
@@ -34,7 +35,6 @@ export const UnderLine = styled.div`
 `;
 
 export const TitleContainer = styled(DisplayRow)`
-  height: 23%;
-  width: 100%;
 `;
-export const GraphContainer = styled(DisplayCenterRow)``;
+export const GraphContainer = styled(DisplayCenterRow)`
+`;

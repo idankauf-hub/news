@@ -37,7 +37,7 @@ export const Li = styled.li<ColorProps>`
   font-size: 15px;
   line-height: 20px;
   letter-spacing: 0.3px;
-
+  margin-bottom: 10px;  
   color: ${(props) => props.color};
 `;
 
