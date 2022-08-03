@@ -4,15 +4,23 @@ import Graph from "../../../Comps/datesGraph/Graph";
 import GraphCard from "../../../Comps/graphCard/GraphCard";
 import { Navbar } from "../../../Comps/navbar/Navbar";
 import SourcesGraph from "../../../Comps/sourcesGraph/SourcesGraph";
-import { ColumnGraphs, Container,ColumnCards, Row,UnderLine } from "./MainPageStyle";
+import {
+  ColumnGraphs,
+  Container,
+  ColumnCards,
+  Row,
+  UnderLine,
+} from "./MainPageStyle";
 
-import { dateData,sourcesData } from "../../../mockData";
-
-
+import { dateData, sourcesData } from "../../../mockData";
+import Title from "../../../Comps/title/Title";
+import TitleStories from "../../../Comps/title/Title.stories";
 
 const MainPage = () => {
-  const [dates, setDates] = useState<{ month: string; frequency: number; }[]>(dateData);
-  const [sources, setSources] = useState<{ name: string; value: number; fill: string; }[]>(sourcesData);
+  const [dates, setDates] =
+    useState<{ month: string; frequency: number }[]>(dateData);
+  const [sources, setSources] =
+    useState<{ name: string; value: number; fill: string }[]>(sourcesData);
 
   useEffect(() => {
     //call api and set all data and pass it to store of search query
@@ -22,27 +30,24 @@ const MainPage = () => {
   return (
     <>
       <Navbar />
-      {/* <DropDowns/> */}
-      <UnderLine></UnderLine>
       <Container>
-        {/* <Title/> */}
+        {/* <DropDowns/> */}
+        <UnderLine></UnderLine>
+        <Title subject="dfdf" city="dfsdf" />
         <Row>
-        <ColumnCards><Cards /></ColumnCards>
-        <ColumnGraphs>
-        <GraphCard
-          title="Sources"
-          GraphElement={() => (
-            <SourcesGraph data={sources}  />
-          )}
-        />
-        <GraphCard
-          title="Dates"
-          GraphElement={() => (
-            <Graph
-              data={dates}
+          <ColumnCards>
+            <Cards />
+          </ColumnCards>
+          <ColumnGraphs>
+            <GraphCard
+              title="Sources"
+              GraphElement={() => <SourcesGraph data={sources} />}
             />
-          )}
-        /></ColumnGraphs>
+            <GraphCard
+              title="Dates"
+              GraphElement={() => <Graph data={dates} />}
+            />
+          </ColumnGraphs>
         </Row>
       </Container>
     </>

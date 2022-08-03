@@ -4,8 +4,8 @@ import {H1Bold} from "../../styles/typography"
 
 export const TitleText = styled(H1Bold)`
  font-weight:500;
+ font-family:"Roboto";
  color:${COLORS.darkblue};
   
-
 `;
 

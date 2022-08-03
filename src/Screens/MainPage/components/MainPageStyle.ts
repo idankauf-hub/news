@@ -29,7 +29,7 @@ export const ColumnCards = styled(DisplayColumn)`
 `;
 
 export const UnderLine = styled.div`
-  width: 1440px;
+  width: 100%;
   height: 0px;
   opacity: 0.5;
   border: 1px solid ${COLORS.lightgray};
