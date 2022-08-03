@@ -1,14 +1,12 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { Navbar } from "./Comps/navbar/Navbar";
 
+import "./App.css";
+import MainPage from "./Screens/MainPage/components/MainPage";
 
 function App() {
   return (
     <>
-      {/* <DropDown data={data} ListElement={ListElement} /> */}
-      <Navbar />
+      <MainPage />
     </>
   );
 }
