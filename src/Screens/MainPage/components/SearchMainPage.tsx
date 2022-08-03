@@ -11,18 +11,23 @@ export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
   const debouncedValue = useDebounce<string>(input, 500);
 
-  const storeInput = useSelector((state:RootState) => state.query.input);
+  const Query = useSelector((state:RootState) => state.query);
   const dispatch= useDispatch();
 
   const handleChange = (value: string) => {
     setInput(value);
-    dispatch(addInput({query:value,endpoint:""}));
-    console.log(storeInput)
+    dispatch(addInput(value));
+    console.log(Query.query)
+
   };
 
   useEffect(() => {
     //call api
   }, [debouncedValue]);
+
+  useEffect(() => {
+    console.log("changed")
+  }, [Query]);
 
   return (
     <Search
@@ -36,3 +41,5 @@ export const SearchMainPage = () => {
     />
   );
 };
+
+
