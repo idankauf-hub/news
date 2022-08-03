@@ -17,7 +17,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     <GraphT>
       <PieChart width={200} height={124}>
         <Pie
-          cx={"60%"}
+          cx={"50%"}
           cy={"50%"}
           data={data}
           innerRadius={50}

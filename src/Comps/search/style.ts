@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import  {COLORS}  from "../../globalStyle";
+import  {COLORS}  from "../../styles/colors";
 
 export const SearchFormContainer = styled.form`
   display: flex;
@@ -7,6 +7,7 @@ export const SearchFormContainer = styled.form`
   left: 1px;
   height: 50px;
   position: relative;
+  
 `;
 
 export const SearchButton = styled.button.attrs({ 
