@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import { ForwardIcon } from "../../Icons";
 
-import { COLORS } from "../../globalStyle";
+import { COLORS } from "../../styles/colors";
 import { CustomeSelect } from "./style";
 
 interface SelectProps {
