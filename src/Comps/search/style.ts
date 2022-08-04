@@ -3,8 +3,8 @@ import  {COLORS}  from "../../styles/colors";
 
 export const SearchFormContainer = styled.form`
   display: flex;
-  width: 60%;
-  left: 1px;
+  width: 55%;
+  // left: 1px;
   height: 50px;
   position: relative;
   
@@ -36,11 +36,11 @@ export const Input = styled.input.attrs(({ placeholder }) => ({
 export const VerticalLine = styled.div`
   border: 0.5px solid ${COLORS.lightgray};
   position: relative;
-  left: 57%; 
   top: 50%;
-  width: 40px;
+  width: 30px;
   height: 0px;
   opacity: 0.5;
   transform: rotate(90deg);
+  
 
 `;

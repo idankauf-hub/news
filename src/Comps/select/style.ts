@@ -5,8 +5,6 @@ import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
 
 export const CustomeSelect = styled(Select)`
-height: 90%;
-left:1%;
-gap: 16px;
-background:"red";
+height: 100%;
+border:none;
 `

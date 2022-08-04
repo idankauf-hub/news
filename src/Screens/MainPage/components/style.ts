@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import Box from "@mui/material/Box";
 
-export const Container = styled(Box)`
+export const Container = styled.div`
+display:flex;
+flex-direction:row;
 width: 423px;
 height: 50px;
 left: 1px;
