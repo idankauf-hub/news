@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IQuery {
   query: {
     input: string;
-    endpoint: string;
+    endpoint: "everything"|"top-headlines";
     country: string;
     catagory: string;
     sources: string;
@@ -17,7 +17,7 @@ const querySlice = createSlice({
   initialState: {
     query: {
       input: "",
-      endpoint: "",
+      endpoint: "top-headlines",
       country: "",
       catagory: "",
       sources: "",
