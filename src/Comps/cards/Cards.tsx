@@ -12,7 +12,6 @@ interface CardsProps {
 
 const Cards: React.FC<CardsProps> = ({ query, endpoint }) => {
   const [data, setData] = useState<any>(mockData);
-  console.log(data.articles);
 
   useEffect(() => {
     //call api and setData
