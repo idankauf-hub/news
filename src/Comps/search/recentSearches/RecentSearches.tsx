@@ -10,6 +10,7 @@ type ISearch = {
 const RecentSearches: React.FC<ISearch> = ({ value }) => {
   const [items, setItems] = useState<string[]>(value);
   const deleteSearches=()=>{
+    localStorage.setItem('lastSearches',JSON.stringify([]))
     setItems([])
   }
   useEffect(() => {
