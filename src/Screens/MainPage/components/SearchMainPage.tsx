@@ -3,7 +3,7 @@ import Search from "../../../Comps/search/Search";
 import useDebounce from "../../../Hooks/useDebounce";
 import { SearchIcon } from "../../../Icons";
 import DropDown from "../../../Comps/select/DropDown";
-
+import RecentSearches from "../../../Comps/search/recentSearches/RecentSearches"
 import FormControl from "@mui/material/FormControl";
 import { VerticalLine } from "../../../Comps/search/style";
 import { Container } from "./style";
@@ -12,6 +12,8 @@ import { Container } from "./style";
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
+  const [inputlist, setInputList] = useState<string[]>();
+
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
 
@@ -24,8 +26,9 @@ export const SearchMainPage = () => {
   };
 
   useEffect(() => {
+
     //call api
-    console.log(input); //do Http Query
+    console.log(inputlist); //do Http Query
   }, [debouncedValue]);
 
   return (
@@ -48,6 +51,7 @@ export const SearchMainPage = () => {
         placeholder={placeholders[0]}
       />
       </Container>
+      <RecentSearches/>
        </FormControl>
     </>
   );
