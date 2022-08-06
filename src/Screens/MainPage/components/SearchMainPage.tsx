@@ -3,9 +3,9 @@ import Search from "../../../Comps/search/Search";
 import useDebounce from "../../../Hooks/useDebounce";
 import { SearchIcon } from "../../../Icons";
 import type { RootState } from '../../../store/store'
-import { addInput } from "../../../store/query";
 
 import { useSelector,useDispatch} from "react-redux";
+import { updateSearch } from "../../../store/query";
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
@@ -16,7 +16,7 @@ export const SearchMainPage = () => {
 
   const handleChange = (value: string) => {
     setInput(value);
-    dispatch(addInput(value));
+    dispatch(updateSearch({input:value,endpoint:"s"}));
     console.log(Query.query)
 
   };
@@ -26,7 +26,6 @@ export const SearchMainPage = () => {
   }, [debouncedValue]);
 
   useEffect(() => {
-    console.log("changed")
   }, [Query]);
 
   return (
