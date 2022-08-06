@@ -12,9 +12,17 @@ export type Languages =
   | "ru"
   | "sv"
   | "ud"
-  | "zh";
+  | "zh"
+  | "";
 
-  export type SortBy ="relevancy" | "popularity" | "publishedAt";
-  export type EndPoints ="everything" | "top-headlines";
-
-
+export type SortBy = "relevancy" | "popularity" | "publishedAt";
+export type EndPoints = "everything" | "top-headlines";
+export type Categories =
+  | "business"
+  | "entertainment"
+  | "genral"
+  | "health"
+  | "science"
+  | "sports"
+  | "technology"
+  | "";
