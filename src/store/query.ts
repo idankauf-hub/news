@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Languages, SortBy, EndPoints, Categories } from "../types/types";
+import { Languages, SortBy, EndPoints, Categories ,Country} from "../types/types";
 
 interface IQuery {
   endpoint: any;
@@ -7,7 +7,7 @@ interface IQuery {
     search: string;
     endpoint: EndPoints;
     filters: {
-      country: string;
+      country: Country;
       catagory: Categories;
       sources: string;
       date:string;

@@ -15,17 +15,32 @@ import {
 import { dateData, sourcesData } from "../../../mockData";
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
+import { getLocation } from "../../../Services/Api";
+import { useDispatch } from "react-redux";
+import { updateFilters } from "../../../store/query";
+import axios from "axios";
 
 const MainPage = () => {
   const [dates, setDates] =
     useState<{ month: string; frequency: number }[]>(dateData);
   const [sources, setSources] =
     useState<{ name: string; value: number; fill: string }[]>(sourcesData);
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    //call api and set all data and pass it to store of search query
-    //
-  }, []);
+    useEffect(() => {
+      axios
+      .get("https://ipapi.co/json/")
+      .then((response:any) => {
+        let data = response.data.country_code.toLowerCase();
+        dispatch(updateFilters({country:data}));
+
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+      
+      // dispatch(updateFilters({country:}));
+    }, []);
 
   return (
     <>

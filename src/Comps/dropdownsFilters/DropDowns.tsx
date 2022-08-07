@@ -4,6 +4,8 @@ import { DisplayRowWithGap } from "./style";
 import { RootState } from "../../store/store";
 
 import { useSelector, useDispatch } from "react-redux";
+import { updateFilters } from "../../store/query";
+import { getLocation } from "../../Services/Api";
 
 const DropDowns = () => {
   const [filters, setFilters] = useState<string[]>([]);
@@ -13,37 +15,30 @@ const DropDowns = () => {
   const topHeadlinesFilters = ["Country", "Catagory", "Sources"];
   const dispatch = useDispatch();
 
-  const HandleDropDowns = (selected: string) => {
-    // dispatch(updateFilters({ filter: selected }));
-    console.log(selected);
-    // switch (selected) {
-    //   case "Sort by":
-    //     dispatch(updateFilters({}));
-    //     break;
-    //   case "Dates":
-    //     dispatch(updateFilters({}));
-    //     break;
-    //   case "Sources":
-    //     dispatch(updateFilters({}));
-    //     break;
-    //   case "Language":
-    //     dispatch(updateFilters({}));
-    //     break;
-    //   case "Country":
-    //     dispatch(updateFilters({}));
-    //     break;
-    //   case "Catagory":
-    //     dispatch(updateFilters({}));
-    //     break;
-    //   default:
-    //   // code block
-    // }
+  const HandleDropDowns = (value:string,filter: string) => {
+        switch (filter) {
+      case "Sort by":
+        dispatch(updateFilters({sortby:value}));
+        break;
+      case "Dates":
+        dispatch(updateFilters({date:value}));
+        break;
+      case "Sources":
+        dispatch(updateFilters({sources:value}));
+        break;
+      case "Language":
+        dispatch(updateFilters({language:value}));
+        break;
+      case "Country":
+        dispatch(updateFilters({country:value}));
+        break;
+      case "Catagory":
+        dispatch(updateFilters({catagory:value}));
+        break;
+      default:
+    }
   };
-  // useEffect(() => {
-  //   (Query.query.endpoint == "everything")
-  //     ? setFilters(() => everythingFilters)
-  //     : setFilters(() => topHeadlinesFilters);
-  // }, []);
+
   
   useEffect(() => {
     // console.log(Query.query.endpoint)
@@ -56,6 +51,7 @@ const DropDowns = () => {
     Query.query.endpoint == "everything"
       ? setFilters(() => everythingFilters)
       : setFilters(() => topHeadlinesFilters);
+    
   }, [Query.query.endpoint]);
 
   return (
@@ -65,7 +61,7 @@ const DropDowns = () => {
           <DropDown
             key={i}
             data={["a", "b"]}
-            onSelect={HandleDropDowns}
+            onSelect={(value)=>HandleDropDowns(value,filter)}
             placeholder={filter}
           ></DropDown>
         );
