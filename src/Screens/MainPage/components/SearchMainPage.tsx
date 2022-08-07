@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import Search from "../../../Comps/search/Search";
 import useDebounce from "../../../Hooks/useDebounce";
 import { SearchIcon } from "../../../Icons";
-import DropDown from "../../../Comps/select/DropDown";
+import type { RootState } from "../../../store/store";
 
-import FormControl from "@mui/material/FormControl";
-import { VerticalLine } from "../../../Comps/search/style";
-import { Container } from "./style";
-
+import { useSelector, useDispatch } from "react-redux";
+import { updateSearch } from "../../../store/query";
 
 
 export const SearchMainPage = () => {
@@ -15,8 +13,13 @@ export const SearchMainPage = () => {
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
 
+  const Query = useSelector((state: RootState) => state.query);
+  const dispatch = useDispatch();
+
   const handleChange = (value: string) => {
     setInput(value);
+    dispatch(updateSearch({ input: value}));
+    console.log(Query.query);
   };
   const handleDropDown = (value: string) => {
     console.log(value);
@@ -24,14 +27,17 @@ export const SearchMainPage = () => {
   };
 
   useEffect(() => {
-    //call api
-    console.log(input); //do Http Query
+    //change input in store redux
   }, [debouncedValue]);
+
+  useEffect(() => {
+    //call api
+  }, [Query]);
 
   return (
     <>
-    <FormControl fullWidth>
-    <Container>
+    {/* <FormControl fullWidth>
+    <Container> */}
       <Search
         input={input}
         searchFunction={handleChange}
@@ -41,14 +47,14 @@ export const SearchMainPage = () => {
           </>
         )}
       />
-       <VerticalLine/>
+       {/* <VerticalLine/>
       <DropDown
         data={placeholders}
         onSelect={handleDropDown}
         placeholder={placeholders[0]}
       />
       </Container>
-       </FormControl>
+       </FormControl> */}
     </>
   );
 };
