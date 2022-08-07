@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import Search from "../../../Comps/search/Search";
 import useDebounce from "../../../Hooks/useDebounce";
 import { SearchIcon } from "../../../Icons";
-import DropDown from "../../../Comps/select/DropDown";
-import RecentSearches from "../../../Comps/search/recentSearches/RecentSearches";
-import FormControl from "@mui/material/FormControl";
+import type { RootState } from "../../../store/store";
+
+import { useSelector, useDispatch } from "react-redux";
+import { updateSearch } from "../../../store/query";
+import {FormControl } from "@mui/material";
 import { VerticalLine } from "../../../Comps/search/style";
-import { Container } from "./style";
+import DropDown from "../../../Comps/select/DropDown";
+import {Container} from './style'
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
@@ -22,8 +25,13 @@ export const SearchMainPage = () => {
       setItems([...items, input]);
     }
   };
+  const Query = useSelector((state: RootState) => state.query);
+  const dispatch = useDispatch();
+
   const handleChange = (value: string) => {
     setInput(value);
+    dispatch(updateSearch({ input: value}));
+    console.log(Query.query);
   };
   const handleDropDown = (value: string) => {
     console.log(value);
@@ -37,14 +45,19 @@ export const SearchMainPage = () => {
 
   useEffect(() => {
     addItem();
-
     //call api
     // addToRecentSearches([],input)
+    //change input in store redux
   }, [debouncedValue]);
 
   useEffect(() => {
     localStorage.setItem("lastSearches", JSON.stringify(items));
   }, [items]);
+
+
+  useEffect(() => {
+    //call api
+  }, [Query]);
 
   return (
     <>
