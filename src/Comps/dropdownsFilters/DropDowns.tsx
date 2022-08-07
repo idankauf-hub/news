@@ -4,18 +4,18 @@ import { DisplayRowWithGap } from "./style";
 import { RootState } from "../../store/store";
 
 import { useSelector, useDispatch } from "react-redux";
-import { updateFilters } from "../../store/query";
 
 const DropDowns = () => {
   const [filters, setFilters] = useState<string[]>([]);
   const Query = useSelector((state: RootState) => state.query);
+
   const everythingFilters = ["Sort by", "Dates", "Sources", "Language"];
   const topHeadlinesFilters = ["Country", "Catagory", "Sources"];
   const dispatch = useDispatch();
 
   const HandleDropDowns = (selected: string) => {
     // dispatch(updateFilters({ filter: selected }));
-    console.log(selected)
+    console.log(selected);
     // switch (selected) {
     //   case "Sort by":
     //     dispatch(updateFilters({}));
@@ -39,19 +39,31 @@ const DropDowns = () => {
     //   // code block
     // }
   };
+  // useEffect(() => {
+  //   (Query.query.endpoint == "everything")
+  //     ? setFilters(() => everythingFilters)
+  //     : setFilters(() => topHeadlinesFilters);
+  // }, []);
+  
   useEffect(() => {
-    if (Query.query.endpoint == "everything") {
-      setFilters(everythingFilters);
-    } else {
-      setFilters(topHeadlinesFilters);
-    }
-  }, [Query]);
+    // console.log(Query.query.endpoint)
+    // if (Query.query.endpoint == "everything") {
+    //   setFilters(()=>everythingFilters);
+    // }
+    // else if(Query.query.endpoint == "top-headlines") {
+    //   setFilters(()=>topHeadlinesFilters);
+    // }
+    Query.query.endpoint == "everything"
+      ? setFilters(() => everythingFilters)
+      : setFilters(() => topHeadlinesFilters);
+  }, [Query.query.endpoint]);
 
   return (
     <DisplayRowWithGap>
-      {filters.map((filter,i) => {
+      {filters?.map((filter, i) => {
         return (
-          <DropDown key={i}
+          <DropDown
+            key={i}
             data={["a", "b"]}
             onSelect={HandleDropDowns}
             placeholder={filter}

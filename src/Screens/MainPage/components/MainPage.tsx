@@ -14,7 +14,6 @@ import {
 
 import { dateData, sourcesData } from "../../../mockData";
 import Title from "../../../Comps/title/Title";
-import TitleStories from "../../../Comps/title/Title.stories";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
 
 const MainPage = () => {

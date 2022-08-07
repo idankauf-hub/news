@@ -14,6 +14,7 @@ interface IQuery {
       language: Languages; //Options from the api
     };
     sortby: SortBy; //Options from the api
+    everythingFilters:string[]
   };
 }
 const querySlice = createSlice({

@@ -13,7 +13,7 @@ interface SelectProps {
 
 const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [val, setVal] = useState<string>(placeholder);
+  const [val, setVal] = useState<string>(placeholder||"");
 
   const handleClick = (value: string) => {
     onSelect(value);
