@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Languages, SortBy, EndPoints, Categories } from "../types/types";
 
 interface IQuery {
+  endpoint: any;
   query: {
     search: string;
     endpoint: EndPoints;
@@ -9,7 +10,7 @@ interface IQuery {
       country: string;
       catagory: Categories;
       sources: string;
-      date: Date | string;
+      date:string;
       language: Languages; //Options from the api
     };
     sortby: SortBy; //Options from the api
@@ -23,7 +24,7 @@ const querySlice = createSlice({
       endpoint: "top-headlines",
       filters: {
         language: "",
-        date: new Date(),
+        date: new Date().toDateString(),
         country: "",
         catagory: "",
         sources: "",

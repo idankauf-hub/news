@@ -23,14 +23,14 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   return (
     <CustomeSelect
       id="select"
-      defaultValue={""}
+      defaultValue={''}
       value={val}
       onClick={() => setIsOpen(!isOpen)}
       fullWidth
       open={isOpen}
       sx={{
         // alignItems: "center",
-        // justifyContent: "center",
+        background:"white",
         fontWeight: 500,
         fontSize: 14,
         width: "37%",
