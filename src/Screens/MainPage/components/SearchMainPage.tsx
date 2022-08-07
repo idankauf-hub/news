@@ -6,6 +6,10 @@ import type { RootState } from "../../../store/store";
 
 import { useSelector, useDispatch } from "react-redux";
 import { updateSearch } from "../../../store/query";
+import {FormControl } from "@mui/material";
+import { VerticalLine } from "../../../Comps/search/style";
+import DropDown from "../../../Comps/select/DropDown";
+import {Container} from './style'
 
 
 export const SearchMainPage = () => {
@@ -36,8 +40,8 @@ export const SearchMainPage = () => {
 
   return (
     <>
-    {/* <FormControl fullWidth>
-    <Container> */}
+    <FormControl fullWidth>
+    <Container>
       <Search
         input={input}
         searchFunction={handleChange}
@@ -47,14 +51,14 @@ export const SearchMainPage = () => {
           </>
         )}
       />
-       {/* <VerticalLine/>
+       <VerticalLine/>
       <DropDown
         data={placeholders}
         onSelect={handleDropDown}
         placeholder={placeholders[0]}
       />
       </Container>
-       </FormControl> */}
+       </FormControl>
     </>
   );
 };
