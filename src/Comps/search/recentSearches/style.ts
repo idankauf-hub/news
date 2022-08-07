@@ -30,7 +30,6 @@ export const Title = styled.p`
   color: ${COLORS.darkpurple};
 `;
 export const Search = styled.p`
-
 font-family: 'Roboto';
 font-style: normal;
 font-weight: 400;
@@ -38,6 +37,7 @@ font-size: 12px;
 line-height: 16px;
 letter-spacing: 0.1px;
 color: ${COLORS.darkpurple};
+width:100%;
 `;
 
 export const ClearButton = styled.button`
