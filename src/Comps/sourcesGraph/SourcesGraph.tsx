@@ -31,8 +31,8 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
       </PieChart>
       <CustomeLegend>
         <ul>
-          {data.map((item) => (
-            <Row>
+          {data.map((item,i) => (
+            <Row key={i}>
               <Li color={item.fill}>
                 <LiText>{item.name}</LiText>
               </Li>
