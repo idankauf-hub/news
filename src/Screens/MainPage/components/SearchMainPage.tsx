@@ -7,9 +7,11 @@ import type { RootState } from "../../../store/store";
 import { useSelector, useDispatch } from "react-redux";
 import { updateSearch } from "../../../store/query";
 
+
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
   const debouncedValue = useDebounce<string>(input, 500);
+  const placeholders = ["Top Headlines", "Everything"];
 
   const Query = useSelector((state: RootState) => state.query);
   const dispatch = useDispatch();
@@ -18,6 +20,10 @@ export const SearchMainPage = () => {
     setInput(value);
     dispatch(updateSearch({ input: value}));
     console.log(Query.query);
+  };
+  const handleDropDown = (value: string) => {
+    console.log(value);
+
   };
 
   useEffect(() => {
@@ -29,14 +35,26 @@ export const SearchMainPage = () => {
   }, [Query]);
 
   return (
-    <Search
-      input={input}
-      searchFunction={handleChange}
-      Icon={() => (
-        <>
-          <SearchIcon />
-        </>
-      )}
-    />
+    <>
+    <FormControl fullWidth>
+    <Container>
+      <Search
+        input={input}
+        searchFunction={handleChange}
+        Icon={() => (
+          <>
+            <SearchIcon />
+          </>
+        )}
+      />
+       <VerticalLine/>
+      <DropDown
+        data={placeholders}
+        onSelect={handleDropDown}
+        placeholder={placeholders[0]}
+      />
+      </Container>
+       </FormControl>
+    </>
   );
 };
