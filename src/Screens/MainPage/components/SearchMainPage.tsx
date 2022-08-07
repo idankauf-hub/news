@@ -36,8 +36,8 @@ export const SearchMainPage = () => {
 
   return (
     <>
-    <FormControl fullWidth>
-    <Container>
+    {/* <FormControl fullWidth>
+    <Container> */}
       <Search
         input={input}
         searchFunction={handleChange}
@@ -47,14 +47,14 @@ export const SearchMainPage = () => {
           </>
         )}
       />
-       <VerticalLine/>
+       {/* <VerticalLine/>
       <DropDown
         data={placeholders}
         onSelect={handleDropDown}
         placeholder={placeholders[0]}
       />
       </Container>
-       </FormControl>
+       </FormControl> */}
     </>
   );
 };
