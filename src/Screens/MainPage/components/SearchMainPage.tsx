@@ -10,6 +10,7 @@ import {FormControl } from "@mui/material";
 import { VerticalLine } from "../../../Comps/search/style";
 import DropDown from "../../../Comps/select/DropDown";
 import {Container} from './style'
+import RecentSearches from "../../../Comps/search/recentSearches/RecentSearches";
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
