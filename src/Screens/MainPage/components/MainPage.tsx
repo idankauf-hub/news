@@ -25,28 +25,19 @@ const MainPage = () => {
     useState<{ month: string; frequency: number }[]>(dateData);
   const [sources, setSources] =
     useState<{ name: string; value: number; fill: string }[]>(sourcesData);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-      axios
-      .get("https://ipapi.co/json/")
-      .then((response:any) => {
-        let data = response.data.country_code.toLowerCase();
-        dispatch(updateFilters({country:data}));
-
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
-      
-      // dispatch(updateFilters({country:}));
-    }, []);
+  useEffect(() => {
+    getLocation().then((value) => {
+      dispatch(updateFilters({ country: value }));
+    });
+  }, []);
 
   return (
     <>
       <Navbar />
       <Container>
-        <DropDowns/>
+        <DropDowns />
         <UnderLine></UnderLine>
         <Title subject="dfdf" city="dfsdf" />
         <Row>

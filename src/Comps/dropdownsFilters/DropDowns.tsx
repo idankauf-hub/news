@@ -5,7 +5,6 @@ import { RootState } from "../../store/store";
 
 import { useSelector, useDispatch } from "react-redux";
 import { updateFilters } from "../../store/query";
-import { getLocation } from "../../Services/Api";
 
 const DropDowns = () => {
   const [filters, setFilters] = useState<string[]>([]);
