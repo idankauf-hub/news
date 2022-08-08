@@ -25,6 +25,8 @@ const MainPage = () => {
     useState<{ month: string; frequency: number }[]>(dateData);
   const [sources, setSources] =
     useState<{ name: string; value: number; fill: string }[]>(sourcesData);
+  const [value, setValue] = useState<string>("");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const MainPage = () => {
     <>
       <Navbar />
       <Container>
-        <DropDowns />
+        <DropDowns endpoint={value} />
         <UnderLine></UnderLine>
         <Title subject="dfdf" city="dfsdf" />
         <Row>

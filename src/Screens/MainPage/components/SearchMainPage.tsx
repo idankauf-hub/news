@@ -6,15 +6,15 @@ import type { RootState } from "../../../store/store";
 
 import { useSelector, useDispatch } from "react-redux";
 import { updateEndPoint, updateSearch } from "../../../store/query";
-import {FormControl } from "@mui/material";
+import { FormControl } from "@mui/material";
 import { VerticalLine } from "../../../Comps/search/style";
 import DropDown from "../../../Comps/select/DropDown";
-import {Container} from './style'
+import { Container } from "./style";
 import { Row } from "./MainPageStyle";
-
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
+
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
 
@@ -26,9 +26,8 @@ export const SearchMainPage = () => {
     dispatch(updateSearch(value));
   };
   const handleEndpointDropDown = (value: string) => {
-    if(value === "Everything")
-    dispatch(updateEndPoint("everything"));
-    else{
+    if (value === "Everything") dispatch(updateEndPoint("everything"));
+    else {
       dispatch(updateEndPoint("top-headlines"));
     }
   };
@@ -43,25 +42,25 @@ export const SearchMainPage = () => {
 
   return (
     <>
-    <FormControl fullWidth>
-    <Container>
-      <Search
-        input={input}
-        searchFunction={handleChange}
-        Icon={() => (
-          <>
-            <SearchIcon />
-          </>
-        )}
-      />
-       <VerticalLine/>
-      <DropDown
-        data={placeholders}
-        onSelect={handleEndpointDropDown}
-        placeholder={placeholders[0]}
-      />
-      </Container>
-       </FormControl>
+      <FormControl fullWidth>
+        <Container>
+          <Search
+            input={input}
+            searchFunction={handleChange}
+            Icon={() => (
+              <>
+                <SearchIcon />
+              </>
+            )}
+          />
+          <VerticalLine />
+          <DropDown
+            data={placeholders}
+            onSelect={handleEndpointDropDown}
+            placeholder={placeholders[0]}
+          />
+        </Container>
+      </FormControl>
     </>
   );
 };

@@ -4,63 +4,63 @@ import { DisplayRowWithGap } from "./style";
 import { RootState } from "../../store/store";
 
 import { useSelector, useDispatch } from "react-redux";
-import { updateFilters } from "../../store/query";
-
-const DropDowns = () => {
-  const [filters, setFilters] = useState<string[]>([]);
-  const Query = useSelector((state: RootState) => state.query);
-
+import { updateFilters, resetFilters } from "../../store/query";
+type Data = {
+  endpoint: string;
+};
+const DropDowns: React.FC<Data> = (endpoint) => {
   const everythingFilters = ["Sort by", "Dates", "Sources", "Language"];
   const topHeadlinesFilters = ["Country", "Catagory", "Sources"];
+  const [filters, setFilters] = useState<string[]>(topHeadlinesFilters);
+  const Query = useSelector((state: RootState) => state.query);
+
   const dispatch = useDispatch();
 
-  const HandleDropDowns = (value:string,filter: string) => {
-        switch (filter) {
+  const HandleDropDowns = (value: string, filter: string) => {
+    switch (filter) {
       case "Sort by":
-        dispatch(updateFilters({sortby:value}));
+        dispatch(updateFilters({ sortby: value }));
         break;
       case "Dates":
-        dispatch(updateFilters({date:value}));
+        dispatch(updateFilters({ date: value }));
         break;
       case "Sources":
-        dispatch(updateFilters({sources:value}));
+        dispatch(updateFilters({ sources: value }));
         break;
       case "Language":
-        dispatch(updateFilters({language:value}));
+        dispatch(updateFilters({ language: value }));
         break;
       case "Country":
-        dispatch(updateFilters({country:value}));
+        dispatch(updateFilters({ country: value }));
         break;
       case "Catagory":
-        dispatch(updateFilters({catagory:value}));
+        dispatch(updateFilters({ catagory: value }));
         break;
       default:
     }
   };
 
-  
   useEffect(() => {
-    // console.log(Query.query.endpoint)
-    // if (Query.query.endpoint == "everything") {
-    //   setFilters(()=>everythingFilters);
-    // }
-    // else if(Query.query.endpoint == "top-headlines") {
-    //   setFilters(()=>topHeadlinesFilters);
-    // }
+    dispatch(resetFilters());
     Query.query.endpoint == "everything"
       ? setFilters(() => everythingFilters)
       : setFilters(() => topHeadlinesFilters);
-    
   }, [Query.query.endpoint]);
 
   return (
     <DisplayRowWithGap>
       {filters?.map((filter, i) => {
+        var key = "";
+        if (Query.query.endpoint == "everything") {
+          key = "everything/" + filter;
+        } else {
+          key = "top-headlines/" + filter;
+        }
         return (
           <DropDown
-            key={i}
+            key={key}
             data={["a", "b"]}
-            onSelect={(value)=>HandleDropDowns(value,filter)}
+            onSelect={(value) => HandleDropDowns(value, filter)}
             placeholder={filter}
           ></DropDown>
         );

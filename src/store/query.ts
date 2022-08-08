@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Languages, SortBy, EndPoints, Categories ,Country} from "../types/types";
+import {
+  Languages,
+  SortBy,
+  EndPoints,
+  Categories,
+  Country,
+} from "../types/types";
 
 interface IQuery {
   endpoint: any;
@@ -10,29 +16,31 @@ interface IQuery {
       country: Country;
       catagory: Categories;
       sources: string;
-      date:string;
+      date: string;
       language: Languages; //Options from the api
     };
     sortby: SortBy; //Options from the api
-    everythingFilters:string[]
+    everythingFilters: string[];
   };
 }
+
+const initialState = {
+  query: {
+    search: "",
+    endpoint: "top-headlines",
+    filters: {
+      language: "",
+      date: new Date().toDateString(),
+      country: "",
+      catagory: "",
+      sources: "",
+    },
+    sortby: "publishedAt",
+  },
+};
 const querySlice = createSlice({
   name: "query",
-  initialState: {
-    query: {
-      search: "",
-      endpoint: "top-headlines",
-      filters: {
-        language: "",
-        date: new Date().toDateString(),
-        country: "",
-        catagory: "",
-        sources: "",
-      },
-      sortby: "publishedAt",
-    },
-  } as IQuery,
+  initialState: initialState as IQuery,
   reducers: {
     updateSearch: (state, action) => {
       state.query.search = action.payload;
@@ -42,11 +50,15 @@ const querySlice = createSlice({
     },
     updateFilters: (state, action) => {
       state.query.filters = { ...state.query.filters, ...action.payload };
-      // state.query.filters.country = action.payload.country;
-      // state.query.filters.catagory = action.payload.catagory;
-      // state.query.filters.language = action.payload.language;
-      // state.query.filters.date = action.payload.date;
-      // state.query.filters.sources = action.payload.sources;
+    },
+    resetFilters: (state) => {
+      state.query.filters = {
+        language: "",
+        date: new Date().toDateString(),
+        country: "",
+        catagory: "",
+        sources: "",
+      };
     },
     updateSortBy: (state, action) => {
       state.query.sortby = action.payload;
@@ -57,5 +69,6 @@ export const updateSearch = querySlice.actions.updateSearch;
 export const updateEndPoint = querySlice.actions.updateEndPoint;
 export const updateFilters = querySlice.actions.updateFilters;
 export const updateSortBy = querySlice.actions.updateSortBy;
+export const resetFilters = querySlice.actions.resetFilters;
 
 export default querySlice.reducer;
