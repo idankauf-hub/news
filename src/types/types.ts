@@ -20,7 +20,7 @@ export type EndPoints = "everything" | "top-headlines";
 export type Categories =
   | "business"
   | "entertainment"
-  | "genral"
+  | "general"
   | "health"
   | "science"
   | "sports"

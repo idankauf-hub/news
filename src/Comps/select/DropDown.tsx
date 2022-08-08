@@ -29,7 +29,6 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
       fullWidth
       open={isOpen}
       sx={{
-        // alignItems: "center",
         background:"white",
         fontWeight: 500,
         fontSize: 14,

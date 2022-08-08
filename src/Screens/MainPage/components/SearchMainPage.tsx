@@ -14,7 +14,6 @@ import { Row } from "./MainPageStyle";
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
-
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
 
