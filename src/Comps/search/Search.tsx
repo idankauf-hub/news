@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FocusEventHandler, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FocusEventHandler,
+  RefObject,
+  useEffect,
+  useState,
+} from "react";
 import { SearchFormContainer, SearchButton, Input } from "./style";
 
 interface SearchProps {
@@ -6,9 +12,9 @@ interface SearchProps {
   searchFunction: (e: string) => void;
   input: string;
   Icon?: () => JSX.Element;
-  onBlur?:FocusEventHandler<HTMLInputElement>;
-  onFocus?:FocusEventHandler<HTMLInputElement>;
-  //recentSearches:string[]; //last searches per user - local storage
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  onFocus?: FocusEventHandler<HTMLInputElement>;
+  forwardedRef?: RefObject<HTMLInputElement>;
 }
 
 const Search: React.FC<SearchProps> = ({
@@ -17,7 +23,8 @@ const Search: React.FC<SearchProps> = ({
   input,
   searchFunction,
   onFocus,
-  onBlur
+  onBlur,
+  forwardedRef,
 }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     searchFunction(event.currentTarget.value);
@@ -27,6 +34,7 @@ const Search: React.FC<SearchProps> = ({
     <SearchFormContainer>
       <SearchButton>{Icon && <Icon />}</SearchButton>
       <Input
+        ref={forwardedRef}
         onBlur={onBlur}
         onFocus={onFocus}
         placeholder={placeholder}
