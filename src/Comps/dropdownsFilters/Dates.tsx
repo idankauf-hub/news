@@ -11,6 +11,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { updateFilters } from "../../store/query";
 import { useDispatch } from "react-redux";
 import { Input } from "./style";
+import { DateIcon } from "../../Icons/index";
 
 // const theme = createTheme({
 //   components: {
@@ -92,6 +93,9 @@ const Dates = ({ onSelect, data }: DatesProps) => {
     // </div>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
+        components={{
+          OpenPickerIcon: DateIcon,
+        }}
         value={value}
         onChange={(value) => {
           setValue(value);
