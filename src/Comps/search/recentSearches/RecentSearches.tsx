@@ -1,20 +1,20 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Container, Row, Title, ClearButton, Search } from "./style";
-import {} from "../../../styles/layouts";
-import {} from "../../../styles/typography";
 import { DeleteIcon } from "../../../Icons";
 
 type ISearch = {
-  value: string[];
+  value: string;
   setInput: Dispatch<SetStateAction<string>>;
+  setClear:any;
 };
-const RecentSearches: React.FC<ISearch> = ({ value, setInput }) => {
-  const [items, setItems] = useState<string[]>(value);
+const RecentSearches: React.FC<ISearch> = ({ value, setInput,setClear }) => {
+  const [lastSearches, setLastSearches] = useState<string[]>([]);
 
   const clearSearches = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    localStorage.setItem("lastSearches", JSON.stringify([]));
-    setItems([]);
+    try {
+      setClear([])
+      localStorage.removeItem("lastSearches");
+    } catch {}
   };
   const chooseSearch = (item: string) => {
     setInput(item);
@@ -23,14 +23,15 @@ const RecentSearches: React.FC<ISearch> = ({ value, setInput }) => {
     item: string,
     event: { preventDefault: () => void }
   ) => {
-    console.log(item);
     event.preventDefault();
   };
+
   useEffect(() => {
-    if (items) {
-      const item = localStorage.getItem("lastSearches");
-      setItems(JSON.parse(item || ""));
-    }
+    try {
+      const item = JSON.parse(localStorage.getItem("lastSearches") || "{}");
+      const y= [...new Set([...item, value]) as any]
+      if (value) setLastSearches(y);
+    } catch {}
   }, [value]);
 
   return (
@@ -39,15 +40,16 @@ const RecentSearches: React.FC<ISearch> = ({ value, setInput }) => {
         <Title>RECENT SEARCHES</Title>
         <ClearButton onMouseDown={clearSearches}>CLEAR</ClearButton>
       </Row>
-      {items?.map((item: string, i: number) => (
-        <Row key={i}>
-          <Search onMouseDown={() => chooseSearch(item)}>{item}</Search>
-          <DeleteIcon
-            transform="scale(0.5)"
-            onMouseDown={(e) => deleteSearch(item, e)}
-          />
-        </Row>
-      ))}
+      {lastSearches &&
+        lastSearches.map((item: string, i: number) => (
+          <Row key={i}>
+            <Search onMouseDown={() => chooseSearch(item)}>{item}</Search>
+            <DeleteIcon
+              transform="scale(0.5)"
+              onMouseDown={(e) => deleteSearch(item, e)}
+            />
+          </Row>
+        ))}
     </Container>
   );
 };

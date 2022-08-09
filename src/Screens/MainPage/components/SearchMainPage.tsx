@@ -14,15 +14,18 @@ import RecentSearches from "../../../Comps/search/recentSearches/RecentSearches"
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
-  const [items, setItems] = useState<string[]>([]);
+  const [inputRecent, setInputRecent] = useState<string>("");
+
+  const [searches, setItems] = useState<string[]>([]);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
 
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
 
-  const addItem = () => {
-    if (input) setItems([...items, input]);
+  const addItem = (input:string) => {
+    if (input) setItems([...searches, input]);
+    localStorage.setItem("lastSearches", JSON.stringify(searches));
   };
   const Query = useSelector((state: RootState) => state.query);
   const dispatch = useDispatch();
@@ -43,17 +46,13 @@ export const SearchMainPage = () => {
       setIsFocus(false);
     }
   };
-
   useEffect(() => {
-    addItem();
+    addItem(input);
+    setInputRecent(input)
     //call api
     // addToRecentSearches([],input)
     //change input in store redux
   }, [debouncedValue]);
-
-  useEffect(() => {
-    localStorage.setItem("lastSearches", JSON.stringify(items));
-  }, [items]);
 
   useEffect(() => {
     //call api
@@ -82,8 +81,8 @@ export const SearchMainPage = () => {
             placeholder={placeholders[0]}
           />
         </Container>
-        {document.activeElement === inputRef.current && (
-          <RecentSearches value={items} setInput={setInput} />
+        {isFocus && (
+          <RecentSearches value={inputRecent} setInput={setInput} setClear={setItems} />
         )}
       </FormControl>
     </>
