@@ -6,10 +6,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { COLORS } from "../../styles/colors";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
 // import type {} from '@mui/x-date-pickers-pro/themeAugmentation';
-import { createTheme, SxProps, ThemeProvider } from "@mui/material";
+import { Box, createTheme, SxProps, ThemeProvider } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { updateFilters } from "../../store/query";
 import { useDispatch } from "react-redux";
+import { Input } from "./style";
 
 // const theme = createTheme({
 //   components: {
@@ -61,34 +62,67 @@ const Dates = ({ onSelect, data }: DatesProps) => {
   };
 
   return (
-    <div style={{ backgroundColor: "white", border: "none" }}>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          PopperProps={{
-            sx: popperSx,
-          }}
-          InputProps={{
-            disableUnderline: true,
-          }}
-          value={value}
-          onChange={(value) => {
-            dispatch(updateFilters({ date: value?.toDateString() }));
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="standard"
-              sx={{
-                backgroundColor: "white",
-                textAlign: "center",
-                justifyContent: "center",
-                outlineColor: "red",
+    // <div style={{ backgroundColor: "white", border: "none" }}>
+    //   <LocalizationProvider dateAdapter={AdapterDateFns}>
+    //     <DatePicker
+    //       PopperProps={{
+    //         sx: popperSx,
+    //       }}
+    //       InputProps={{
+    //         disableUnderline: true,
+    //       }}
+    //       value={value}
+    //       onChange={(value) => {
+    //         dispatch(updateFilters({ date: value?.toDateString() }));
+    //       }}
+    //       renderInput={(params) => (
+    //         <TextField
+    //           {...params}
+    //           variant="standard"
+    //           sx={{
+    //             backgroundColor: "white",
+    //             textAlign: "center",
+    //             justifyContent: "center",
+    //             outlineColor: "red",
+    //           }}
+    //         />
+    //       )}
+    //     />
+    //   </LocalizationProvider>
+    // </div>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker
+        value={value}
+        onChange={(value) => {
+          setValue(value);
+          dispatch(updateFilters({ date: value?.toDateString() }));
+        }}
+        renderInput={({ inputRef, inputProps, InputProps }) => (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "30%",
+              alignItems: "center",
+              background: "white",
+              padding: "15px",
+              gap: "10px",
+              borderRadius: "10px",
+            }}
+          >
+            <Input
+              ref={inputRef}
+              {...inputProps}
+              style={{
+                border: "none",
+                width: "70px",
               }}
             />
-          )}
-        />
-      </LocalizationProvider>
-    </div>
+            {InputProps?.endAdornment}
+          </Box>
+        )}
+      />
+    </LocalizationProvider>
   );
 };
 
