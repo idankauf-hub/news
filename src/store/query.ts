@@ -49,6 +49,7 @@ const querySlice = createSlice({
       state.query.endpoint = action.payload;
     },
     updateFilters: (state, action) => {
+      console.log(action.payload)
       state.query.filters = { ...state.query.filters, ...action.payload };
     },
     resetFilters: (state) => {

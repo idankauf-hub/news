@@ -14,6 +14,7 @@ import {
   everythingFilters,
   topHeadlinesFilters,
 } from "../../types/datatypes";
+import Dates from "./Dates";
 
 type Data = {
   endpoint: string;
@@ -111,6 +112,9 @@ const DropDowns: React.FC<Data> = (endpoint) => {
         } else {
           key = "top-headlines-" + filter;
         }
+        if(filter==="Dates"){
+          return (<Dates key={i} data={handleData(filter)} onSelect={(e) =>{console.log(e)}}></Dates>)
+        } 
         return (
           <DropDown
             key={key}
