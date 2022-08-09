@@ -5,14 +5,14 @@ import { DeleteIcon } from "../../../Icons";
 type ISearch = {
   value: string;
   setInput: Dispatch<SetStateAction<string>>;
-  setClear:any;
+  setClear: any;
 };
-const RecentSearches: React.FC<ISearch> = ({ value, setInput,setClear }) => {
+const RecentSearches: React.FC<ISearch> = ({ value, setInput, setClear }) => {
   const [lastSearches, setLastSearches] = useState<string[]>([]);
 
   const clearSearches = (event: { preventDefault: () => void }) => {
     try {
-      setClear([])
+      setClear([]);
       localStorage.removeItem("lastSearches");
     } catch {}
   };
@@ -29,8 +29,7 @@ const RecentSearches: React.FC<ISearch> = ({ value, setInput,setClear }) => {
   useEffect(() => {
     try {
       const item = JSON.parse(localStorage.getItem("lastSearches") || "{}");
-      const y= [...new Set([...item, value]) as any]
-      if (value) setLastSearches(y);
+      if (value) setLastSearches([...(new Set([...item, value]) as any)]);
     } catch {}
   }, [value]);
 

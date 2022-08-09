@@ -14,7 +14,7 @@ import RecentSearches from "../../../Comps/search/recentSearches/RecentSearches"
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
-  const [inputRecent, setInputRecent] = useState<string>("");
+  const [inputRecent, setInputToRecent] = useState<string>("");
 
   const [searches, setItems] = useState<string[]>([]);
   const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export const SearchMainPage = () => {
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
 
-  const addItem = (input:string) => {
+  const addItemToLocalStorage = (input:string) => {
     if (input) setItems([...searches, input]);
     localStorage.setItem("lastSearches", JSON.stringify(searches));
   };
@@ -47,8 +47,8 @@ export const SearchMainPage = () => {
     }
   };
   useEffect(() => {
-    addItem(input);
-    setInputRecent(input)
+    addItemToLocalStorage(input);
+    setInputToRecent(input)
     //call api
     // addToRecentSearches([],input)
     //change input in store redux
