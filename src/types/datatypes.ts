@@ -2,7 +2,7 @@ import { SortBy, Categories, Country, Languages } from "./types";
 
 export const SortbyData: SortBy[] = ["relevancy", "popularity", "publishedAt"];
 
-export const CatagoryData: Categories[] = [
+export const CategoryData: Categories[] = [
   "business",
   "entertainment",
   "general",
@@ -122,4 +122,4 @@ export function setToLanguageCode(
 }
 
 export const everythingFilters = ["Sort by", "Dates", "Sources", "Language"];
-export const topHeadlinesFilters = ["Country", "Catagory", "Sources"];
+export const topHeadlinesFilters = ["Country", "Category", "Sources"];

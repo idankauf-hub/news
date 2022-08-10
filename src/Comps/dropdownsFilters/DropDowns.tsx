@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateFilters, resetFilters } from "../../store/query";
 import {
   SortbyData,
-  CatagoryData,
+  CategoryData,
   CountryData,
   Language,
   LanguageCodesAndNames,
@@ -15,9 +15,7 @@ import {
   topHeadlinesFilters,
 } from "../../types/datatypes";
 import Dates from "./Dates";
-import axios from "axios";
-import { Sources } from "../../types/types";
-import { API_KEY, getAllTopHeadlinesSources } from "../../Services/Api";
+import { getAllTopHeadlinesSources } from "../../Services/Api";
 
 
 const DropDowns: React.FC = () => {
@@ -64,8 +62,8 @@ const DropDowns: React.FC = () => {
           })
         );
         break;
-      case "Catagory":
-        dispatch(updateFilters({ catagory: value }));
+      case "Category":
+        dispatch(updateFilters({ category: value }));
         break;
       default:
     }
@@ -92,8 +90,8 @@ const DropDowns: React.FC = () => {
         );
         return Countries;
         break;
-      case "Catagory":
-        return CatagoryData;
+      case "Category":
+        return CategoryData;
         break;
       default:
         return [];

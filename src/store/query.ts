@@ -14,7 +14,7 @@ interface IQuery {
     endpoint: EndPoints;
     filters: {
       country: Country;
-      catagory: Categories;
+      category: Categories;
       sources: string;
       date: string;
       language: Languages; //Options from the api
@@ -32,7 +32,7 @@ const initialState = {
       language: "",
       date: "",
       country: "",
-      catagory: "",
+      category: "",
       sources: "",
     },
     sortby: "publishedAt",
@@ -56,7 +56,7 @@ const querySlice = createSlice({
         language: "",
         date: "",
         country: "",
-        catagory: "",
+        category: "",
         sources: "",
       };
     },

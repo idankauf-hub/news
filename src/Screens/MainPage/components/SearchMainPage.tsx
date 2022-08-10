@@ -46,11 +46,11 @@ export const SearchMainPage = () => {
     if (Query.query.endpoint === "top-headlines") {
       if (isQueryEmpty()) {
         setQueryUrl(
-          `${BASE_URL}${Query.query.endpoint}?country=${Query.query.filters.country}&catagory=${Query.query.filters.catagory}&apiKey=${API_KEY}`
+          `${BASE_URL}${Query.query.endpoint}?country=${Query.query.filters.country}&category=${Query.query.filters.category}&apiKey=${API_KEY}`
         );
       } else {
         setQueryUrl(
-          `${BASE_URL}${Query.query.endpoint}?sources=${Query.query.filters.sources}&catagory=${Query.query.filters.catagory}&apiKey=${API_KEY}`
+          `${BASE_URL}${Query.query.endpoint}?sources=${Query.query.filters.sources}&category=${Query.query.filters.category}&apiKey=${API_KEY}`
         );
       }
     } else {
