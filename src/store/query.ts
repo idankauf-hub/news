@@ -8,7 +8,6 @@ import {
 } from "../types/types";
 
 interface IQuery {
-  endpoint: any;
   query: {
     search: string;
     endpoint: EndPoints;
@@ -20,7 +19,8 @@ interface IQuery {
       language: Languages; //Options from the api
     };
     sortby: SortBy; //Options from the api
-    everythingFilters: string[];
+    queryUrl: string;
+
   };
 }
 
@@ -36,6 +36,7 @@ const initialState = {
       sources: "",
     },
     sortby: "publishedAt",
+    queryUrl: "",
   },
 };
 const querySlice = createSlice({
@@ -63,6 +64,9 @@ const querySlice = createSlice({
     updateSortBy: (state, action) => {
       state.query.sortby = action.payload;
     },
+    updateQueryUrl: (state, action) => {
+      state.query.queryUrl = action.payload;
+    },
   },
 });
 export const updateSearch = querySlice.actions.updateSearch;
@@ -70,5 +74,7 @@ export const updateEndPoint = querySlice.actions.updateEndPoint;
 export const updateFilters = querySlice.actions.updateFilters;
 export const updateSortBy = querySlice.actions.updateSortBy;
 export const resetFilters = querySlice.actions.resetFilters;
+export const updateQueryUrl = querySlice.actions.updateQueryUrl;
+
 
 export default querySlice.reducer;

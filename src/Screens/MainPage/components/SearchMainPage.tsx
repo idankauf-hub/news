@@ -6,7 +6,7 @@ import type { RootState } from "../../../store/store";
 import { VerticalLine } from "../../../Comps/search/style";
 import DropDown from "../../../Comps/select/DropDown";
 import { Container } from "./style";
-import { updateEndPoint, updateSearch } from "../../../store/query";
+import { updateEndPoint, updateQueryUrl, updateSearch } from "../../../store/query";
 import { BASE_URL, API_KEY } from "../../../Services/Api";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -58,6 +58,8 @@ export const SearchMainPage = () => {
         `${BASE_URL}${Query.query.endpoint}?q=${Query.query.search}&sortBy=${Query.query.sortby}&from=${Query.query.filters.date}&to=${Query.query.filters.date}&sources=${Query.query.filters.sources}&language=${Query.query.filters.language}&apiKey=${API_KEY}`
       );
     }
+    dispatch(updateQueryUrl(queryUrl));
+
   };
   useEffect(() => {
     buildApiQuery();
