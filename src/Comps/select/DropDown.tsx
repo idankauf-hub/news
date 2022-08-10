@@ -4,32 +4,90 @@ import { ForwardIcon } from "../../Icons";
 
 import { COLORS } from "../../styles/colors";
 import { CustomeSelect } from "./style";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { selectCountry, selectSources } from "../../store/selectedDropDown";
 
 interface SelectProps {
   placeholder: string;
-  onSelect: (e: string) => void ;
+  onSelect: (e: string) => void;
   data: string[];
 }
 
 const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [val, setVal] = useState<string>(placeholder||"");
+  const [val, setVal] = useState<string>(placeholder || "");
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const Query = useSelector((state: RootState) => state.query);
+  const SelectedState = useSelector((state: RootState) => state.selected);
 
   const handleClick = (value: string) => {
+    console.log("chose");
+    setIsClicked(true);
+    if (placeholder == "Sources") {
+      dispatch(selectSources(true));
+    }
+    if (placeholder == "Country") {
+      dispatch(selectCountry(true));
+    }
     onSelect(value);
     setVal(value);
   };
-
+  const isQueryEmpty = () => {
+    if (placeholder == "Country") {
+      Query.query.filters.sources.length === 0
+        ? setDisabled(false)
+        : setDisabled(true);
+    }
+    if (placeholder == "Sources") {
+      Query.query.filters.country.length === 0
+        ? setDisabled(false)
+        : setDisabled(true);
+    }
+    // if (placeholder == "Sources") {
+    //   Query.query.filters.sources.length === 0
+    //     ? setDisabled(false)
+    //     : setDisabled(true);
+    // }
+  };
+  useEffect(() => {
+    // isQueryEmpty();
+    console.log(placeholder, isClicked);
+    if (placeholder === "Sources" && SelectedState.country) setDisabled(true);
+    else {
+      setDisabled(false);
+    }
+    //call api
+    //build query url
+    //state url
+    // call api with the query url ^
+  }, [Query.query.filters.country]);
+  useEffect(() => {
+    // isQueryEmpty();
+    if (placeholder === "Country" && SelectedState.sources) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+    //call api
+    //build query url
+    //state url
+    // call api with the query url ^
+  }, [Query.query.filters.sources]);
   return (
     <CustomeSelect
+      disabled={disabled}
       id="select"
-      defaultValue={''}
+      defaultValue={""}
       value={val || ""}
       onClick={() => setIsOpen(!isOpen)}
       fullWidth
       open={isOpen}
       sx={{
-        background:"white",
+        background: "white",
         fontWeight: 500,
         fontSize: 14,
         width: "37%",
