@@ -10,13 +10,12 @@ import { Input } from "./style";
 import { DateIcon } from "../../Icons/index";
 
 interface DatesProps {
-  onSelect?: (e: string) => void;
   data: string[];
 }
-const Dates = ({ onSelect, data }: DatesProps) => {
+const Dates = () => {
   const dispatch = useDispatch();
 
-  const [value, setValue] = React.useState<Date | string>("Dates");
+  const [date, setDate] = React.useState<Date | string>("Dates");
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -24,10 +23,12 @@ const Dates = ({ onSelect, data }: DatesProps) => {
         components={{
           OpenPickerIcon: DateIcon,
         }}
-        value={value}
+        value={date}
         onChange={(value) => {
-          setValue(value || "");
-          dispatch(updateFilters({ date: value?.toString() }));
+          setDate(value || "");
+          dispatch(
+            updateFilters({ date: new Date(value || "").toISOString() })
+          );
         }}
         renderInput={({ inputRef, inputProps, InputProps }) => (
           <>
@@ -44,7 +45,7 @@ const Dates = ({ onSelect, data }: DatesProps) => {
             >
               <Input
                 ref={inputRef}
-                value={value.toString()}
+                value={date.toString()}
                 {...inputProps}
                 placeholder={"Dates"}
                 style={{

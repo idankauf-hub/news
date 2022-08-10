@@ -54,7 +54,7 @@ const querySlice = createSlice({
     resetFilters: (state) => {
       state.query.filters = {
         language: "",
-        date: new Date().toDateString(),
+        date: "",
         country: "",
         catagory: "",
         sources: "",

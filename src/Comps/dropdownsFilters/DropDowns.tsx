@@ -46,9 +46,7 @@ const DropDowns: React.FC = () => {
       case "Sort by":
         dispatch(updateFilters({ sortby: value }));
         break;
-      case "Dates":
-        dispatch(updateFilters({ date: value }));
-        break;
+
       case "Sources":
         dispatch(updateFilters({ sources: value }));
         break;
@@ -122,10 +120,6 @@ const DropDowns: React.FC = () => {
           return (
             <Dates
               key={i}
-              data={handleData(filter)}
-              onSelect={(e) => {
-                console.log(e);
-              }}
             ></Dates>
           );
         }

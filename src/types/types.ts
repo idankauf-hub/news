@@ -84,7 +84,7 @@ export type Country =
   | "za"
   | "";
 
- export interface Sources {
+  export interface Sources {
     status: string;
     sources: {
       id: string;

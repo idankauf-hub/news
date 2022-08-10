@@ -2,12 +2,11 @@ import React from 'react'
 import { TitleText } from './style'
 
 interface TitleProps{
-    subject:string;
     city:string;
 }
-const Title: React.FC<TitleProps> = ({subject,city}) => {
+const Title: React.FC<TitleProps> = ({city}) => {
   return (
-    <TitleText>{subject} in {city}</TitleText>
+    <TitleText>Top Headlines in {city}</TitleText>
   )
 }
 

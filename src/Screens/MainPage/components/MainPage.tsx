@@ -45,7 +45,6 @@ const MainPage = () => {
         <DropDowns />
         <UnderLine></UnderLine>
         <Title
-          subject={Query.query.endpoint}
           city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
         />
         <Row>

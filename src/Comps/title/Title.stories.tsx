@@ -7,6 +7,6 @@ export default {
   title: "Components/Title",
 } as Meta;
 
-const Template: Story = () => <Title subject="Top Headlines" city="Tel Aviv" />;
+const Template: Story = () => <Title city="f"/>;
 
 export const Primary = Template.bind({});
