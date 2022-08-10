@@ -24,7 +24,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
     <CustomeSelect
       id="select"
       defaultValue={''}
-      value={val}
+      value={val || ""}
       onClick={() => setIsOpen(!isOpen)}
       fullWidth
       open={isOpen}
@@ -45,7 +45,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         return <div>{value}</div>;
       }}
     >
-      {data.map((item, i) => {
+      {data?.map((item, i) => {
         return (
           <div key={i} onClick={() => handleClick(item)}>
             <MenuItem key={i} value={item}>

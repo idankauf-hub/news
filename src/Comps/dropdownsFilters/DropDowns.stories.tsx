@@ -7,6 +7,6 @@ export default {
   title: "Components/DropDowns",
 } as Meta;
 
-const Template: Story = () => <DropDowns endpoint="d" />;
+const Template: Story = () => <DropDowns/>;
 
 export const Primary = Template.bind({});

@@ -15,20 +15,23 @@ import {
 import { dateData, sourcesData } from "../../../mockData";
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
-import { getLocation } from "../../../Services/Api";
-import { useDispatch } from "react-redux";
+import { getLocation, getAllTopHeadlinesSources } from "../../../Services/Api";
+import { useDispatch, useSelector } from "react-redux";
 import { updateFilters } from "../../../store/query";
 import axios from "axios";
+import { RootState } from "../../../store/store";
+import { CountryData } from "../../../types/datatypes";
 
 const MainPage = () => {
+  const Query = useSelector((state: RootState) => state.query);
   const [dates, setDates] =
     useState<{ month: string; frequency: number }[]>(dateData);
   const [sources, setSources] =
     useState<{ name: string; value: number; fill: string }[]>(sourcesData);
-  const [value, setValue] = useState<string>("");
 
   const dispatch = useDispatch();
 
+  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   useEffect(() => {
     getLocation().then((value) => {
       dispatch(updateFilters({ country: value }));
@@ -39,9 +42,12 @@ const MainPage = () => {
     <>
       <Navbar />
       <Container>
-        <DropDowns endpoint={value} />
+        <DropDowns />
         <UnderLine></UnderLine>
-        <Title subject="dfdf" city="dfsdf" />
+        <Title
+          subject={Query.query.endpoint}
+          city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
+        />
         <Row>
           <ColumnCards>
             <Cards />

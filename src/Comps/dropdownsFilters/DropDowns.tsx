@@ -15,13 +15,22 @@ import {
   topHeadlinesFilters,
 } from "../../types/datatypes";
 import Dates from "./Dates";
+import axios from "axios";
+import { Sources } from "../../types/types";
+import { API_KEY, getAllTopHeadlinesSources } from "../../Services/Api";
 
-type Data = {
-  endpoint: string;
-};
-const DropDowns: React.FC<Data> = (endpoint) => {
+
+const DropDowns: React.FC = () => {
   const [filters, setFilters] = useState<string[]>(topHeadlinesFilters);
-  const [data, setData] = useState<string[]>();
+  const [sources, setSources] = useState<string[]>();
+  const Query = useSelector((state: RootState) => state.query);
+
+
+  useEffect(() => {
+    getAllTopHeadlinesSources(Query.query.filters.sources).then((value) => {
+      setSources(value);
+    });
+  }, [Query.query.filters.country]);
 
   //convert Countries and Languages code to names and names to code
   var countries = require("i18n-iso-countries");
@@ -29,8 +38,6 @@ const DropDowns: React.FC<Data> = (endpoint) => {
   const languageNamesInEnglish = new Intl.DisplayNames(["en"], {
     type: "language",
   });
-
-  const Query = useSelector((state: RootState) => state.query);
 
   const dispatch = useDispatch();
 
@@ -65,17 +72,16 @@ const DropDowns: React.FC<Data> = (endpoint) => {
       default:
     }
   };
+
+
   const handleData = (filter: string) => {
     switch (filter) {
       case "Sort by":
         return SortbyData;
         break;
-      // case "Dates":
-      //   dispatch(updateFilters({ date: value }));
-      //   break;
-      // case "Sources":
-      //   dispatch(updateFilters({ sources: value }));
-      //   break;
+      case "Sources":
+        return sources || [];
+        break;
       case "Language":
         let Languages = Language.map((languageCode: string) =>
           languageNamesInEnglish.of(languageCode)
@@ -112,9 +118,17 @@ const DropDowns: React.FC<Data> = (endpoint) => {
         } else {
           key = "top-headlines-" + filter;
         }
-        if(filter==="Dates"){
-          return (<Dates key={i} data={handleData(filter)} onSelect={(e) =>{console.log(e)}}></Dates>)
-        } 
+        if (filter === "Dates") {
+          return (
+            <Dates
+              key={i}
+              data={handleData(filter)}
+              onSelect={(e) => {
+                console.log(e);
+              }}
+            ></Dates>
+          );
+        }
         return (
           <DropDown
             key={key}

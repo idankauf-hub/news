@@ -37,6 +37,9 @@ export const SearchMainPage = () => {
 
   useEffect(() => {
     //call api
+    //build query url 
+    //state url 
+    // call api with the query url ^
   }, [Query]);
 
   return (
