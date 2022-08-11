@@ -8,6 +8,7 @@ import { updateFilters } from "../../store/query";
 import { useDispatch } from "react-redux";
 import { Input } from "./style";
 import { DateIcon } from "../../Icons/index";
+import dayjs from "dayjs";
 
 interface DatesProps {
   data: string[];
@@ -16,6 +17,11 @@ const Dates = () => {
   const dispatch = useDispatch();
 
   const [date, setDate] = React.useState<Date | string>("Dates");
+
+  const changeDateForamt = (value: string | Date) => {
+    const formatted = dayjs(value).format("YYYY-MM-DD");
+    return formatted;
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -26,9 +32,8 @@ const Dates = () => {
         value={date}
         onChange={(value) => {
           setDate(value || "");
-          dispatch(
-            updateFilters({ date: new Date(value || "").toISOString() })
-          );
+          changeDateForamt(value || "");
+          dispatch(updateFilters({ date: changeDateForamt(value || "") }));
         }}
         renderInput={({ inputRef, inputProps, InputProps }) => (
           <>

@@ -35,7 +35,7 @@ const Cards: React.FC<CardsProps> = ({ query, endpoint }) => {
         data?.articles?.map(
           (
             article: {
-              content: string;
+              description: string;
               author: string;
               publishedAt: string;
               urlToImage: string;
@@ -47,7 +47,7 @@ const Cards: React.FC<CardsProps> = ({ query, endpoint }) => {
             return (
               <Card
                 key={i}
-                description={article.content || ""}
+                description={article.description || ""}
                 author={article.author || ""}
                 publishedAt={changeDateForamt(article.publishedAt)}
                 urlToImage={article.urlToImage || ""}
