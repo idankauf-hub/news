@@ -12,7 +12,7 @@ import {
   UnderLine,
 } from "./MainPageStyle";
 
-import { dateData, sourcesData } from "../../../mockData";
+import { dateData} from "../../../mockData";
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
 import { getLocation, getAllTopHeadlinesSources } from "../../../Services/Api";
@@ -27,10 +27,13 @@ const MainPage = () => {
   const [dates, setDates] =
     useState<{ month: string; frequency: number }[]>(dateData);
   const [sources, setSources] =
-    useState<{ name: string; value: number; fill: string }[]>(sourcesData);
+    useState<{ name: string; value: number; fill: string; total:number;}[]>([]);
 
   const dispatch = useDispatch();
-
+  
+  const setGraphsData = (value: []) => {
+    setSources(value);
+  };
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   useEffect(() => {
     getLocation().then((value) => {
@@ -43,13 +46,13 @@ const MainPage = () => {
       <Navbar />
       <Container>
         <DropDowns />
-        <UnderLine/>
+        <UnderLine />
         <Title
           city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
         />
         <Row>
           <ColumnCards>
-            <Cards />
+            <Cards setGraphsData={setGraphsData} />
           </ColumnCards>
           <ColumnGraphs>
             <GraphCard

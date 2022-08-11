@@ -7,20 +7,69 @@ import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { getArticles } from "../../Services/Api";
+import { GraphColors } from "../../styles/colors";
 
-interface CardsProps {
-  query?: string;
-  endpoint?: string;
+interface ISourcesData {
+  setGraphsData: (e: []) => void;
 }
 
-const Cards: React.FC<CardsProps> = ({ query, endpoint }) => {
+const Cards = ({ setGraphsData }: ISourcesData) => {
   const [data, setData] = useState<any>(mockData);
   const Query = useSelector((state: RootState) => state.query);
+
+  const removeDuplicates = (sourcesSum: any) => {
+    const ids = sourcesSum.map((o: { name: any }) => o.name);
+    const filtered = sourcesSum.filter(
+      ({ name }: any, index: number) => !ids.includes(name, index + 1)
+    );
+    return filtered;
+  };
+  const getTop4Sources = (sourcesSumWithOutDuplicates: any) => {
+    return sourcesSumWithOutDuplicates
+      .sort((a: any, b: any) => b.value - a.value)
+      .slice(0, 4);
+  };
+  const addColorsToArray = (sortedTopSources: any) => {
+    return sortedTopSources.map((obj: any, i: number) => ({
+      ...obj,
+      fill: GraphColors[i],
+    }));
+  };
+
+  const sendSumOfSources = (sources: any) => {
+    const sourcesSum = sumSources(sources);
+    const sourcesSumWithOutDuplicates = removeDuplicates(sourcesSum);
+    const sortedTopSources = getTop4Sources(sourcesSumWithOutDuplicates);
+    const sortedTopSourcesWithColors = addColorsToArray(sortedTopSources);
+    setGraphsData(sortedTopSourcesWithColors);
+  };
+  const sumSources = (data: any) => {
+    let sourcesSum = [];
+    let count = 0;
+    let nameToSum = "";
+
+    for (const x in data?.articles) {
+      nameToSum = data.articles[x].source.name;
+      for (const x in data.articles) {
+        if (nameToSum === data.articles[x].source.name) {
+          count++;
+        }
+      }
+      sourcesSum.push({
+        name: nameToSum,
+        value: count,
+        total: data?.articles.length,
+      });
+      count = 0;
+    }
+    return sourcesSum;
+  };
 
   useEffect(() => {
     //call api and setData
     getArticles(Query.query.queryUrl).then((value) => {
       setData(value);
+      sendSumOfSources(value);
     });
   }, [Query]);
 

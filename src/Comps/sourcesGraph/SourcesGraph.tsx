@@ -1,11 +1,13 @@
 import React from "react";
 import { PieChart, Pie, Legend, Label } from "recharts";
+import { GraphColors } from "../../styles/colors";
 import { CustomeLegend, GraphT, Row, Span, Li, LiText } from "./style";
 
 type Data = {
   name: string;
-  value: string | number;
-  fill: string
+  value:number;
+  fill: string;
+  total:number
 };
 interface GraphProps {
   placeholder?: string;
@@ -13,6 +15,7 @@ interface GraphProps {
 }
 
 const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
+  console.log(data)
   return (
     <GraphT>
       <PieChart width={200} height={124}>
@@ -26,17 +29,27 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
           paddingAngle={0}
           dataKey="value"
         >
-          <Label value={placeholder} position="center" style={{ fontFamily:"Mulish" ,fontSize: '12px', fill: '#030035',fontWeight:"400",lineHeight:"16px"}}/>
+          <Label
+            value={placeholder}
+            position="center"
+            style={{
+              fontFamily: "Mulish",
+              fontSize: "12px",
+              fill: "#030035",
+              fontWeight: "400",
+              lineHeight: "16px",
+            }}
+          />
         </Pie>
       </PieChart>
       <CustomeLegend>
         <ul>
-          {data.map((item,i) => (
+          {data.map((item, i) => (
             <Row key={i}>
-              <Li color={item.fill}>
+              <Li color={GraphColors[i]}>
                 <LiText>{item.name}</LiText>
               </Li>
-              <Span>{item.value}</Span>
+              <Span>{`${(item.value/item.total)*100}%`}</Span>
             </Row>
           ))}
         </ul>

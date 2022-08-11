@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Sources } from "../types/types";
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "55afe1ce41ab4e1ba2cadbc8c29a9b7f";
+export const API_KEY = "5f64a0997ab9487680979856e3b64dc2";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -24,13 +24,14 @@ export const getAllTopHeadlinesSources = async (
       `${BASE_URL}top-headlines/sources?country=${country}&apiKey=${API_KEY}`
     )
     .then((response) => {
-      response.data.sources.map((item: any) => {
+      response.data.sources?.map((item: any) => {
         let name = item.name.toString();
         sourcesName.push(name);
       });
       return sourcesName;
     })
     .catch((error) => {
+      console.log(error)
       return error;
     });
 };

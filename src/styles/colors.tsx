@@ -10,3 +10,5 @@ export const COLORS = {
   darkpurpleblack: "#030035",
   purpleblue: "#5A5A89",
 };
+export const GraphColors = ["#343A6E",  "#DDF3FE","#030035", "#FF9800",];
+

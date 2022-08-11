@@ -19,7 +19,7 @@ import { getAllTopHeadlinesSources } from "../../Services/Api";
 
 const DropDowns: React.FC = () => {
   const [filters, setFilters] = useState<string[]>(topHeadlinesFilters);
-  const [sources, setSources] = useState<string[]>();
+  const [sources, setSources] = useState<string[]>([]);
   const Query = useSelector((state: RootState) => state.query);
 
   useEffect(() => {
@@ -40,7 +40,6 @@ const DropDowns: React.FC = () => {
   const HandleDropDowns = (value: string, filter: string) => {
     switch (filter) {
       case "Sort by":
-        console.log("sortby", value);
         dispatch(updateSortBy(value));
         break;
 
@@ -74,7 +73,7 @@ const DropDowns: React.FC = () => {
         return SortbyData;
         break;
       case "Sources":
-        return sources || [];
+        return sources;
         break;
       case "Language":
         let Languages = Language.map((languageCode: string) =>
