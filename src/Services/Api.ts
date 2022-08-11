@@ -38,10 +38,9 @@ export const getArticles = async (QueryUrl: string): Promise<string[]> => {
   return await axios
     .get(QueryUrl)
     .then((response) => {
-      console.log(response.data);
       return response.data;
     })
     .catch((error) => {
-      return error;
+      console.log(error);
     });
 };
