@@ -49,12 +49,12 @@ export const SearchMainPage = () => {
     let queryUrl = "";
     if (Query.query.endpoint === "top-headlines") {
       if (isQueryEmpty()) {
-        queryUrl = `${BASE_URL}${Query.query.endpoint}?country=${Query.query.filters.country}&category=${Query.query.filters.category}&apiKey=${API_KEY}`;
+        queryUrl = `${BASE_URL}${Query.query.endpoint}?country=${Query.query.filters.country}&category=${Query.query.filters.category}&pageSize=10&apiKey=${API_KEY}`;
       } else {
-        queryUrl = `${BASE_URL}${Query.query.endpoint}?sources=${Query.query.filters.sources}&category=${Query.query.filters.category}&apiKey=${API_KEY}`;
+        queryUrl = `${BASE_URL}${Query.query.endpoint}?sources=${Query.query.filters.sources}&category=${Query.query.filters.category}&pageSize=10&apiKey=${API_KEY}`;
       }
     } else {
-      queryUrl = `${BASE_URL}${Query.query.endpoint}?q=${Query.query.search}&sortBy=${Query.query.sortby}&from=${Query.query.filters.date}&to=${Query.query.filters.date}&sources=${Query.query.filters.sources}&language=${Query.query.filters.language}&apiKey=${API_KEY}`;
+      queryUrl = `${BASE_URL}${Query.query.endpoint}?q=${Query.query.search}&sortBy=${Query.query.sortby}&from=${Query.query.filters.date}&to=${Query.query.filters.date}&sources=${Query.query.filters.sources}&language=${Query.query.filters.language}&pageSize=10&apiKey=${API_KEY}`;
     }
     dispatch(updateQueryUrl(queryUrl));
   };

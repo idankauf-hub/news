@@ -43,7 +43,7 @@ const MainPage = () => {
       <Navbar />
       <Container>
         <DropDowns />
-        <UnderLine></UnderLine>
+        <UnderLine/>
         <Title
           city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
         />
