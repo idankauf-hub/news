@@ -44,7 +44,6 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
       name: "Others",
       value: sum,
       total: data?.articles?.length,
-      fill: "blue",
     });
   };
   const sendSumOfSources = (sources: any) => {
