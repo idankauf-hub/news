@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Sources } from "../types/types";
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "ea71674db5a34c77826a88200ef3ab5e";
+export const API_KEY = "5529c1884ca1461388de52aa5845d8e7";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -29,6 +29,17 @@ export const getAllTopHeadlinesSources = async (
         sourcesName.push(name);
       });
       return sourcesName;
+    })
+    .catch((error) => {
+      return error;
+    });
+};
+export const getArticles = async (QueryUrl: string): Promise<string[]> => {
+  return await axios
+    .get(QueryUrl)
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
     })
     .catch((error) => {
       return error;

@@ -18,15 +18,12 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [val, setVal] = useState<string>(placeholder || "");
   const [disabled, setDisabled] = useState<boolean>(false);
-  const [isClicked, setIsClicked] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const Query = useSelector((state: RootState) => state.query);
   const SelectedState = useSelector((state: RootState) => state.selected);
 
   const handleClick = (value: string) => {
-    console.log("chose");
-    setIsClicked(true);
     if (placeholder == "Sources") {
       dispatch(selectSources(true));
     }
@@ -47,39 +44,24 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         ? setDisabled(false)
         : setDisabled(true);
     }
-    // if (placeholder == "Sources") {
-    //   Query.query.filters.sources.length === 0
-    //     ? setDisabled(false)
-    //     : setDisabled(true);
-    // }
   };
   useEffect(() => {
-    // isQueryEmpty();
-    console.log(placeholder, isClicked);
     if (placeholder === "Sources" && SelectedState.country) setDisabled(true);
     else {
       setDisabled(false);
     }
-    //call api
-    //build query url
-    //state url
-    // call api with the query url ^
   }, [Query.query.filters.country]);
   useEffect(() => {
-    // isQueryEmpty();
     if (placeholder === "Country" && SelectedState.sources) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-    //call api
-    //build query url
-    //state url
-    // call api with the query url ^
   }, [Query.query.filters.sources]);
   return (
     <CustomeSelect
       disabled={disabled}
+      displayEmpty
       id="select"
       defaultValue={""}
       value={val || ""}
@@ -103,15 +85,16 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         return <div>{value}</div>;
       }}
     >
-      {data?.map((item, i) => {
-        return (
-          <div key={i} onClick={() => handleClick(item)}>
-            <MenuItem key={i} value={item}>
-              {item}
-            </MenuItem>
-          </div>
-        );
-      })}
+      {data &&
+        data?.map((item, i) => {
+          return (
+            <div key={i} onClick={() => handleClick(item)}>
+              <MenuItem key={i} value={item}>
+                {item}
+              </MenuItem>
+            </div>
+          );
+        })}
     </CustomeSelect>
   );
 };

@@ -20,7 +20,6 @@ interface IQuery {
     };
     sortby: SortBy; //Options from the api
     queryUrl: string;
-
   };
 }
 
@@ -75,6 +74,5 @@ export const updateFilters = querySlice.actions.updateFilters;
 export const updateSortBy = querySlice.actions.updateSortBy;
 export const resetFilters = querySlice.actions.resetFilters;
 export const updateQueryUrl = querySlice.actions.updateQueryUrl;
-
 
 export default querySlice.reducer;

@@ -12,7 +12,7 @@ interface ImageProps {
 }
 export const CardContainer = styled(DisplayCenterRow)`
   position: relative;
-  
+
   padding: 0px;
   width: 100%;
   height: 15%;
@@ -49,7 +49,7 @@ export const DateDiv = styled(DisplayRow)`
   justify-content: space-between;
   align-items: flex-start;
   padding: 0px;
-  gap:10px;
+  gap: 10px;
   width: 80%;
   height: 22px;
 `;
@@ -80,8 +80,8 @@ export const Description = styled(H1DarkPurple)`
   line-height: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; 
-  width:100%
+  white-space: nowrap;
+  width: 100%;
 `;
 
 export const BtnDiv = styled(DisplayCenterRow)`

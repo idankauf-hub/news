@@ -3,7 +3,7 @@ import DropDown from "../select/DropDown";
 import { DisplayRowWithGap } from "./style";
 import { RootState } from "../../store/store";
 import { useSelector, useDispatch } from "react-redux";
-import { updateFilters, resetFilters } from "../../store/query";
+import { updateFilters, resetFilters, updateSortBy } from "../../store/query";
 import {
   SortbyData,
   CategoryData,
@@ -17,15 +17,13 @@ import {
 import Dates from "./Dates";
 import { getAllTopHeadlinesSources } from "../../Services/Api";
 
-
 const DropDowns: React.FC = () => {
   const [filters, setFilters] = useState<string[]>(topHeadlinesFilters);
   const [sources, setSources] = useState<string[]>();
   const Query = useSelector((state: RootState) => state.query);
 
-
   useEffect(() => {
-    getAllTopHeadlinesSources(Query.query.filters.sources).then((value) => {
+    getAllTopHeadlinesSources(Query.query.filters.country).then((value) => {
       setSources(value);
     });
   }, [Query.query.filters.country]);
@@ -42,7 +40,8 @@ const DropDowns: React.FC = () => {
   const HandleDropDowns = (value: string, filter: string) => {
     switch (filter) {
       case "Sort by":
-        dispatch(updateFilters({ sortby: value }));
+        console.log("sortby", value);
+        dispatch(updateSortBy(value));
         break;
 
       case "Sources":
@@ -68,7 +67,6 @@ const DropDowns: React.FC = () => {
       default:
     }
   };
-
 
   const handleData = (filter: string) => {
     switch (filter) {
@@ -115,11 +113,7 @@ const DropDowns: React.FC = () => {
           key = "top-headlines-" + filter;
         }
         if (filter === "Dates") {
-          return (
-            <Dates
-              key={i}
-            ></Dates>
-          );
+          return <Dates key={i}></Dates>;
         }
         return (
           <DropDown
