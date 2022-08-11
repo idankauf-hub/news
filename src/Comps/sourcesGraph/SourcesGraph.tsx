@@ -15,7 +15,6 @@ interface GraphProps {
 }
 
 const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
-  console.log(data)
   return (
     <GraphT>
       <PieChart width={200} height={124}>

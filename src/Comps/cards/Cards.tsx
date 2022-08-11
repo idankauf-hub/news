@@ -35,11 +35,23 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
       fill: GraphColors[i],
     }));
   };
-
+  const addOthers = (sortedTopSources: any) => {
+    let sum = 0;
+    for (const x in sortedTopSources) {
+      sum += sortedTopSources[x].value;
+    }
+    sortedTopSources.push({
+      name: "Others",
+      value: sum,
+      total: data?.articles?.length,
+      fill: "blue",
+    });
+  };
   const sendSumOfSources = (sources: any) => {
     const sourcesSum = sumSources(sources);
     const sourcesSumWithOutDuplicates = removeDuplicates(sourcesSum);
     const sortedTopSources = getTop4Sources(sourcesSumWithOutDuplicates);
+    addOthers(sortedTopSources);
     const sortedTopSourcesWithColors = addColorsToArray(sortedTopSources);
     setGraphsData(sortedTopSourcesWithColors);
   };
@@ -102,7 +114,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
                 urlToImage={article.urlToImage || ""}
                 urlToNews={article.url}
                 title={article.title}
-              ></Card>
+              />
             );
           }
         )}
