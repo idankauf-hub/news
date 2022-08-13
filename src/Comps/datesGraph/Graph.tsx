@@ -4,7 +4,12 @@ import { XAxis, ResponsiveContainer, AreaChart, Area } from "recharts";
 import { GraphProps } from "../../types/types";
 
 const Graph: React.FC<GraphProps> = ({ data }) => {
-  const [dates, setDates] = useState<[]>([]);
+  const [dates, setDates] = useState<
+    {
+      month: string;
+      frequency: number;
+    }[]
+  >([]);
 
   const setSumOfSources = (sources: any) => {
     const sourcesSum = sumSources(sources);
