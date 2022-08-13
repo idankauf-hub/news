@@ -42,7 +42,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
     }
     sortedTopSources.push({
       name: "Others",
-      value: sum,
+      value: data?.articles?.length - sum,
       total: data?.articles?.length,
     });
   };

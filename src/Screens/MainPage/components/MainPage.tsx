@@ -32,6 +32,7 @@ const MainPage = () => {
   const dispatch = useDispatch();
   
   const setGraphsData = (value: []) => {
+    console.log(value)
     setSources(value);
   };
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
