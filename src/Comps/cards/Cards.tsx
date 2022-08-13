@@ -31,6 +31,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
       }
       setData(value);
       setGraphsData(value);
+      dispatch(setError(false));
     });
   }, [Query]);
 

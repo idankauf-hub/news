@@ -28,14 +28,21 @@ const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
   const [dates, setDates] = useState<[]>([]);
   const [sources, setSources] = useState<[]>([]);
+  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+  const [title, setTitle] = useState<JSX.Element>(
+    <Title
+      city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
+    />
+  );
 
   const dispatch = useDispatch();
 
   const setGraphsData = (value: []) => {
     setSources(value);
     setDates(value);
+    setTitle(<div>{value.length}</div>)
   };
-  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+
   useEffect(() => {
     dispatch(setLoading(true));
     getLocation()
@@ -51,15 +58,14 @@ const MainPage = () => {
       });
   }, []);
 
+
   return (
     <>
       <Navbar />
       <Container>
         <DropDowns />
         <UnderLine />
-        <Title
-          city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
-        />
+        {title}
         <Row>
           <ColumnCards>
             <Cards setGraphsData={setGraphsData} />
