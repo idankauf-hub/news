@@ -24,15 +24,14 @@ import { CountryData } from "../../../types/datatypes";
 
 const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
-  const [dates, setDates] =
-    useState<{ month: string; frequency: number }[]>(dateData);
+  const [dates, setDates] = useState<[]>([]);
   const [sources, setSources] = useState<[]>([]);
 
   const dispatch = useDispatch();
 
   const setGraphsData = (value: []) => {
-    console.log(value);
     setSources(value);
+    setDates(value);
   };
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   useEffect(() => {

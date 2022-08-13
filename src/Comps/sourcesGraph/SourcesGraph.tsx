@@ -10,13 +10,12 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     { name: string; value: number; total: number; fill: string }[]
   >([]);
 
-  const sendSumOfSources = (sources: any) => {
+  const setSumOfSources = (sources: any) => {
     const sourcesSum = sumSources(sources);
     const sourcesSumWithOutDuplicates = removeDuplicates(sourcesSum);
     const sortedTopSources = getTop4Sources(sourcesSumWithOutDuplicates);
     addOthers(sortedTopSources, data);
     const sortedTopSourcesWithColors = addColorsToArray(sortedTopSources);
-    console.log(sortedTopSourcesWithColors);
     setSourcesData(sortedTopSourcesWithColors);
   };
   const sumSources = (data: any) => {
@@ -59,7 +58,6 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     }));
   };
   const addOthers = (sortedTopSources: any, data: any) => {
-    console.log(data);
     let sum = 0;
     for (const x in sortedTopSources) {
       sum += sortedTopSources[x].value;
@@ -72,8 +70,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
   };
 
   useEffect(() => {
-    sendSumOfSources(data);
-    console.log(data);
+    setSumOfSources(data);
   }, [data]);
 
   return (

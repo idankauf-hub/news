@@ -1,32 +1,66 @@
-import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-} from "recharts";
+import React, { useEffect, useState } from "react";
+import { XAxis, ResponsiveContainer, AreaChart, Area } from "recharts";
 
-type Data = {
-  month:string;
-  frequency:string|number;
-};
-interface GraphProps{
-  data:Data[];
-}
+import { GraphProps } from "../../types/types";
 
 const Graph: React.FC<GraphProps> = ({ data }) => {
+  const [dates, setDates] = useState<[]>([]);
 
+  const setSumOfSources = (sources: any) => {
+    const sourcesSum = sumSources(sources);
+    const sourcesSumWithOutDuplicates = removeDuplicates(sourcesSum);
+    setDates(sourcesSumWithOutDuplicates);
+  };
+  const sumSources = (data: any) => {
+    let sourcesSum = [];
+    let count = 0;
+
+    for (const x in data?.articles) {
+      const month = new Date(data.articles[x].publishedAt).toLocaleString(
+        "default",
+        { month: "short" }
+      );
+      for (const x in data.articles) {
+        if (
+          month ===
+          new Date(data.articles[x].publishedAt).toLocaleString("default", {
+            month: "short",
+          })
+        ) {
+          count++;
+        }
+      }
+      sourcesSum.push({
+        month: month,
+        frequency: count,
+      });
+      count = 0;
+    }
+    return sourcesSum;
+  };
+  const removeDuplicates = (sourcesSum: any) => {
+    const ids = sourcesSum.map((o: { month: any }) => o.month);
+    const filtered = sourcesSum.filter(
+      ({ month }: any, index: number) => !ids.includes(month, index + 1)
+    );
+    return filtered;
+  };
+
+  useEffect(() => {
+    setSumOfSources(data);
+  }, [data]);
   return (
-    <div style={{ height: "149px", width: "412.19px",marginTop:"22%",padding:10}}>
+    <div
+      style={{
+        height: "149px",
+        width: "412.19px",
+        marginTop: "22%",
+        padding: 10,
+      }}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
-          data={data}
+          data={dates}
           margin={{ top: 10, right: 15, left: 15, bottom: 0 }}
         >
           <defs>
