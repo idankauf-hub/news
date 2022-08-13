@@ -84,7 +84,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
   if (Status.loading) {
     return <CircularProgress />;
   }
-  if (Status.error) {
+  if (Status.error || data.length === 0) {
     return <NotFoundChart />;
   }
   return (

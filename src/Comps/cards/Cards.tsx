@@ -74,7 +74,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
     return formatted;
   };
 
-  if (Status.error) {
+  if (Status.error || articles.length===0) {
     return <NotFound />;
   }
   if (Status.loading) {
