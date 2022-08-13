@@ -10,6 +10,7 @@ import NotFound from "../notFound/NotFound";
 import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import { CircularProgress } from "@mui/material";
+import Title from "../title/Title";
 
 interface ISourcesData {
   setGraphsData: (e: []) => void;
@@ -19,7 +20,14 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
   const [data, setData] = useState<any>(mockData);
   const Query = useSelector((state: RootState) => state.query);
   const Status = useSelector((state: RootState) => state.apiStatus);
-
+  //delete if un used
+  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+  const [articlesLength, setArticlesLength] = useState<string>();
+  const [title, setTitle] = useState<JSX.Element>(
+    <Title
+      city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
+    />
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setLoading(true));
@@ -30,6 +38,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
         return;
       }
       setData(value);
+      setArticlesLength(value.articles.length);
       setGraphsData(value);
       dispatch(setError(false));
     });
@@ -39,6 +48,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
     const formatted = dayjs(value).format("dddd MMM D, YYYY");
     return formatted;
   };
+
   if (Status.loading) {
     return <CircularProgress />;
   }
@@ -47,6 +57,11 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
   }
   return (
     <CardsContainer>
+      {Query.query.endpoint === "top-headlines" ? (
+        title
+      ) : (
+        <>{articlesLength} Total results</>
+      )}
       {data &&
         data?.articles?.map(
           (
