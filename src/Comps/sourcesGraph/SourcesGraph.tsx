@@ -4,11 +4,17 @@ import { PieChart, Pie, Legend, Label } from "recharts";
 import { GraphColors } from "../../styles/colors";
 import { CustomeLegend, GraphT, Row, Span, Li, LiText } from "./style";
 import { GraphProps } from "../../types/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { CircularProgress } from "@mui/material";
+import { NotFounedChartIcon } from "../../Icons";
+import NotFoundChart from "../notFound/NotFoundChart";
 
 const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
   const [sourcesData, setSourcesData] = useState<
     { name: string; value: number; total: number; fill: string }[]
   >([]);
+  const Status = useSelector((state: RootState) => state.apiStatus);
 
   const setSumOfSources = (sources: any) => {
     const sourcesSum = sumSources(sources);
@@ -73,6 +79,12 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     setSumOfSources(data);
   }, [data]);
 
+  if (Status.loading) {
+    return <CircularProgress />;
+  }
+  if (Status.error) {
+    return <NotFoundChart />;
+  }
   return (
     <GraphT>
       <PieChart width={200} height={124}>

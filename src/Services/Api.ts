@@ -1,7 +1,10 @@
 import axios from "axios";
 import { Sources } from "../types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, setError } from "../store/apiStatus";
+
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "5f64a0997ab9487680979856e3b64dc2";
+export const API_KEY = "6678381eaab84a7983f130d746a4f13e";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -29,19 +32,19 @@ export const getAllTopHeadlinesSources = async (
         sourcesName.push(name);
       });
       return sourcesName;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error;
     });
 };
 export const getArticles = async (QueryUrl: string): Promise<[]> => {
+  // const dispatch = useDispatch();
+  // dispatch(setLoading(true));
+
   return await axios
     .get(QueryUrl)
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
+      // dispatch(setError(true));
+      return error;
     });
 };

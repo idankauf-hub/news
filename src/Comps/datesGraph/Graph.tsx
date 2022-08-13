@@ -1,7 +1,11 @@
+import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { XAxis, ResponsiveContainer, AreaChart, Area } from "recharts";
+import { RootState } from "../../store/store";
 
 import { GraphProps } from "../../types/types";
+import NotFoundChart from "../notFound/NotFoundChart";
 
 const Graph: React.FC<GraphProps> = ({ data }) => {
   const [dates, setDates] = useState<
@@ -10,6 +14,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
       frequency: number;
     }[]
   >([]);
+  const Status = useSelector((state: RootState) => state.apiStatus);
 
   const setSumOfSources = (sources: any) => {
     const sourcesSum = sumSources(sources);
@@ -54,6 +59,14 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   useEffect(() => {
     setSumOfSources(data);
   }, [data]);
+
+  if (Status.loading) {
+    return <CircularProgress />;
+  }
+  if (Status.error) {
+    return <NotFoundChart />;
+  }
+
   return (
     <div
       style={{

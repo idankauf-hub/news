@@ -15,9 +15,11 @@ import {
 import { dateData } from "../../../mockData";
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
-import { getLocation, getAllTopHeadlinesSources } from "../../../Services/Api";
+import { getLocation } from "../../../Services/Api";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFilters } from "../../../store/query";
+import { setLoading, setError } from "../../../store/apiStatus";
+
 import axios from "axios";
 import { RootState } from "../../../store/store";
 import { CountryData } from "../../../types/datatypes";
@@ -35,9 +37,18 @@ const MainPage = () => {
   };
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
   useEffect(() => {
-    getLocation().then((value) => {
-      dispatch(updateFilters({ country: value }));
-    });
+    dispatch(setLoading(true));
+    getLocation()
+      .then((value) => {
+        dispatch(updateFilters({ country: value }));
+        dispatch(setLoading(false));
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+          dispatch(setError(true));
+        }
+      });
   }, []);
 
   return (

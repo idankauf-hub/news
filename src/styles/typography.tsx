@@ -10,6 +10,16 @@ export const H2 = styled.h1`
   font-size: ${FONTSIZE.text};
   line-height: 22px;
 `;
+export const H3 = styled(H2)`
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: ${FONTWEIGHT.regular};
+  font-size: ${FONTSIZE.cardtitle};
+  line-height: 21px;
+  text-align: center;
+  color: ${COLORS.purpleblue};
+`;
+
 export const H1LightGray = styled(H2)`
   color: rgba(90, 90, 137, 0.5);
 
