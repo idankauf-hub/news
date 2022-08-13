@@ -12,7 +12,7 @@ import {
   UnderLine,
 } from "./MainPageStyle";
 
-import { dateData} from "../../../mockData";
+import { dateData } from "../../../mockData";
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
 import { getLocation, getAllTopHeadlinesSources } from "../../../Services/Api";
@@ -26,13 +26,12 @@ const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
   const [dates, setDates] =
     useState<{ month: string; frequency: number }[]>(dateData);
-  const [sources, setSources] =
-    useState<{ name: string; value: number; fill: string; total:number;}[]>([]);
+  const [sources, setSources] = useState<[]>([]);
 
   const dispatch = useDispatch();
-  
+
   const setGraphsData = (value: []) => {
-    console.log(value)
+    console.log(value);
     setSources(value);
   };
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });

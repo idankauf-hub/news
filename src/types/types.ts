@@ -84,15 +84,38 @@ export type Country =
   | "za"
   | "";
 
-  export interface Sources {
-    status: string;
-    sources: {
-      id: string;
+export interface Sources {
+  status: string;
+  sources: {
+    id: string;
+    name: string;
+    description: string;
+    url: string;
+    category: string;
+    language: string;
+    country: string;
+  }[];
+}
+
+export type NewsApiData = {
+  status: string;
+  totalResults: number;
+  articles: {
+    author: string;
+    content: string;
+    description: string;
+    publishedAt: string;
+    source: {
+      id: string | null;
       name: string;
-      description: string;
-      url: string;
-      category: string;
-      language: string;
-      country: string;
-    }[];
-  }
+    };
+    title: string;
+    url: string;
+    urlToImage: string;
+  };
+};
+
+export interface GraphProps {
+  placeholder?: string;
+  data: NewsApiData[];
+}

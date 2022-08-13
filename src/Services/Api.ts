@@ -31,11 +31,11 @@ export const getAllTopHeadlinesSources = async (
       return sourcesName;
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
       return error;
     });
 };
-export const getArticles = async (QueryUrl: string): Promise<string[]> => {
+export const getArticles = async (QueryUrl: string): Promise<[]> => {
   return await axios
     .get(QueryUrl)
     .then((response) => {
