@@ -9,8 +9,10 @@ import { RootState } from "../../store/store";
 import { CircularProgress } from "@mui/material";
 import { NotFounedChartIcon } from "../../Icons";
 import NotFoundChart from "../notFound/NotFoundChart";
+import { parse } from "path";
 
 const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
+  console.log(data);
   const [sourcesData, setSourcesData] = useState<
     { name: string; value: number; total: number; fill: string }[]
   >([]);
@@ -29,17 +31,17 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     let count = 0;
     let nameToSum = "";
 
-    for (const x in data?.articles) {
-      nameToSum = data.articles[x].source.name;
-      for (const x in data.articles) {
-        if (nameToSum === data.articles[x].source.name) {
+    for (const x in data) {
+      nameToSum = data[x].source.name;
+      for (const x in data) {
+        if (nameToSum === data[x].source.name) {
           count++;
         }
       }
       sourcesSum.push({
         name: nameToSum,
         value: count,
-        total: data?.articles.length,
+        total: data.length,
       });
       count = 0;
     }
@@ -70,8 +72,8 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     }
     sortedTopSources.push({
       name: "Others",
-      value: data?.articles?.length - sum,
-      total: data?.articles?.length,
+      value: data.length - sum,
+      total: data.length,
     });
   };
 
@@ -118,7 +120,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
               <Li color={GraphColors[i]}>
                 <LiText>{item.name}</LiText>
               </Li>
-              <Span>{`${(item.value / item.total) * 100}%`}</Span>
+              <Span>{`${((item.value / item.total) * 100).toFixed(0)}%`}</Span>
             </Row>
           ))}
         </ul>

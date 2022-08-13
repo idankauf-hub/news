@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import { RightArrow } from "../../Icons";
 
 interface CardProps {
+  refLastArticle?:any
   description?: string;
   publishedAt?: string;
   author?: string;
@@ -21,7 +22,7 @@ interface CardProps {
   urlToImage?: string;
   urlToNews?:string|undefined;
 }
-const Card: React.FC<CardProps> = ({
+const Card: React.FC<CardProps> = ({refLastArticle,
   description,
   publishedAt,
   author,
@@ -31,7 +32,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
 
   return (
-    <CardContainer>
+    <CardContainer ref={refLastArticle}>
       <CardImage urlImage={urlToImage}></CardImage>
       <DataContainer>
         <DateDiv>

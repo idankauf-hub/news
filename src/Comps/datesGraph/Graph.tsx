@@ -25,15 +25,15 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     let sourcesSum = [];
     let count = 0;
 
-    for (const x in data?.articles) {
-      const month = new Date(data.articles[x].publishedAt).toLocaleString(
+    for (const x in data) {
+      const month = new Date(data[x].publishedAt).toLocaleString(
         "default",
         { month: "short" }
       );
-      for (const x in data.articles) {
+      for (const x in data) {
         if (
           month ===
-          new Date(data.articles[x].publishedAt).toLocaleString("default", {
+          new Date(data[x].publishedAt).toLocaleString("default", {
             month: "short",
           })
         ) {

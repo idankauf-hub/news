@@ -2,9 +2,10 @@ import axios from "axios";
 import { Sources } from "../types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setError } from "../store/apiStatus";
+import { useEffect, useState } from "react";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "54ac5dd85b4144dd98cb6bd59a6391c9";
+export const API_KEY = "38e4c82230ae43f6bfaa032dc942d694";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -48,3 +49,35 @@ export const getArticles = async (QueryUrl: string): Promise<[]> => {
       return error;
     });
 };
+
+export default function useArticlesSearch(query: string, pageNumber: number) {
+  const dispatch = useDispatch();
+  const [articles, setArticles] = useState<any>([]);
+  const [hasMore, setHasMore] = useState(false);
+
+  useEffect(() => {
+    setArticles([]);
+  }, [query]);
+
+  useEffect(() => {
+    dispatch(setLoading(true));
+    axios
+      .get(query + "&page=" + pageNumber)
+      .then((response) => {
+        dispatch(setLoading(false));
+        dispatch(setError(false));
+
+        setArticles((prevArticles: any) => {
+          return [...prevArticles, ...response.data.articles];
+        });
+        setHasMore(response.data.totalResults / 10 > pageNumber);
+      })
+      .catch((err) => {
+        dispatch(setLoading(false));
+        dispatch(setError(true));
+        console.log(query);
+        console.log(err);
+      });
+  }, [query, pageNumber]);
+  return { articles, hasMore };
+}
