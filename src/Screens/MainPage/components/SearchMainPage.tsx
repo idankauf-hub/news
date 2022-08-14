@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, RefObject } from "react";
 import Search from "../../../Comps/search/Search";
 import useDebounce from "../../../Hooks/useDebounce";
 import { SearchIcon } from "../../../Icons";
@@ -15,14 +15,24 @@ import { BASE_URL, API_KEY } from "../../../Services/Api";
 
 import { useSelector, useDispatch } from "react-redux";
 import { FormControl } from "@mui/material";
+import RecentSearches from "../../../Comps/search/recentSearches/RecentSearches";
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
+  const [inputRecent, setInputToRecent] = useState<string>("");
+
+  const [searches, setItems] = useState<string[]>([]);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+  const inputRef = useRef<any>(null);
   const Query = useSelector((state: RootState) => state.query);
 
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
 
+  const addItemToLocalStorage = (input: string) => {
+    if (input) setItems([...searches, input]);
+    localStorage.setItem("lastSearches", JSON.stringify(searches));
+  };
   const dispatch = useDispatch();
 
   const handleChange = (value: string) => {
@@ -37,7 +47,21 @@ export const SearchMainPage = () => {
   const isQueryEmpty = () => {
     return Query.query.search.length === 0;
   };
+
+  const handleDropDown = (value: string) => {
+    console.log(value);
+  };
+
+  const handleInputFocus = () => {
+    if (document.activeElement === inputRef.current) {
+      setIsFocus(true);
+    } else {
+      setIsFocus(false);
+    }
+  };
   useEffect(() => {
+    addItemToLocalStorage(input);
+    setInputToRecent(input);
     dispatch(updateSearch(input));
   }, [debouncedValue]);
 
@@ -68,9 +92,16 @@ export const SearchMainPage = () => {
       <FormControl fullWidth>
         <Container>
           <Search
+            onFocus={handleInputFocus}
+            onBlur={handleInputFocus}
             input={input}
             searchFunction={handleChange}
-            Icon={() => <SearchIcon />}
+            forwardedRef={inputRef}
+            Icon={() => (
+              <>
+                <SearchIcon />
+              </>
+            )}
           />
           <VerticalLine />
           <DropDown
@@ -79,6 +110,13 @@ export const SearchMainPage = () => {
             placeholder={placeholders[0]}
           />
         </Container>
+        {isFocus && (
+          <RecentSearches
+            value={inputRecent}
+            setInput={setInput}
+            setClear={setItems}
+          />
+        )}
       </FormControl>
     </>
   );
