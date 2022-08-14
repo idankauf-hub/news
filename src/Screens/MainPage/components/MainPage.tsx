@@ -28,6 +28,7 @@ const MainPage = () => {
   const [dates, setDates] = useState<[]>([]);
   const [sources, setSources] = useState<[]>([]);
   const [totalResults, setTotalResults] = useState<number>(0);
+  const [title, setTitle] = useState<JSX.Element>(<></>);
 
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
@@ -38,6 +39,37 @@ const MainPage = () => {
     setSources(value);
     setDates(value);
   };
+  useEffect(() => {
+    setTitle(
+      <Title
+        city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
+      />
+    );
+  }, []);
+  useEffect(() => {
+    if (
+      Query.query.endpoint === "top-headlines" ||
+      Query.query.search.length === 0 ||
+      Query.query.filters.category.length === 0 ||
+      Query.query.filters.country === "us" ||
+      Query.query.filters.sources.length === 0
+    ) {
+      setTitle(
+        <Title
+          city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
+        />
+      );
+    } else {
+      setTitle(
+        <TotalResults>
+          <>
+            {ApiStatus.error || ApiStatus.loading ? 0 : totalResults} Total
+            results
+          </>
+        </TotalResults>
+      );
+    }
+  }, [Query.query.endpoint]);
 
   return (
     <>
@@ -45,7 +77,7 @@ const MainPage = () => {
       <Container>
         <DropDowns />
         <UnderLine />
-
+        {/* {title} */}
         {Query.query.endpoint === "top-headlines" &&
         Query.query.search.length === 0 ? (
           <Title
@@ -63,7 +95,7 @@ const MainPage = () => {
             </TotalResults>
           )
         )}
-        {Query.query.endpoint === "everything" && (
+        {Query.query.endpoint === "everything" && ApiStatus.error != true && (
           <TotalResults>
             <>
               {ApiStatus.error || ApiStatus.loading ? 0 : totalResults} Total

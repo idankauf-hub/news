@@ -47,7 +47,7 @@ export const SearchMainPage = () => {
       if (isQueryEmpty()) {
         queryUrl = `${BASE_URL}${Query.query.endpoint}?country=${Query.query.filters.country}&category=${Query.query.filters.category}&sources=${Query.query.filters.sources}&pageSize=10&apiKey=${API_KEY}`;
       } else {
-        queryUrl = `${BASE_URL}${Query.query.endpoint}?sources=${Query.query.filters.sources}&q=${Query.query.search}&category=${Query.query.filters.category}&pageSize=10&apiKey=${API_KEY}`;
+        queryUrl = `${BASE_URL}${Query.query.endpoint}?sources=${Query.query.filters.sources}&country=${Query.query.filters.country}&q=${Query.query.search}&category=${Query.query.filters.category}&pageSize=10&apiKey=${API_KEY}`;
       }
     } else {
       queryUrl = `${BASE_URL}${Query.query.endpoint}?q=${Query.query.search}&sortBy=${Query.query.sortby}&from=${Query.query.filters.date}&to=${Query.query.filters.date}&sources=${Query.query.filters.sources}&language=${Query.query.filters.language}&pageSize=10&apiKey=${API_KEY}`;
@@ -70,9 +70,7 @@ export const SearchMainPage = () => {
           <Search
             input={input}
             searchFunction={handleChange}
-            Icon={() => (
-                <SearchIcon />
-            )}
+            Icon={() => <SearchIcon />}
           />
           <VerticalLine />
           <DropDown

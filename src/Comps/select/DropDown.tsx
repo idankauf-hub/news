@@ -18,14 +18,8 @@ interface SelectProps {
 const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [val, setVal] = useState<string>(placeholder || "");
-  const [sourcesSelected, setSourcesSelected] = useState<boolean>(false);
-  const [counrtiesSelected, setCounrtiesSelected] = useState<boolean>(false);
-
   const [disabled, setDisabled] = useState<boolean>(false);
-
   const dispatch = useDispatch();
-
-  const Query = useSelector((state: RootState) => state.query);
   const SelectedState = useSelector((state: RootState) => state.selected);
 
   let dropDowns;
@@ -56,9 +50,6 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
     onSelect(id);
     setVal(name);
     dispatch(updateFilters({ country: "" }));
-    // setSourcesSelected(true);
-    // setCounrtiesSelected(false);
-
     dispatch(selectSources(true));
     dispatch(selectCountry(false));
   };
@@ -67,8 +58,6 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
     if (placeholder == "Country") {
       dispatch(selectCountry(true));
       dispatch(selectSources(false));
-      // setCounrtiesSelected(true);
-      // setSourcesSelected(false);
       dispatch(updateFilters({ sources: "" }));
     }
     onSelect(value);
@@ -76,12 +65,10 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   };
 
   useEffect(() => {
-    // console.log(counrtiesSelected)
     if (placeholder === "Sources" && SelectedState.country) setDisabled(true);
     else if (placeholder === "Sources") {
       setDisabled(false);
     }
-    console.log("changed");
   }, [SelectedState.country, SelectedState.sources]);
 
   useEffect(() => {
