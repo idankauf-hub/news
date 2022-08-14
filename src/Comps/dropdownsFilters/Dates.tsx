@@ -2,7 +2,7 @@ import * as React from "react";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
-import { Box, createTheme, SxProps, ThemeProvider } from "@mui/material";
+import { Box} from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { updateFilters } from "../../store/query";
 import { useDispatch } from "react-redux";

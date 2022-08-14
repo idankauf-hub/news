@@ -1,4 +1,5 @@
 import { CircularProgress } from "@mui/material";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { XAxis, ResponsiveContainer, AreaChart, Area } from "recharts";
@@ -25,25 +26,22 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     let sourcesSum = [];
     let count = 0;
     for (const x in data) {
-      const month = new Date(data[x].publishedAt).toLocaleString("default", {
-        month: "short",
-      });
+      const formatted = dayjs(data[x].publishedAt).format("D MMM");
       for (const x in data) {
         if (
-          month ===
-          new Date(data[x].publishedAt).toLocaleString("default", {
-            month: "short",
-          })
+          formatted ===
+          dayjs(data[x].publishedAt).format("D MMM")
         ) {
           count++;
         }
       }
       sourcesSum.push({
-        month: month,
+        month: formatted,
         frequency: count,
       });
       count = 0;
     }
+    console.log(sourcesSum)
     return sourcesSum;
   };
   const removeDuplicates = (sourcesSum: any) => {
@@ -51,6 +49,8 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     const filtered = sourcesSum.filter(
       ({ month }: any, index: number) => !ids.includes(month, index + 1)
     );
+    console.log(filtered)
+
     return filtered;
   };
 
