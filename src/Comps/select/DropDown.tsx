@@ -3,7 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { ForwardIcon } from "../../Icons";
 
 import { COLORS } from "../../styles/colors";
-import { CustomeSelect } from "./style";
+import { CustomSelect } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { selectCountry, selectSources } from "../../store/selectedDropDown";
@@ -80,11 +80,11 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   }, [SelectedState.sources]);
 
   return (
-    <CustomeSelect
+    <CustomSelect
       disabled={disabled}
       displayEmpty
       id="select"
-      defaultValue={""}
+      defaultValue={''}
       value={val || ""}
       onClick={() => setIsOpen(!isOpen)}
       fullWidth
@@ -107,7 +107,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
       }}
     >
       {dropDowns}
-    </CustomeSelect>
+    </CustomSelect>
   );
 };
 
