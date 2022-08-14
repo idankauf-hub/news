@@ -20,7 +20,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   const setSumOfSources = (sources: any) => {
     const sourcesSum = sumSourcesDate(sources);
     const sourcesSumWithOutDuplicates = removeDuplicates(sourcesSum);
-    setDates(sourcesSumWithOutDuplicates);
+    setDates(sourcesSumWithOutDuplicates.reverse());
   };
   const sumSourcesDate = (data: any) => {
     let sourcesSum = [];
@@ -28,10 +28,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     for (const x in data) {
       const formatted = dayjs(data[x].publishedAt).format("D MMM");
       for (const x in data) {
-        if (
-          formatted ===
-          dayjs(data[x].publishedAt).format("D MMM")
-        ) {
+        if (formatted === dayjs(data[x].publishedAt).format("D MMM")) {
           count++;
         }
       }
@@ -57,7 +54,17 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   }, [data]);
 
   if (Status.loading) {
-    return <div style={{marginLeft:"45%",justifyContent:"center",marginTop:"25%"}}><CircularProgress /></div>;
+    return (
+      <div
+        style={{
+          marginLeft: "45%",
+          justifyContent: "center",
+          marginTop: "25%",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   }
   if (Status.error || data.length === 0) {
     return <NotFoundChart />;
