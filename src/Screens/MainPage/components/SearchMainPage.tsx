@@ -72,9 +72,7 @@ export const SearchMainPage = () => {
             input={input}
             searchFunction={handleChange}
             Icon={() => (
-              <>
                 <SearchIcon />
-              </>
             )}
           />
           <VerticalLine />

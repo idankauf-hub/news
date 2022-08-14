@@ -328,11 +328,11 @@ export const mockData = {
 
 export const dateData = [
   {
-    month: "MAR",
+    month: "13 MAR",
     frequency: 4000,
   },
   {
-    month: "APR",
+    month: "13 Mar",
     frequency: 2000,
   },
   {

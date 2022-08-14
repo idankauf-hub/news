@@ -50,6 +50,7 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
   const dispatch = useDispatch();
   const [articles, setArticles] = useState<any>([]);
   const [hasMore, setHasMore] = useState(false);
+  const [totalResults, setTotalResults] = useState<number>(0);
 
   useEffect(() => {
     setArticles([]);
@@ -62,6 +63,7 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
       .then((response) => {
         dispatch(setLoading(false));
         dispatch(setError(false));
+        setTotalResults(response.data.totalResults)
         setArticles((prevArticles: any) => {
           return [...prevArticles, ...response.data.articles];
         });
@@ -74,5 +76,5 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
         dispatch(setError(true));
       });
   }, [query, pageNumber]);
-  return { articles, hasMore };
+  return { articles, hasMore ,totalResults};
 }

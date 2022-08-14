@@ -10,6 +10,7 @@ import {
   ColumnCards,
   Row,
   UnderLine,
+  TotalResults,
 } from "./MainPageStyle";
 
 import { dateData } from "../../../mockData";
@@ -26,13 +27,17 @@ import { CountryData } from "../../../types/datatypes";
 
 const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
+  const ApiStatus = useSelector((state: RootState) => state.apiStatus);
   const [dates, setDates] = useState<[]>([]);
   const [sources, setSources] = useState<[]>([]);
+  const [totalResults, setTotalResults] = useState<number>(0);
 
+  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
   const dispatch = useDispatch();
 
-  const setGraphsData = (value: []) => {
+  const setGraphsData = (value: [], totalResults: number) => {
+    setTotalResults(totalResults);
     setSources(value);
     setDates(value);
   };
@@ -46,7 +51,6 @@ const MainPage = () => {
       })
       .catch((err) => {
         if (err) {
-          console.log(err);
           dispatch(setError(true));
         }
       });
@@ -58,6 +62,22 @@ const MainPage = () => {
       <Container>
         <DropDowns />
         <UnderLine />
+
+        {Query.query.endpoint === "top-headlines" &&
+        Query.query.search.length === 0 ? (
+          <Title
+            city={
+              regionNames.of(Query.query.filters.country.toUpperCase()) || ""
+            }
+          />
+        ) : (
+          <TotalResults>
+            <>
+              {ApiStatus.error || ApiStatus.loading ? 0 : totalResults} Total
+              results
+            </>
+          </TotalResults>
+        )}
         <Row>
           <ColumnCards>
             <Cards setGraphsData={setGraphsData} />

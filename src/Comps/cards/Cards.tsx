@@ -8,31 +8,29 @@ import useArticlesSearch, { getArticles } from "../../Services/Api";
 import NotFound from "../notFound/NotFound";
 
 import dayjs from "dayjs";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import Title from "../title/Title";
 
 interface ISourcesData {
-  setGraphsData: (e: []) => void;
+  setGraphsData: (e: [], totalResults: number) => void;
 }
 
 const Cards = ({ setGraphsData }: ISourcesData) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
 
   const Query = useSelector((state: RootState) => state.query);
-  const Status = useSelector((state: RootState) => state.apiStatus);
-
-  const dispatch = useDispatch();
+  const ApiStatus = useSelector((state: RootState) => state.apiStatus);
 
   const observer = useRef<any>();
-  const { articles, hasMore } = useArticlesSearch(
+  const { articles, hasMore, totalResults } = useArticlesSearch(
     Query.query.queryUrl,
     pageNumber
   );
 
   const lastArticleElementRef = useCallback(
-    (node: any): void => {
-      if (Status.loading) return;
+    (node: HTMLDivElement): void => {
+      if (ApiStatus.loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
@@ -41,40 +39,27 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
       });
       if (node) observer.current.observe(node);
     },
-    [Status.loading, hasMore]
-  );
-  //delete if unused
-  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
-  const [articlesLength, setArticlesLength] = useState<string>();
-  const [title, setTitle] = useState<JSX.Element>(
-    <Title
-      city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
-    />
+    [ApiStatus.loading, hasMore]
   );
 
   useEffect(() => {
-    setGraphsData(articles);
-  }, [articles]);
+    setGraphsData(articles, totalResults);
+  }, [articles, Query]);
 
   const changeDateForamt = (value: string) => {
     const formatted = dayjs(value).format("dddd MMM D, YYYY");
     return formatted;
   };
 
-  if (Status.error || articles.length === 0) {
+  if (ApiStatus.error || articles.length === 0) {
     return <NotFound />;
   }
-  if (Status.loading) {
+  if (ApiStatus.loading) {
     return <CircularProgress />;
   }
 
   return (
     <CardsContainer>
-      {Query.query.endpoint === "top-headlines" ? (
-        title
-      ) : (
-        <>{articlesLength} Total results</>
-      )}
       {articles &&
         articles.map(
           (

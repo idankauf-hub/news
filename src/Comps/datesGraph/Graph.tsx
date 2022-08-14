@@ -17,19 +17,17 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   const Status = useSelector((state: RootState) => state.apiStatus);
 
   const setSumOfSources = (sources: any) => {
-    const sourcesSum = sumSources(sources);
+    const sourcesSum = sumSourcesDate(sources);
     const sourcesSumWithOutDuplicates = removeDuplicates(sourcesSum);
     setDates(sourcesSumWithOutDuplicates);
   };
-  const sumSources = (data: any) => {
+  const sumSourcesDate = (data: any) => {
     let sourcesSum = [];
     let count = 0;
-
     for (const x in data) {
-      const month = new Date(data[x].publishedAt).toLocaleString(
-        "default",
-        { month: "short" }
-      );
+      const month = new Date(data[x].publishedAt).toLocaleString("default", {
+        month: "short",
+      });
       for (const x in data) {
         if (
           month ===
@@ -63,7 +61,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   if (Status.loading) {
     return <CircularProgress />;
   }
-  if (Status.error || data.length===0) {
+  if (Status.error || data.length === 0) {
     return <NotFoundChart />;
   }
 

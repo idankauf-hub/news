@@ -9,6 +9,7 @@ export const COLORS = {
   gray: "#9fa2b4",
   darkpurpleblack: "#030035",
   purpleblue: "#5A5A89",
+  lightgrayTotalResualt:"rgba(90, 90, 137, 0.5)"
 };
 export const GraphColors = [
   "#343A6E",
