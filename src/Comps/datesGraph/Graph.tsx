@@ -59,7 +59,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   }, [data]);
 
   if (Status.loading) {
-    return <CircularProgress />;
+    return <div style={{marginLeft:"45%",justifyContent:"center",marginTop:"25%"}}><CircularProgress /></div>;
   }
   if (Status.error || data.length === 0) {
     return <NotFoundChart />;

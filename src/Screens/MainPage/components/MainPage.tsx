@@ -43,17 +43,17 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    dispatch(setLoading(true));
-    getLocation()
-      .then((value) => {
-        dispatch(updateFilters({ country: value }));
-        dispatch(setLoading(false));
-      })
-      .catch((err) => {
-        if (err) {
-          dispatch(setError(true));
-        }
-      });
+    // dispatch(setLoading(true));
+    // getLocation()
+    //   .then((value) => {
+    //     dispatch(updateFilters({ country: value }));
+    //     dispatch(setLoading(false));
+    //   })
+    //   .catch((err) => {
+    //     if (err) {
+    //       dispatch(setError(true));
+    //     }
+    //   });
   }, []);
 
   return (

@@ -30,7 +30,7 @@ const initialState = {
     filters: {
       language: "",
       date: "",
-      country: "il",
+      country: "us",
       category: "",
       sources: "",
     },
@@ -55,7 +55,7 @@ const querySlice = createSlice({
       state.query.filters = {
         language: "",
         date: "",
-        country: "il",
+        country: "us",
         category: "",
         sources: "",
       };
