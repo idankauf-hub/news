@@ -7,11 +7,12 @@ import { CustomeSelect } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { selectCountry, selectSources } from "../../store/selectedDropDown";
+import { updateFilters } from "../../store/query";
 
 interface SelectProps {
   placeholder: string;
   onSelect: (e: string) => void;
-  data: string[];
+  data: any[];
 }
 
 const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
@@ -22,29 +23,47 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
 
   const Query = useSelector((state: RootState) => state.query);
   const SelectedState = useSelector((state: RootState) => state.selected);
+  let dropDowns;
+
+  if (placeholder == "Sources") {
+    console.log(data);
+    dropDowns = data?.map((item: any, i) => {
+      return (
+        <div key={i} onClick={() => handleSourceClick(item.id, item.name)}>
+          <MenuItem key={i} value={item.id}>
+            {item.name}
+          </MenuItem>
+        </div>
+      );
+    });
+  } else {
+    dropDowns = data?.map((item, i) => {
+      return (
+        <div key={i} onClick={() => handleClick(item)}>
+          <MenuItem key={i} value={item}>
+            {item}
+          </MenuItem>
+        </div>
+      );
+    });
+  }
+
+  const handleSourceClick = (id: string, name: string) => {
+    onSelect(id);
+    setVal(name);
+    dispatch(updateFilters({ country: "" }));
+    dispatch(selectSources(true));
+  };
 
   const handleClick = (value: string) => {
-    if (placeholder == "Sources") {
-      dispatch(selectSources(true));
-    }
     if (placeholder == "Country") {
       dispatch(selectCountry(true));
+      dispatch(updateFilters({ sources: "" }));
     }
     onSelect(value);
     setVal(value);
   };
-  const isQueryEmpty = () => {
-    if (placeholder == "Country") {
-      Query.query.filters.sources.length === 0
-        ? setDisabled(false)
-        : setDisabled(true);
-    }
-    if (placeholder == "Sources") {
-      Query.query.filters.country.length === 0
-        ? setDisabled(false)
-        : setDisabled(true);
-    }
-  };
+
   useEffect(() => {
     if (placeholder === "Sources" && SelectedState.country) setDisabled(true);
     else {
@@ -85,16 +104,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         return <div>{value}</div>;
       }}
     >
-      {data &&
-        data?.map((item, i) => {
-          return (
-            <div key={i} onClick={() => handleClick(item)}>
-              <MenuItem key={i} value={item}>
-                {item}
-              </MenuItem>
-            </div>
-          );
-        })}
+      {dropDowns}
     </CustomeSelect>
   );
 };

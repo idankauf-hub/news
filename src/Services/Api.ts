@@ -20,8 +20,8 @@ export async function getLocation(): Promise<string> {
 
 export const getAllTopHeadlinesSources = async (
   country: string
-): Promise<string[]> => {
-  var sourcesName: string[] = [];
+): Promise<any[]> => {
+  var sourcesName: any[] = [];
   return await axios
     .get<Sources>(
       `${BASE_URL}top-headlines/sources?country=${country}&apiKey=${API_KEY}`
@@ -29,7 +29,7 @@ export const getAllTopHeadlinesSources = async (
     .then((response) => {
       response.data.sources?.map((item: any) => {
         let name = item.name.toString();
-        sourcesName.push(name);
+        sourcesName.push({name:name,id:item.id.toString()});
       });
       return sourcesName;
     });

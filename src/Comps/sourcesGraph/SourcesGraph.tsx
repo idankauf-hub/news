@@ -12,7 +12,6 @@ import NotFoundChart from "../notFound/NotFoundChart";
 import { parse } from "path";
 
 const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
-  console.log(data);
   const [sourcesData, setSourcesData] = useState<
     { name: string; value: number; total: number; fill: string }[]
   >([]);

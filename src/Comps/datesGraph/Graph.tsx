@@ -41,7 +41,6 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
       });
       count = 0;
     }
-    console.log(sourcesSum)
     return sourcesSum;
   };
   const removeDuplicates = (sourcesSum: any) => {
@@ -49,7 +48,6 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     const filtered = sourcesSum.filter(
       ({ month }: any, index: number) => !ids.includes(month, index + 1)
     );
-    console.log(filtered)
 
     return filtered;
   };

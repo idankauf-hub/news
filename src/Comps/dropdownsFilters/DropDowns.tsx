@@ -19,11 +19,11 @@ import { getAllTopHeadlinesSources } from "../../Services/Api";
 
 const DropDowns: React.FC = () => {
   const [filters, setFilters] = useState<string[]>(topHeadlinesFilters);
-  const [sources, setSources] = useState<string[]>([]);
+  const [sources, setSources] = useState<any[]>([]);
   const Query = useSelector((state: RootState) => state.query);
 
   useEffect(() => {
-    getAllTopHeadlinesSources(Query.query.filters.country).then((value) => {
+    getAllTopHeadlinesSources(Query.query.filters.country).then((value:any) => {
       setSources(value);
     });
   }, [Query.query.filters.country]);
