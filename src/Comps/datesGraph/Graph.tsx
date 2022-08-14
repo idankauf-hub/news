@@ -20,10 +20,9 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   const setSumOfSources = (sources: any) => {
     const sourcesDateSum = sumSourcesDate(sources);
     const sourcesDatesWithOutDuplicates = removeDuplicates(sourcesDateSum);
-    if(sourcesDatesWithOutDuplicates.length ===1){
-      sourcesDatesWithOutDuplicates.push(sourcesDatesWithOutDuplicates[0])
+    if (sourcesDatesWithOutDuplicates.length === 1) {
+      sourcesDatesWithOutDuplicates.push(sourcesDatesWithOutDuplicates[0]);
     }
-    console.log(sourcesDatesWithOutDuplicates)
     setDates(sourcesDatesWithOutDuplicates.reverse());
   };
   const sumSourcesDate = (data: any) => {
@@ -57,11 +56,28 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     setSumOfSources(data);
   }, [data]);
 
+  if (Status.error || data.length === 0) {
+    return <NotFoundChart />;
+  }
+  if (Status.loading) {
+    return (
+      <div
+        style={{
+          marginLeft: "45%",
+          justifyContent: "center",
+          marginTop: "25%",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
         height: "149px",
-        width: "412.19px",
+        width: "400.19px",
         marginTop: "22%",
         padding: 10,
       }}
@@ -83,7 +99,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
             tickLine={false}
             stroke="#5A5A89"
             fontWeight={700}
-            fontSize={13}
+            fontSize={11}
             interval={0}
           />
           <Area
@@ -96,18 +112,6 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
           />
         </AreaChart>
       </ResponsiveContainer>
-      {Status.loading && (
-        <div
-          style={{
-            marginLeft: "45%",
-            justifyContent: "center",
-            marginTop: "25%",
-          }}
-        >
-          <CircularProgress />
-        </div>
-      )}
-      {(Status.error || data.length === 0) && <NotFoundChart />}
     </div>
   );
 };
