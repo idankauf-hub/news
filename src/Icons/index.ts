@@ -5,6 +5,7 @@ import { ReactComponent as RightArrow } from "./ArrowRight.svg";
 import { ReactComponent as DateIcon } from "./date.svg";
 import { ReactComponent as NotFounedIcon } from "./not-found.svg";
 import { ReactComponent as NotFounedChartIcon } from "./chart.svg";
+import { ReactComponent as DeleteIcon } from "./x.svg";
 
 export {
   LogoIcon,
@@ -14,4 +15,5 @@ export {
   DateIcon,
   NotFounedIcon,
   NotFounedChartIcon,
+  DeleteIcon
 };

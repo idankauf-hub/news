@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Container, Row, Title, ClearButton, Search } from "./style";
-import { DeleteIcon } from "../../../Icons";
+import { DeleteIcon } from "../../../Icons/index";
 
 type ISearch = {
   value: string;

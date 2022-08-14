@@ -77,7 +77,6 @@ const MainPage = () => {
       <Container>
         <DropDowns />
         <UnderLine />
-        {/* {title} */}
         {Query.query.endpoint === "top-headlines" &&
         Query.query.search.length === 0 ? (
           <Title
