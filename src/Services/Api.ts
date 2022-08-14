@@ -5,7 +5,7 @@ import { setLoading, setError } from "../store/apiStatus";
 import { useEffect, useState } from "react";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "d5b0bd2365fb4e8d96725ce42501d396";
+export const API_KEY = "e8262826814247808657b79ee20e3dfa";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -50,6 +50,8 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
   const dispatch = useDispatch();
   const [articles, setArticles] = useState<any>([]);
   const [hasMore, setHasMore] = useState(false);
+  const [loading, setLoading] = useState<any>([]);
+  const [error, setError] = useState(false);
   const [totalResults, setTotalResults] = useState<number>(0);
 
   useEffect(() => {
@@ -57,13 +59,17 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
   }, [query]);
 
   useEffect(() => {
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
+    setLoading(true);
     axios
       .get(query + "&page=" + pageNumber)
       .then((response) => {
-        dispatch(setLoading(false));
-        dispatch(setError(false));
-        setTotalResults(response.data.totalResults)
+        // dispatch(setLoading(false));
+        // dispatch(setError(false));
+        console.log(response.data)
+        setLoading(false);
+        setError(false);
+        setTotalResults(response.data.totalResults);
         setArticles((prevArticles: any) => {
           return [...prevArticles, ...response.data.articles];
         });
@@ -72,9 +78,11 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
         );
       })
       .catch((err) => {
-        dispatch(setLoading(false));
-        dispatch(setError(true));
+        // dispatch(setLoading(false));
+        // dispatch(setError(true));
+        setLoading(false);
+        setError(true);
       });
   }, [query, pageNumber]);
-  return { articles, hasMore ,totalResults};
+  return { articles, hasMore, totalResults, loading, error };
 }
