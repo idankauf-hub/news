@@ -3,8 +3,8 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { XAxis, ResponsiveContainer, AreaChart, Area } from "recharts";
-import { RootState } from "../../store/store";
 
+import { RootState } from "../../store/store";
 import { GraphProps } from "../../types/types";
 import NotFoundChart from "../notFound/NotFoundChart";
 
@@ -18,9 +18,13 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   const Status = useSelector((state: RootState) => state.apiStatus);
 
   const setSumOfSources = (sources: any) => {
-    const sourcesSum = sumSourcesDate(sources);
-    const sourcesSumWithOutDuplicates = removeDuplicates(sourcesSum);
-    setDates(sourcesSumWithOutDuplicates.reverse());
+    const sourcesDateSum = sumSourcesDate(sources);
+    const sourcesDatesWithOutDuplicates = removeDuplicates(sourcesDateSum);
+    if(sourcesDatesWithOutDuplicates.length ===1){
+      sourcesDatesWithOutDuplicates.push(sourcesDatesWithOutDuplicates[0])
+    }
+    console.log(sourcesDatesWithOutDuplicates)
+    setDates(sourcesDatesWithOutDuplicates.reverse());
   };
   const sumSourcesDate = (data: any) => {
     let sourcesSum = [];
@@ -53,23 +57,6 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     setSumOfSources(data);
   }, [data]);
 
-  if (Status.loading) {
-    return (
-      <div
-        style={{
-          marginLeft: "45%",
-          justifyContent: "center",
-          marginTop: "25%",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
-  }
-  if (Status.error || data.length === 0) {
-    return <NotFoundChart />;
-  }
-
   return (
     <div
       style={{
@@ -99,7 +86,6 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
             fontSize={13}
             interval={0}
           />
-          {/* <Tooltip /> */}
           <Area
             type="monotone"
             dataKey="frequency"
@@ -110,6 +96,18 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
           />
         </AreaChart>
       </ResponsiveContainer>
+      {Status.loading && (
+        <div
+          style={{
+            marginLeft: "45%",
+            justifyContent: "center",
+            marginTop: "25%",
+          }}
+        >
+          <CircularProgress />
+        </div>
+      )}
+      {(Status.error || data.length === 0) && <NotFoundChart />}
     </div>
   );
 };
