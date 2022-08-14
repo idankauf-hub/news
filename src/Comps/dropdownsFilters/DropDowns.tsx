@@ -96,10 +96,10 @@ const DropDowns: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(resetFilters());
     Query.query.endpoint == "everything"
       ? setFilters(() => everythingFilters)
       : setFilters(() => topHeadlinesFilters);
+      dispatch(resetFilters());
   }, [Query.query.endpoint]);
 
   return (

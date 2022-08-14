@@ -18,15 +18,19 @@ interface SelectProps {
 const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [val, setVal] = useState<string>(placeholder || "");
+  const [sourcesSelected, setSourcesSelected] = useState<boolean>(false);
+  const [counrtiesSelected, setCounrtiesSelected] = useState<boolean>(false);
+
   const [disabled, setDisabled] = useState<boolean>(false);
+
   const dispatch = useDispatch();
 
   const Query = useSelector((state: RootState) => state.query);
   const SelectedState = useSelector((state: RootState) => state.selected);
+
   let dropDowns;
 
   if (placeholder == "Sources") {
-    console.log(data);
     dropDowns = data?.map((item: any, i) => {
       return (
         <div key={i} onClick={() => handleSourceClick(item.id, item.name)}>
@@ -52,12 +56,19 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
     onSelect(id);
     setVal(name);
     dispatch(updateFilters({ country: "" }));
+    // setSourcesSelected(true);
+    // setCounrtiesSelected(false);
+
     dispatch(selectSources(true));
+    dispatch(selectCountry(false));
   };
 
   const handleClick = (value: string) => {
     if (placeholder == "Country") {
       dispatch(selectCountry(true));
+      dispatch(selectSources(false));
+      // setCounrtiesSelected(true);
+      // setSourcesSelected(false);
       dispatch(updateFilters({ sources: "" }));
     }
     onSelect(value);
@@ -65,18 +76,22 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   };
 
   useEffect(() => {
+    // console.log(counrtiesSelected)
     if (placeholder === "Sources" && SelectedState.country) setDisabled(true);
-    else {
+    else if (placeholder === "Sources") {
       setDisabled(false);
     }
-  }, [Query.query.filters.country]);
+    console.log("changed");
+  }, [SelectedState.country, SelectedState.sources]);
+
   useEffect(() => {
     if (placeholder === "Country" && SelectedState.sources) {
       setDisabled(true);
-    } else {
+    } else if (placeholder === "Country") {
       setDisabled(false);
     }
-  }, [Query.query.filters.sources]);
+  }, [SelectedState.sources]);
+
   return (
     <CustomeSelect
       disabled={disabled}

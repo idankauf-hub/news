@@ -16,7 +16,7 @@ const apiStatusSlice = createSlice({
     },
   },
 });
-export const setLoading = apiStatusSlice.actions.setLoading;
-export const setError = apiStatusSlice.actions.setError;
+export const setLoadingGlobal = apiStatusSlice.actions.setLoading;
+export const setErrorGlobal = apiStatusSlice.actions.setError;
 
 export default apiStatusSlice.reducer;

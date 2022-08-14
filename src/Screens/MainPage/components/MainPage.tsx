@@ -19,11 +19,8 @@ import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
 import { getLocation } from "../../../Services/Api";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFilters } from "../../../store/query";
-import { setLoading, setError } from "../../../store/apiStatus";
 
-import axios from "axios";
 import { RootState } from "../../../store/store";
-import { CountryData } from "../../../types/datatypes";
 
 const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
@@ -42,20 +39,6 @@ const MainPage = () => {
     setDates(value);
   };
 
-  useEffect(() => {
-    // dispatch(setLoading(true));
-    // getLocation()
-    //   .then((value) => {
-    //     dispatch(updateFilters({ country: value }));
-    //     dispatch(setLoading(false));
-    //   })
-    //   .catch((err) => {
-    //     if (err) {
-    //       dispatch(setError(true));
-    //     }
-    //   });
-  }, []);
-
   return (
     <>
       <Navbar />
@@ -71,6 +54,16 @@ const MainPage = () => {
             }
           />
         ) : (
+          Query.query.endpoint === "top-headlines" && (
+            <TotalResults>
+              <>
+                {ApiStatus.error || ApiStatus.loading ? 0 : totalResults} Total
+                results
+              </>
+            </TotalResults>
+          )
+        )}
+        {Query.query.endpoint === "everything" && (
           <TotalResults>
             <>
               {ApiStatus.error || ApiStatus.loading ? 0 : totalResults} Total

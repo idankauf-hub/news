@@ -1,10 +1,12 @@
 import { Sources } from "../types/types";
-import { useEffect, useState } from "react";
 
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setLoadingGlobal, setErrorGlobal } from "../store/apiStatus";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "e5e2e1cd529d4d18a3ce0c5ef6c13d5d";
+export const API_KEY = "9ce231647996401e92c8f127de8255e1";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -29,7 +31,7 @@ export const getAllTopHeadlinesSources = async (
     .then((response) => {
       response.data.sources?.map((item: any) => {
         let name = item.name.toString();
-        sourcesName.push({name:name,id:item.id.toString()});
+        sourcesName.push({ name: name, id: item.id.toString() });
       });
       return sourcesName;
     });
@@ -51,19 +53,22 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
   const [loading, setLoading] = useState<any>([]);
   const [error, setError] = useState(false);
   const [totalResults, setTotalResults] = useState<number>(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setArticles([]);
   }, [query]);
 
   useEffect(() => {
-    // dispatch(setLoading(true));
     setLoading(true);
     axios
       .get(query + "&page=" + pageNumber)
       .then((response) => {
         setLoading(false);
         setError(false);
+        dispatch(setErrorGlobal(false));
+        dispatch(setLoadingGlobal(false));
+
         setTotalResults(response.data.totalResults);
         setArticles((prevArticles: any) => {
           return [...prevArticles, ...response.data.articles];
@@ -75,6 +80,8 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
       .catch((err) => {
         setLoading(false);
         setError(true);
+        dispatch(setLoadingGlobal(false));
+        dispatch(setErrorGlobal(true));
       });
   }, [query, pageNumber]);
   return { articles, hasMore, totalResults, loading, error };
