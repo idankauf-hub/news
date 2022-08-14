@@ -17,7 +17,6 @@ interface ISourcesData {
 }
 
 const Cards = ({ setGraphsData }: ISourcesData) => {
-  const [data, setData] = useState<any>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
 
   const Query = useSelector((state: RootState) => state.query);
@@ -30,6 +29,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
     Query.query.queryUrl,
     pageNumber
   );
+
   const lastArticleElementRef = useCallback(
     (node: any): void => {
       if (Status.loading) return;
@@ -53,20 +53,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
   );
 
   useEffect(() => {
-    // dispatch(setLoading(true));
-    // // getArticles(Query.query.queryUrl).then((value: any) => {
-    // //   dispatch(setLoading(false));
-    // //   if (value?.response?.data?.status == "error") {
-    // //     dispatch(setError(true));
-    // //     return;
-    // //   }
-    // //   setData(value);
-    // //   setArticlesLength(value.articles.length);
-    // //   setGraphsData(value);
-    // //   dispatch(setError(false));
-    // // });
     setGraphsData(articles);
-    console.log();
   }, [articles]);
 
   const changeDateForamt = (value: string) => {
@@ -74,7 +61,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
     return formatted;
   };
 
-  if (Status.error || articles.length===0) {
+  if (Status.error || articles.length === 0) {
     return <NotFound />;
   }
   if (Status.loading) {

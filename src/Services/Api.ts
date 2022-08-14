@@ -5,7 +5,7 @@ import { setLoading, setError } from "../store/apiStatus";
 import { useEffect, useState } from "react";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "38e4c82230ae43f6bfaa032dc942d694";
+export const API_KEY = "d5b0bd2365fb4e8d96725ce42501d396";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -36,16 +36,12 @@ export const getAllTopHeadlinesSources = async (
     });
 };
 export const getArticles = async (QueryUrl: string): Promise<[]> => {
-  // const dispatch = useDispatch();
-  // dispatch(setLoading(true));
-
   return await axios
     .get(QueryUrl)
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
-      // dispatch(setError(true));
       return error;
     });
 };
@@ -66,17 +62,16 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
       .then((response) => {
         dispatch(setLoading(false));
         dispatch(setError(false));
-
         setArticles((prevArticles: any) => {
           return [...prevArticles, ...response.data.articles];
         });
-        setHasMore(response.data.totalResults / 10 > pageNumber);
+        setHasMore(
+          response.data.totalResults / 10 > pageNumber && pageNumber < 10
+        );
       })
       .catch((err) => {
         dispatch(setLoading(false));
         dispatch(setError(true));
-        console.log(query);
-        console.log(err);
       });
   }, [query, pageNumber]);
   return { articles, hasMore };
