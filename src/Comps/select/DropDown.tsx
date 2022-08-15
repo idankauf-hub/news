@@ -1,19 +1,31 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import { ForwardIcon } from "../../Icons";
 
+import { ForwardIcon } from "../../Icons";
 import { COLORS } from "../../styles/colors";
 import { CustomSelect } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { selectCountry, selectSources } from "../../store/selectedDropDown";
 import { updateFilters } from "../../store/query";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 interface SelectProps {
   placeholder: string;
   onSelect: (e: string) => void;
   data: any[];
 }
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: "Mulish",
+      textTransform: "none",
+      fontSize: 16,
+      fontWeight: 400,
+      color: "#5A5A89",
+    },
+  },
+});
 
 const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,9 +40,17 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
     dropDowns = data?.map((item: any, i) => {
       return (
         <div key={i} onClick={() => handleSourceClick(item.id, item.name)}>
-          <MenuItem key={i} value={item.id}>
-            {item.name}
-          </MenuItem>
+          <ThemeProvider theme={theme}>
+            <MenuItem
+              sx={{
+                "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
+              }}
+              key={i}
+              value={item.id}
+            >
+              {item.name}
+            </MenuItem>
+          </ThemeProvider>
         </div>
       );
     });
@@ -38,9 +58,17 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
     dropDowns = data?.map((item, i) => {
       return (
         <div key={i} onClick={() => handleClick(item)}>
-          <MenuItem key={i} value={item}>
-            {item}
-          </MenuItem>
+          <ThemeProvider theme={theme}>
+            <MenuItem
+              sx={{
+                "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
+              }}
+              key={i}
+              value={item}
+            >
+              {item}
+            </MenuItem>
+          </ThemeProvider>
         </div>
       );
     });
@@ -81,23 +109,46 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
 
   return (
     <CustomSelect
+      size="small"
       disabled={disabled}
       displayEmpty
+      disableUnderline
       id="select"
-      defaultValue={''}
+      defaultValue={""}
       value={val || ""}
       onClick={() => setIsOpen(!isOpen)}
       fullWidth
+      MenuProps={{
+        PaperProps: { sx: { maxHeight: 300 } },
+      }}
       open={isOpen}
       sx={{
         background: "white",
         fontWeight: 500,
         fontSize: 14,
         width: "37%",
+        padding: "15px",
+        outline: "none",
         letterSpacing: 0.25,
         color: COLORS.purpleblue,
+        borderRadius: "10px",
         "& .MuiOutlinedInput-notchedOutline": {
           borderColor: "white",
+          outline: "white",
+          outlineColor: "yellow",
+        },
+        "& .MuiPaper-root": {
+          transition: "none !important",
+          outlineColor: "white",
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          border: "none",
+        },
+        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+          border: "none",
+        },
+        "&:	.Mui-focused": {
+          color: "blue",
         },
       }}
       IconComponent={ForwardIcon}

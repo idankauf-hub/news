@@ -12,37 +12,52 @@ import {
 } from "./style";
 import Button from "@mui/material/Button";
 import { RightArrow } from "../../Icons";
+import { CardMedia } from "@mui/material";
+import { COLORS } from "../../styles/colors";
 
 interface CardProps {
-  refLastArticle?:any
+  refLastArticle?: any;
   description?: string;
   publishedAt?: string;
   author?: string;
   title?: string;
   urlToImage?: string;
-  urlToNews?:string|undefined;
+  urlToNews?: string | undefined;
 }
-const Card: React.FC<CardProps> = ({refLastArticle,
+const Card: React.FC<CardProps> = ({
+  refLastArticle,
   description,
   publishedAt,
   author,
   title,
   urlToImage,
-  urlToNews
+  urlToNews,
 }) => {
-
   return (
     <CardContainer ref={refLastArticle}>
-      <CardImage urlImage={urlToImage}></CardImage>
+      {/* <CardImage urlImage={urlToImage}></CardImage> */}
+
+      <CardMedia
+        component="img"
+        sx={{
+          "@media (min-width: 600px)": {
+            height: "100%",
+          },
+          borderRadius: "20px 0px 0px 20px",
+          borderRight: `1px solid ${COLORS.lightgray}`,
+
+          width: { sm: 150 },
+        }}
+        image={urlToImage}
+        alt="image thumbnail"
+      />
       <DataContainer>
         <DateDiv>
           <DateText>{publishedAt}</DateText>
         </DateDiv>
         <Title>{title}</Title>
         <AuthorName>{author}</AuthorName>
-        <Description>
-          {description}
-        </Description>
+        <Description>{description}</Description>
         <BtnDiv>
           <Button
             href={urlToNews || ""}
@@ -54,13 +69,12 @@ const Card: React.FC<CardProps> = ({refLastArticle,
               borderRadius: 20,
               width: 226,
               height: 36,
-              textAlign:"center",
-              fontFamily:"Roboto",
-              fontWeight:500,
-              fontSize:14,
-              lineHeight:26,
-              display:"flex",
-
+              textAlign: "center",
+              fontFamily: "Roboto",
+              fontWeight: 500,
+              fontSize: 14,
+              lineHeight: 26,
+              display: "flex",
             }}
           >
             NAVIGATE TO DISPATCH
