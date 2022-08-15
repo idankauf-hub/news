@@ -52,6 +52,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
         (
           article: {
             content: any;
+            description: any;
             author: any;
             publishedAt: string;
             urlToImage: any;
@@ -61,11 +62,16 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
           index: number
         ) => {
           if (articles.length === index + 1) {
+            console.log(article);
             return (
               <Card
                 refLastArticle={lastArticleElementRef}
                 key={index}
-                description={article.content || ""}
+                description={
+                  Query.query.filters.country === "il"
+                    ? article.content
+                    : article.description
+                }
                 author={article.author || ""}
                 publishedAt={changeDateForamt(article.publishedAt)}
                 urlToImage={
@@ -81,7 +87,11 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
             return (
               <Card
                 key={index}
-                description={article.content || ""}
+                description={
+                  Query.query.filters.country === "il"
+                    ? article.description
+                    : article.content
+                }
                 author={article.author || ""}
                 publishedAt={changeDateForamt(article.publishedAt)}
                 urlToImage={
