@@ -77,7 +77,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     <div
       style={{
         height: "149px",
-        width: "400.19px",
+        width: "100%",
         marginTop: "22%",
         padding: 10,
       }}

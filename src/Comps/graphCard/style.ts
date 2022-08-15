@@ -5,7 +5,7 @@ import { H1Bold} from "../../styles/typography";
 
 export const CardContainer = styled.div`
   position: relative;
-  width: 412px;
+  width: 100%;
   height: 355px;
   background: ${COLORS.white};
   border: 1px solid ${COLORS.lightgray};

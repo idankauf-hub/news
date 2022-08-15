@@ -12,10 +12,8 @@ interface ImageProps {
 }
 export const CardContainer = styled(DisplayCenterRow)`
   position: relative;
-
   padding: 0px;
   width: 100%;
-  height: 15%;
   background: ${COLORS.white};
   border: 1px solid ${COLORS.lightgray};
   box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
@@ -35,24 +33,14 @@ export const CardImage = styled.img<ImageProps>`
 `;
 
 export const DataContainer = styled.div`
-  display: inline-block;
+  display: inline;
   flex-direction: column;
-  align-items: flex-end;
   padding: 8px 17px;
   gap: 10px;
-
-  width: 76%;
+  width: 100%;
   height: 100%;
-  justify-content: space-between;
 `;
 export const DateDiv = styled(DisplayRow)`
-  // justify-content: space-between;
-  // align-items: flex-start;
-  // padding: 0px;
-  // gap: 10px;
-  // width: 80%;
-  // height: 22px;
-
   margin-bottom: 16px;
   font-size: 14px;
   overflow: hidden;
@@ -69,34 +57,39 @@ export const DateText = styled(H1LightGray)`
 `;
 export const Title = styled(BoldTitleBluishBlack)`
   width: 80%;
-  height: 21px;
+  height: 42px;
   margin-up: 19.25px;
 
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  margin-bottom: 19.25px;
+  margin-bottom: 14px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // white-space: nowrap;
 `;
 export const AuthorName = styled(H1LightGray)`
   height: 22px;
   display: flex;
   align-items: center;
   letter-spacing: 0.25px;
+  margin-bottom: 16px;
 `;
 export const Description = styled(H1DarkPurple)`
-  height: 32px;
+  height: 50px;
   line-height: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
+  width: 90%;
+  margin-bottom: 14px;
+
 `;
 
 export const BtnDiv = styled(DisplayCenterRow)`
+  position: inline;
+  width: 100%;
   justify-content: flex-end;
   padding: 0px;
   margin-bottom: 10px;
   gap: 10px;
-  // width: 100%;
-  height: 36px;
+  height: 5vh;
+  
 `;

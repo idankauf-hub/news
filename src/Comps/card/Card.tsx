@@ -45,11 +45,9 @@ const Card: React.FC<CardProps> = ({
           },
           borderRadius: "20px 0px 0px 20px",
           borderRight: `1px solid ${COLORS.lightgray}`,
-
-          width: { sm: 150 },
+          width: { sm: 180 },
         }}
         image={urlToImage}
-        alt="image thumbnail"
       />
       <DataContainer>
         <DateDiv>
@@ -57,7 +55,7 @@ const Card: React.FC<CardProps> = ({
         </DateDiv>
         <Title>{title}</Title>
         <AuthorName>{author}</AuthorName>
-        <Description>{description}</Description>
+          <Description>{description}</Description>
         <BtnDiv>
           <Button
             href={urlToNews || ""}

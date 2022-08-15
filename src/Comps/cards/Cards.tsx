@@ -51,7 +51,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
       {articles.map(
         (
           article: {
-            description: any;
+            content: any;
             author: any;
             publishedAt: string;
             urlToImage: any;
@@ -65,7 +65,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
               <Card
                 refLastArticle={lastArticleElementRef}
                 key={index}
-                description={article.description || ""}
+                description={article.content || ""}
                 author={article.author || ""}
                 publishedAt={changeDateForamt(article.publishedAt)}
                 urlToImage={article.urlToImage || ""}
@@ -77,7 +77,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
             return (
               <Card
                 key={index}
-                description={article.description || ""}
+                description={article.content || ""}
                 author={article.author || ""}
                 publishedAt={changeDateForamt(article.publishedAt)}
                 urlToImage={article.urlToImage || ""}
