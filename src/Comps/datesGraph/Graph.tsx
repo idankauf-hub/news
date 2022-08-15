@@ -2,7 +2,7 @@ import { CircularProgress } from "@mui/material";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { XAxis, ResponsiveContainer, AreaChart, Area } from "recharts";
+import { XAxis, ResponsiveContainer, AreaChart, Area, Tooltip } from "recharts";
 
 import { RootState } from "../../store/store";
 import { GraphProps } from "../../types/types";
@@ -96,19 +96,22 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
             dataKey="month"
             axisLine={false}
             tickLine={false}
-            stroke="#5A5A89"
+            fill="#5A5A89"
             fontWeight={700}
             fontSize={11}
+            fontFamily={"Roboto"}
             interval={0}
           />
           <Area
             type="monotone"
             dataKey="frequency"
             stroke="#0058B9"
+            fontFamily="Roboto"
             strokeWidth={4}
             fillOpacity={1}
             fill="url(#colorUv)"
           />
+          <Tooltip/>
         </AreaChart>
       </ResponsiveContainer>
     </div>

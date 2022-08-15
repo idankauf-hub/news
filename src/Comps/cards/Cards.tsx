@@ -102,7 +102,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
           <CircularProgress />
         </div>
       )}
-      {error || (articles.length === 0 && <NotFound />)}
+      {(error || articles.length === 0) && <NotFound />}
     </CardsContainer>
   );
 };

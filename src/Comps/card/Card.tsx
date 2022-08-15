@@ -45,7 +45,7 @@ const Card: React.FC<CardProps> = ({
           },
           borderRadius: "20px 0px 0px 20px",
           borderRight: `1px solid ${COLORS.lightgray}`,
-          width: { sm: 180 },
+          width: { sm: 250 },
         }}
         image={urlToImage}
       />

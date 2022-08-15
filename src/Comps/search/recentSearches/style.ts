@@ -4,7 +4,8 @@ export const Container = styled.div`
   position: absolute;
   overflow: hidden;
   margin-top: 5.5vh;
-  width: 25%;
+  // width: 39.5%;
+  width: 25.2%;
   @media (max-width: 1440px) {
     margin-top: 7vh;
     width: 35%;

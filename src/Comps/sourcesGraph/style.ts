@@ -12,6 +12,7 @@ interface ColorProps {
 }
 export const CustomeLegend = styled(DisplayColumn)`
   margin-top: 2vh;
+  margin-left:2vh;
   width: 80%;
   height: 15vh;
 `;

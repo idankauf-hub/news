@@ -20,6 +20,7 @@ import RecentSearches from "../../../Comps/search/recentSearches/RecentSearches"
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
   const [inputRecent, setInputToRecent] = useState<string>("");
+  const [widthInput, setWidthInput] = useState<string>("423px");
 
   const [searches, setItems] = useState<string[]>([]);
   const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -55,13 +56,16 @@ export const SearchMainPage = () => {
   const handleInputFocus = () => {
     if (document.activeElement === inputRef.current) {
       setIsFocus(true);
+      // setWidthInput("663px");
     } else {
       setIsFocus(false);
+      // setWidthInput("423px");
     }
   };
   useEffect(() => {
     if (localStorage.getItem("lastSearches") === "[]") {
-      setIsLastSearchesEmpty((lastState) => !lastState);
+      // setIsLastSearchesEmpty((lastState) => !lastState);
+      console.log("hey");
     }
   }, [Query.query.search]);
 
@@ -96,7 +100,7 @@ export const SearchMainPage = () => {
   return (
     <>
       <FormControl fullWidth>
-        <Container>
+        <Container width={widthInput}>
           <Search
             onFocus={handleInputFocus}
             onBlur={handleInputFocus}

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import  {COLORS}  from "../../styles/colors";
+import { COLORS } from "../../styles/colors";
 
 export const SearchFormContainer = styled.form`
   display: flex;
@@ -7,7 +7,6 @@ export const SearchFormContainer = styled.form`
   // left: 1px;
   height: 50px;
   position: relative;
-  
 `;
 
 export const SearchButton = styled.button.attrs({
@@ -41,6 +40,4 @@ export const VerticalLine = styled.div`
   height: 0px;
   opacity: 0.5;
   transform: rotate(90deg);
-  
-
 `;
