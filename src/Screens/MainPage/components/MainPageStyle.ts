@@ -23,12 +23,25 @@ export const ColumnGraphs = styled(DisplayColumn)`
 export const ColumnCards = styled(DisplayColumn)`
   align-items: flex-start;
   overflow-y: auto;
-  padding:0px 20px 0px 0px;
+  padding: 0px 17px 0px 0px;
   gap: 24px;
-
   width: 70%;
   height: 100vh;
-  scrollbar-color:blue
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #a0a3bd;
+    -webkit-border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track: {
+    padding: "8px";
+  }
 `;
 
 export const UnderLine = styled.div`
