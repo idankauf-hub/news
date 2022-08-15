@@ -68,6 +68,7 @@ export const AuthorName = styled(H1LightGray)`
   align-items: center;
   letter-spacing: 0.25px;
   margin-bottom: 16px;
+  margin-top: 16px;
 `;
 export const Description = styled(H1DarkPurple)`
   height: 50px;

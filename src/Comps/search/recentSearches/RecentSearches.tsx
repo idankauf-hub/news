@@ -30,8 +30,10 @@ const RecentSearches: React.FC<ISearch> = ({ value, setInput, setClear }) => {
     try {
       const item = JSON.parse(localStorage.getItem("lastSearches") || "{}");
       if (value) setLastSearches([...(new Set([...item, value]) as any)]);
+      
     } catch {}
   }, [value]);
+
 
   return (
     <Container>

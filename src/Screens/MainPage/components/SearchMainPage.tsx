@@ -32,6 +32,7 @@ export const SearchMainPage = () => {
 
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
+  const storage: string = localStorage.getItem("lastSearches") || "";
 
   const addItemToLocalStorage = (input: string) => {
     if (input) setItems([...searches, input]);
@@ -62,10 +63,10 @@ export const SearchMainPage = () => {
       // setWidthInput("423px");
     }
   };
+
   useEffect(() => {
     if (localStorage.getItem("lastSearches") === "[]") {
-      // setIsLastSearchesEmpty((lastState) => !lastState);
-      console.log("hey");
+      setIsLastSearchesEmpty((lastState) => !lastState);
     }
   }, [Query.query.search]);
 

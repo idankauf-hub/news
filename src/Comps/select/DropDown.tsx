@@ -112,12 +112,11 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
       size="small"
       disabled={disabled}
       displayEmpty
-      disableUnderline
       id="select"
       defaultValue={""}
       value={val || ""}
       onClick={() => setIsOpen(!isOpen)}
-      fullWidth
+      // fullWidth
       MenuProps={{
         PaperProps: { sx: { maxHeight: 300 } },
       }}
