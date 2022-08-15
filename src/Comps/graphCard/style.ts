@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
 import { DisplayRow, DisplayCenterRow } from "../../styles/layouts";
-import { H1Bold} from "../../styles/typography";
+import { H1Bold } from "../../styles/typography";
 
 export const CardContainer = styled.div`
   position: relative;
@@ -20,21 +20,20 @@ export const Title = styled(H1Bold)`
   right: 74.68%;
   top: 6.04%;
   bottom: 83.94%;
-
-  `;
+`;
 
 export const UnderLine = styled.div`
   position: absolute;
   left: 5.07%;
-  right: 89.08%;
+  right: 88.08%;
   bottom: 90.48%;
-  top: 13.52%;
+  top: 16.52%;
   border-radius: 10px;
   background: ${COLORS.darkpurple};
-  border: 4px solid ${COLORS.darkpurple};
+  border: 3px solid ${COLORS.darkpurple};
 `;
 
 export const TitleContainer = styled(DisplayRow)`
+  margin-bottom: 1.5vh;
 `;
-export const GraphContainer = styled(DisplayCenterRow)`
-`;
+export const GraphContainer = styled(DisplayCenterRow)``;

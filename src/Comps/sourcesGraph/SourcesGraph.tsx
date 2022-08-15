@@ -88,13 +88,13 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
   }
   return (
     <GraphT>
-      <PieChart width={200} height={124}>
+      <PieChart width={180} height={104}>
         <Pie
           cx={"50%"}
           cy={"50%"}
           data={sourcesData || []}
-          innerRadius={50}
-          outerRadius={60}
+          innerRadius={40}
+          outerRadius={50}
           fill="#FFFFFF"
           paddingAngle={0}
           dataKey="value"

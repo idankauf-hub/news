@@ -18,14 +18,17 @@ export const ColumnGraphs = styled(DisplayColumn)`
   align-items: flex-start;
   gap: 24px;
   width: 30%;
-  height: 95vh;
+  height: 100vh;
 `;
 export const ColumnCards = styled(DisplayColumn)`
   align-items: flex-start;
-  padding: 0px;
+  overflow-y: auto;
+  padding:0px 20px 0px 0px;
   gap: 24px;
+
   width: 70%;
   height: 100vh;
+  scrollbar-color:blue
 `;
 
 export const UnderLine = styled.div`

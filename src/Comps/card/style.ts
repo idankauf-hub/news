@@ -16,7 +16,7 @@ export const CardContainer = styled(DisplayCenterRow)`
   width: 100%;
   background: ${COLORS.white};
   border: 1px solid ${COLORS.lightgray};
-  box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
 `;
 
@@ -59,12 +59,9 @@ export const Title = styled(BoldTitleBluishBlack)`
   width: 80%;
   height: 42px;
   margin-up: 19.25px;
-
   margin-bottom: 14px;
-
   overflow: hidden;
   text-overflow: ellipsis;
-  // white-space: nowrap;
 `;
 export const AuthorName = styled(H1LightGray)`
   height: 22px;
@@ -80,7 +77,6 @@ export const Description = styled(H1DarkPurple)`
   text-overflow: ellipsis;
   width: 90%;
   margin-bottom: 14px;
-
 `;
 
 export const BtnDiv = styled(DisplayCenterRow)`
@@ -91,5 +87,4 @@ export const BtnDiv = styled(DisplayCenterRow)`
   margin-bottom: 10px;
   gap: 10px;
   height: 5vh;
-  
 `;

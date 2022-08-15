@@ -127,15 +127,12 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         fontWeight: 500,
         fontSize: 14,
         width: "37%",
-        padding: "15px",
         outline: "none",
         letterSpacing: 0.25,
         color: COLORS.purpleblue,
         borderRadius: "10px",
         "& .MuiOutlinedInput-notchedOutline": {
           borderColor: "white",
-          outline: "white",
-          outlineColor: "yellow",
         },
         "& .MuiPaper-root": {
           transition: "none !important",

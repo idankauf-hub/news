@@ -11,8 +11,9 @@ interface ColorProps {
   color: string | undefined;
 }
 export const CustomeLegend = styled(DisplayColumn)`
+  margin-top: 2vh;
   width: 80%;
-  height: 143px;
+  height: 15vh;
 `;
 export const GraphT = styled(DisplayCetnerColumn)`
   padding: 0px;
@@ -22,6 +23,7 @@ export const GraphT = styled(DisplayCetnerColumn)`
 
 export const Row = styled(DisplayRow)`
   justify-content: space-between;
+  margin-left: 0.5vh;
 `;
 export const Span = styled.span`
   font-family: "Mulish";
@@ -54,6 +56,3 @@ export const LiText = styled.p`
   letter-spacing: 0.2px;
   color: ${COLORS.darkpurpleblack};
 `;
-
-
-
