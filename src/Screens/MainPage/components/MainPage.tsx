@@ -28,16 +28,23 @@ const MainPage = () => {
   const [dates, setDates] = useState<[]>([]);
   const [sources, setSources] = useState<[]>([]);
   const [totalResults, setTotalResults] = useState<number>(0);
+  const [articalsLen, setArticalsLen] = useState<number>(0);
+
   const [title, setTitle] = useState<JSX.Element>(<></>);
 
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
   const dispatch = useDispatch();
 
-  const setGraphsData = (value: [], totalResults: number) => {
+  const setGraphsData = (
+    value: [],
+    totalResults: number,
+    articalsLength: number
+  ) => {
     setTotalResults(totalResults);
     setSources(value);
     setDates(value);
+    setArticalsLen(articalsLength);
   };
   useEffect(() => {
     setTitle(
@@ -63,8 +70,8 @@ const MainPage = () => {
       setTitle(
         <TotalResults>
           <>
-            {ApiStatus.error || ApiStatus.loading ? 0 : totalResults} Total
-            results
+            {ApiStatus.error || ApiStatus.loading ? 0 : totalResults}
+            Total results
           </>
         </TotalResults>
       );
@@ -88,8 +95,10 @@ const MainPage = () => {
           Query.query.endpoint === "top-headlines" && (
             <TotalResults>
               <>
-                {ApiStatus.error || ApiStatus.loading ? 0 : totalResults} Total
-                results
+                {ApiStatus.error || ApiStatus.loading || articalsLen === 0
+                  ? 0
+                  : totalResults}{" "}
+                Total results
               </>
             </TotalResults>
           )
@@ -97,8 +106,10 @@ const MainPage = () => {
         {Query.query.endpoint === "everything" && ApiStatus.error != true && (
           <TotalResults>
             <>
-              {ApiStatus.error || ApiStatus.loading ? 0 : totalResults} Total
-              results
+              {ApiStatus.error || ApiStatus.loading || articalsLen === 0
+                ? 0
+                : totalResults}{" "}
+              Total results
             </>
           </TotalResults>
         )}
