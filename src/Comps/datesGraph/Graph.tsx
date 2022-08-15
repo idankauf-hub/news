@@ -51,6 +51,20 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
 
     return filtered;
   };
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p style={{ fontFamily: "Roboto", color: "#5A5A89" }}>{`${label}`}</p>
+          <p
+            style={{ fontFamily: "Roboto", color: "#5A5A89" }}
+          >{`Frequency: ${payload[0].value} articals`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   useEffect(() => {
     setSumOfSources(data);
@@ -84,7 +98,12 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={dates}
-          margin={{ top: 10, right: 15, left: 15, bottom: 0 }}
+          margin={{
+            top: 0,
+            right: 17,
+            left: 18,
+            bottom: 0,
+          }}
         >
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -111,7 +130,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
             fillOpacity={1}
             fill="url(#colorUv)"
           />
-          <Tooltip/>
+          <Tooltip content={<CustomTooltip />} />
         </AreaChart>
       </ResponsiveContainer>
     </div>
