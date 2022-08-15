@@ -67,6 +67,8 @@ export const SearchMainPage = () => {
   useEffect(() => {
     if (localStorage.getItem("lastSearches") === "[]") {
       setIsLastSearchesEmpty((lastState) => !lastState);
+    } else {
+      setIsLastSearchesEmpty(false);
     }
   }, [Query.query.search]);
 
