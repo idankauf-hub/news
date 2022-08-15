@@ -38,10 +38,6 @@ export const ColumnCards = styled(DisplayColumn)`
     background: #a0a3bd;
     -webkit-border-radius: 10px;
   }
-
-  ::-webkit-scrollbar-track: {
-    padding: "8px";
-  }
 `;
 
 export const UnderLine = styled.div`

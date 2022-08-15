@@ -127,7 +127,6 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         fontWeight: 500,
         fontSize: 14,
         width: "37%",
-        outline: "none",
         letterSpacing: 0.25,
         color: COLORS.purpleblue,
         borderRadius: "10px",
@@ -143,9 +142,6 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         },
         "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
           border: "none",
-        },
-        "&:	.Mui-focused": {
-          color: "blue",
         },
       }}
       IconComponent={ForwardIcon}

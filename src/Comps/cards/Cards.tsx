@@ -61,6 +61,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
           index: number
         ) => {
           if (articles.length === index + 1) {
+            console.log(article.urlToImage);
             return (
               <Card
                 refLastArticle={lastArticleElementRef}
@@ -68,7 +69,11 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
                 description={article.content || ""}
                 author={article.author || ""}
                 publishedAt={changeDateForamt(article.publishedAt)}
-                urlToImage={article.urlToImage || ""}
+                urlToImage={
+                  article.urlToImage === null
+                    ? "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+                    : article.urlToImage
+                }
                 urlToNews={article.url}
                 title={article.title}
               />
@@ -80,7 +85,11 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
                 description={article.content || ""}
                 author={article.author || ""}
                 publishedAt={changeDateForamt(article.publishedAt)}
-                urlToImage={article.urlToImage || ""}
+                urlToImage={
+                  article.urlToImage === null
+                    ? "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+                    : article.urlToImage
+                }
                 urlToNews={article.url}
                 title={article.title}
               />
@@ -93,7 +102,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
           <CircularProgress />
         </div>
       )}
-      {error && <NotFound />}
+      {error || (articles.length === 0 && <NotFound />)}
     </CardsContainer>
   );
 };

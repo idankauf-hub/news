@@ -23,6 +23,9 @@ export const SearchMainPage = () => {
 
   const [searches, setItems] = useState<string[]>([]);
   const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [isLastSearchesEmpty, setIsLastSearchesEmpty] =
+    useState<boolean>(false);
+
   const inputRef = useRef<any>(null);
   const Query = useSelector((state: RootState) => state.query);
 
@@ -38,6 +41,7 @@ export const SearchMainPage = () => {
   const handleChange = (value: string) => {
     setInput(value);
   };
+
   const handleEndpointDropDown = (value: string) => {
     if (value === "Everything") dispatch(updateEndPoint("everything"));
     else {
@@ -48,10 +52,6 @@ export const SearchMainPage = () => {
     return Query.query.search.length === 0;
   };
 
-  const handleDropDown = (value: string) => {
-    console.log(value);
-  };
-
   const handleInputFocus = () => {
     if (document.activeElement === inputRef.current) {
       setIsFocus(true);
@@ -59,6 +59,12 @@ export const SearchMainPage = () => {
       setIsFocus(false);
     }
   };
+  useEffect(() => {
+    if (localStorage.getItem("lastSearches") === "[]") {
+      setIsLastSearchesEmpty((lastState) => !lastState);
+    }
+  }, [Query.query.search]);
+
   useEffect(() => {
     addItemToLocalStorage(input);
     setInputToRecent(input);
@@ -110,7 +116,7 @@ export const SearchMainPage = () => {
             placeholder={placeholders[0]}
           />
         </Container>
-        {isFocus && (
+        {isFocus && !isLastSearchesEmpty && (
           <RecentSearches
             value={inputRecent}
             setInput={setInput}

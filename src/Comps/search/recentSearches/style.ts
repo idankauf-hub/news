@@ -3,9 +3,13 @@ import { COLORS } from "../../../styles/colors";
 export const Container = styled.div`
   position: absolute;
   overflow: hidden;
-  margin-top: 4.3%;
-  width: 35%;
-  height: 132px;
+  margin-top: 5.5vh;
+  width: 25%;
+  @media (max-width: 1440px) {
+    margin-top: 7vh;
+    width: 35%;
+  }
+  max-height: 132px;
   background: #ffffff;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -18,8 +22,7 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom:5px;
-
+  margin-bottom: 5px;
 `;
 export const Title = styled.p`
   font-family: "Roboto";
@@ -30,14 +33,14 @@ export const Title = styled.p`
   color: ${COLORS.darkpurple};
 `;
 export const Search = styled.p`
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 16px;
-letter-spacing: 0.1px;
-color: ${COLORS.darkpurple};
-width:100%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  color: ${COLORS.darkpurple};
+  width: 100%;
 `;
 
 export const ClearButton = styled.button`
