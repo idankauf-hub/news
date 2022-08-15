@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { selectCountry, selectSources } from "../../store/selectedDropDown";
 import { updateFilters } from "../../store/query";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, makeStyles, ThemeProvider } from "@mui/material";
 
 interface SelectProps {
   placeholder: string;
@@ -33,6 +33,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
   const [disabled, setDisabled] = useState<boolean>(false);
   const dispatch = useDispatch();
   const SelectedState = useSelector((state: RootState) => state.selected);
+  const Query = useSelector((state: RootState) => state.query);
 
   let dropDowns;
 
@@ -106,6 +107,9 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
       setDisabled(false);
     }
   }, [SelectedState.sources]);
+  useEffect(() => {
+    setDisabled(false);
+  }, [Query.query.endpoint]);
 
   return (
     <CustomSelect
