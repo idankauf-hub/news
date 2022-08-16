@@ -23,7 +23,7 @@ const theme = createTheme({
     allVariants: {
       fontFamily: "Mulish",
       textTransform: "none",
-      fontSize: 16,
+      fontSize: 12,
       fontWeight: 400,
       color: "#5A5A89",
     },
@@ -54,7 +54,7 @@ const DropDown = ({
             <MenuItem
               ref={forwardedRefOptions}
               sx={{
-                "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
+                "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" }
               }}
               key={i}
               value={item.id}
@@ -140,8 +140,9 @@ const DropDown = ({
       sx={{
         background: "white",
         fontWeight: 500,
-        fontSize: 14,
-        width: "18vh",
+        fontSize: "0.85rem",
+        wordWrap:"break-word",
+        width: "19vh",
         letterSpacing: 0.25,
         color: COLORS.purpleblue,
         borderRadius: "10px",
