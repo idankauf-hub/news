@@ -100,7 +100,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
           dataKey="value"
         >
           <Label
-            value={placeholder}
+            value={data.length}
             position="center"
             style={{
               fontFamily: "Mulish",

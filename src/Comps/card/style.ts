@@ -59,7 +59,7 @@ export const DateText = styled(H1LightGray)`
 export const Title = styled(BoldTitleBluishBlack)`
   width: 80%;
   // height: 42px;
-  margin-top: 19.25px;
+  margin-top: 14px;
   margin-bottom: 16px;
   max-height: 42px;
   overflow: hidden;

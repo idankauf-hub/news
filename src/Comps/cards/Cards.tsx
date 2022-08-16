@@ -63,7 +63,6 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
           index: number
         ) => {
           if (articles.length === index + 1) {
-            console.log(article.author);
             return (
               <Card
                 refLastArticle={lastArticleElementRef}

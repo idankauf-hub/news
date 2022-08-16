@@ -78,11 +78,6 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     return filtered;
   };
 
-  const CustomTick = ({ props }: any) => {
-    console.log(props);
-
-    return <></>;
-  };
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -174,7 +169,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
             fontSize={"13px"}
             fontFamily={"Roboto"}
             interval={0}
-            tick={{ fontSize: "13px", width: "10px"}}
+            tick={{ fontSize: "11px", width: "10px",height:"50px",fontWeight:"700px"}}
 
             // tick={<CustomTick/>}
           />

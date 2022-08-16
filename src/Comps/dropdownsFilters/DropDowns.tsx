@@ -87,7 +87,6 @@ const DropDowns: React.FC = () => {
         let Countries: string[] = CountryData.map((country: string) =>
           countries.getName(country, "en", { select: "alias" })
         );
-        console.log(Countries);
         return Countries;
         break;
       case "Category":

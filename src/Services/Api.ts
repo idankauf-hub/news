@@ -68,7 +68,6 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
         setError(false);
         dispatch(setErrorGlobal(false));
         dispatch(setLoadingGlobal(false));
-        console.log(response.data);
         setTotalResults(response.data.totalResults);
         setArticles((prevArticles: any) => {
           return [...prevArticles, ...response.data.articles];
