@@ -29,6 +29,18 @@ const theme = createTheme({
     },
   },
 });
+const iconTheme = createTheme({
+  components: {
+    MuiSelect: {
+      styleOverrides: {
+        icon: {
+          right: "19.54px",
+          top: "40%",
+        },
+      },
+    },
+  },
+});
 
 const DropDown = ({
   onSelect,
@@ -139,48 +151,55 @@ const DropDown = ({
   }, [Query.query.endpoint]);
 
   return (
-    <CustomSelect
-      ref={forwardedRef}
-      size="small"
-      disabled={disabled}
-      id="select"
-      defaultValue={""}
-      value={val || ""}
-      onClick={() => setIsOpen(!isOpen)}
-      MenuProps={{
-        PaperProps: { sx: { maxHeight: 300 } },
-      }}
-      open={isOpen}
-      sx={{
-        background: "white",
-        fontWeight: 500,
-        fontSize: "0.85rem",
-        width: "19vh",
-        letterSpacing: 0.25,
-        color: COLORS.purpleblue,
-        borderRadius: "10px",
-        "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: "white",
-        },
-        "& .MuiPaper-root": {
-          transition: "none !important",
-          outlineColor: "white",
-        },
-        "&:hover .MuiOutlinedInput-notchedOutline": {
-          border: "none",
-        },
-        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-          border: "none",
-        },
-      }}
-      IconComponent={ForwardIcon}
-      native={false}
-      renderValue={(value: any) => {
-        return <div>{value}</div>;
-      }}
-    >
-      {dropDownsValues}
-    </CustomSelect>
+    <ThemeProvider theme={iconTheme}>
+      <CustomSelect
+        ref={forwardedRef}
+        size="small"
+        disabled={disabled}
+        id="select"
+        defaultValue={""}
+        value={val || ""}
+        onClick={() => setIsOpen(!isOpen)}
+        MenuProps={{
+          PaperProps: { sx: { maxHeight: 300 } },
+        }}
+        open={isOpen}
+        sx={{
+          background: "white",
+          fontWeight: 500,
+          fontSize: "0.85rem",
+          width: "20vh",
+          letterSpacing: 0.25,
+          color: COLORS.purpleblue,
+          borderRadius: "10px",
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white",
+          },
+          "& .MuiPaper-root": {
+            transition: "none !important",
+            outlineColor: "white",
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            border: "none",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            border: "none",
+          },
+          "&:MuiSelect-icon": {
+            marginRight: "4px",
+            background: "red",
+            right: "40px",
+          },
+        }}
+        IconComponent={ForwardIcon}
+        native={false}
+        renderValue={(value: any) => {
+          return <div>{value}</div>;
+        }}
+      >
+        {dropDownsValues}
+      </CustomSelect>
+    </ThemeProvider>
   );
 };
 
