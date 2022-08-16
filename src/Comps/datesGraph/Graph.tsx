@@ -15,15 +15,22 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
       frequency: number;
     }[]
   >([]);
+  const [interval, setIntervals] = useState<number>(0);
   const Status = useSelector((state: RootState) => state.apiStatus);
 
   const setSumOfSources = (sources: any) => {
+    let dateByHour;
     const sourcesDateSum = sumSourcesDate(sources);
     const sourcesDatesWithOutDuplicates = removeDuplicates(sourcesDateSum);
     if (sourcesDatesWithOutDuplicates.length === 1) {
-      sourcesDatesWithOutDuplicates.push(sourcesDatesWithOutDuplicates[0]);
+      // sourcesDatesWithOutDuplicates.push(sourcesDatesWithOutDuplicates[0]);
+      dateByHour = sumSourcesByHour(sources);
+      const dateByHourWitouDuplicates = removeDuplicates(dateByHour);
+      setIntervals(1);
+      setDates(dateByHourWitouDuplicates.reverse());
+    } else {
+      setDates(sourcesDatesWithOutDuplicates.reverse());
     }
-    setDates(sourcesDatesWithOutDuplicates.reverse());
   };
   const sumSourcesDate = (data: any) => {
     let sourcesSum = [];
@@ -43,6 +50,25 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     }
     return sourcesSum;
   };
+  const sumSourcesByHour = (data: any) => {
+    let sourcesSum = [];
+    let count = 0;
+    for (const x in data) {
+      const formatted = dayjs(data[x].publishedAt).format("H A D MMM");
+      for (const x in data) {
+        if (formatted === dayjs(data[x].publishedAt).format("H A D MMM")) {
+          count++;
+        }
+      }
+      sourcesSum.push({
+        month: formatted,
+        frequency: count,
+      });
+      count = 0;
+    }
+
+    return sourcesSum;
+  };
   const removeDuplicates = (sourcesSum: any) => {
     const ids = sourcesSum.map((o: { month: any }) => o.month);
     const filtered = sourcesSum.filter(
@@ -51,14 +77,42 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
 
     return filtered;
   };
+
+  const CustomTick = ({ props }: any) => {
+    console.log(props);
+
+    return <></>;
+  };
+
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="custom-tooltip">
-          <p style={{ fontFamily: "Roboto", color: "#5A5A89" }}>{`${label}`}</p>
-          <p
-            style={{ fontFamily: "Roboto", color: "#5A5A89" }}
-          >{`Frequency: ${payload[0].value} articals`}</p>
+        <div>
+          <h3
+            style={{
+              fontFamily: "Roboto",
+              color: "black",
+              fontWeight: "unset",
+              marginBottom: "5px",
+            }}
+          >{`${label}`}</h3>
+          <div
+            style={{
+              display: "flex",
+              width: "100px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "Roboto",
+                color: "black",
+                fontSize: "0.8rem",
+                fontWeight: "noraml",
+              }}
+            >
+              Total Articals:{` ${payload[0].value}`}
+            </p>
+          </div>
         </div>
       );
     }
@@ -90,7 +144,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
   return (
     <div
       style={{
-        height: "30vh",
+        height: "28vh",
         width: "100%",
         padding: 10,
       }}
@@ -99,7 +153,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
         <AreaChart
           data={dates}
           margin={{
-            top: 0,
+            top: 10,
             right: 17,
             left: 18,
             bottom: 0,
@@ -116,10 +170,13 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
             axisLine={false}
             tickLine={false}
             fill="#5A5A89"
-            fontWeight={700}
-            fontSize={11}
+            fontWeight={"bold"}
+            fontSize={"13px"}
             fontFamily={"Roboto"}
             interval={0}
+            tick={{ fontSize: "13px", width: "10px"}}
+
+            // tick={<CustomTick/>}
           />
           <Area
             type="monotone"
