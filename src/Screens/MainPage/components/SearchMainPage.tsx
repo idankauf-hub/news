@@ -23,7 +23,7 @@ export const SearchMainPage = () => {
   const [inputRecent, setInputToRecent] = useState<string>("");
   const [widthInput, setWidthInput] = useState<string>("423px");
 
-  const [searches, setItems] = useState<string[]>([]);
+  const [searches, setSearches] = useState<string[]>([]);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isLastSearchesEmpty, setIsLastSearchesEmpty] =
     useState<boolean>(false);
@@ -40,7 +40,7 @@ export const SearchMainPage = () => {
   const storage: string = localStorage.getItem("lastSearches") || "";
 
   const addItemToLocalStorage = (input: string) => {
-    if (input) setItems([...searches, input]);
+    if (input) setSearches([...searches, input]);
     localStorage.setItem("lastSearches", JSON.stringify(searches));
   };
   const dispatch = useDispatch();
@@ -167,7 +167,7 @@ export const SearchMainPage = () => {
           <RecentSearches
             value={inputRecent}
             setInput={setInput}
-            setClear={setItems}
+            setClear={setSearches}
           />
         )}
       </FormControl>

@@ -28,12 +28,15 @@ const RecentSearches: React.FC<ISearch> = ({ value, setInput, setClear }) => {
 
   useEffect(() => {
     try {
-      const item = JSON.parse(localStorage.getItem("lastSearches") || "{}");
-      if (value) setLastSearches([...(new Set([...item, value]) as any)]);
-      
+      const item = JSON.parse(localStorage.getItem("lastSearches") || "idan");
+      console.log("localstorage", item);
+      if (value) {
+        setLastSearches([...(new Set([...item, value]) as any)]);
+      } else {
+        setLastSearches(item);
+      }
     } catch {}
   }, [value]);
-
 
   return (
     <Container>
