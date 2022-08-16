@@ -16,6 +16,7 @@ import { BASE_URL, API_KEY } from "../../../Services/Api";
 import { useSelector, useDispatch } from "react-redux";
 import { FormControl } from "@mui/material";
 import RecentSearches from "../../../Comps/search/recentSearches/RecentSearches";
+import { setSelectedInput } from "../../../store/selectedInput";
 
 export const SearchMainPage = () => {
   const [input, setInput] = useState<string>("");
@@ -28,6 +29,10 @@ export const SearchMainPage = () => {
     useState<boolean>(false);
 
   const inputRef = useRef<any>(null);
+  const searchContainerRef = useRef<any>(null);
+  const dropDownRef = useRef<any>(null);
+  const optionsRef = useRef<any>(null);
+
   const Query = useSelector((state: RootState) => state.query);
 
   const debouncedValue = useDebounce<string>(input, 500);
@@ -58,11 +63,44 @@ export const SearchMainPage = () => {
     if (document.activeElement === inputRef.current) {
       setIsFocus(true);
       // setWidthInput("663px");
+      // dispatch(setSelectedInput(true))
     } else {
       setIsFocus(false);
+      // dispatch(setSelectedInput(false))
       // setWidthInput("423px");
     }
   };
+  // useOutsideAlerter(inputRef, dropDownRef, optionsRef);
+  function useOutsideAlerter(ref: any, dropDownRef: any, optionsRef: any) {
+    useEffect(() => {
+      function handleClickOutside(event: any) {
+        console.log(dropDownRef.current);
+        console.log(ref.current);
+        console.log("option", optionsRef.current);
+        if (dropDownRef.current)
+          if (ref.current && !ref.current.contains(event.target)) {
+            if (
+              dropDownRef.current &&
+              !dropDownRef.current.contains(event.target)
+            )
+              if (
+                optionsRef.current &&
+                !optionsRef.current.contains(event.target)
+              )
+                setWidthInput("623px");
+              else {
+                setWidthInput("423px");
+              }
+          } else {
+            setWidthInput("623px");
+          }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref, dropDownRef, optionsRef]);
+  }
 
   useEffect(() => {
     if (localStorage.getItem("lastSearches") === "[]") {
@@ -103,7 +141,7 @@ export const SearchMainPage = () => {
   return (
     <>
       <FormControl fullWidth>
-        <Container width={widthInput}>
+        <Container width={widthInput} ref={searchContainerRef}>
           <Search
             onFocus={handleInputFocus}
             onBlur={handleInputFocus}
@@ -118,12 +156,14 @@ export const SearchMainPage = () => {
           />
           <VerticalLine />
           <DropDown
+            forwardedRef={dropDownRef}
+            forwardedRefOptions={optionsRef}
             data={placeholders}
             onSelect={handleEndpointDropDown}
             placeholder={placeholders[0]}
           />
         </Container>
-        {isFocus && !isLastSearchesEmpty && (
+        {isFocus && (
           <RecentSearches
             value={inputRecent}
             setInput={setInput}

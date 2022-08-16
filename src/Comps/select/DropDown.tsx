@@ -9,11 +9,14 @@ import { RootState } from "../../store/store";
 import { selectCountry, selectSources } from "../../store/selectedDropDown";
 import { updateFilters } from "../../store/query";
 import { createTheme, makeStyles, ThemeProvider } from "@mui/material";
+import { blue } from "@mui/material/colors";
 
 interface SelectProps {
   placeholder: string;
   onSelect: (e: string) => void;
   data: any[];
+  forwardedRef?: any;
+  forwardedRefOptions?: any;
 }
 const theme = createTheme({
   typography: {
@@ -27,7 +30,13 @@ const theme = createTheme({
   },
 });
 
-const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
+const DropDown = ({
+  onSelect,
+  data,
+  placeholder,
+  forwardedRef,
+  forwardedRefOptions,
+}: SelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [val, setVal] = useState<string>(placeholder || "");
   const [disabled, setDisabled] = useState<boolean>(false);
@@ -43,6 +52,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         <div key={i} onClick={() => handleSourceClick(item.id, item.name)}>
           <ThemeProvider theme={theme}>
             <MenuItem
+              ref={forwardedRefOptions}
               sx={{
                 "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
               }}
@@ -61,6 +71,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         <div key={i} onClick={() => handleClick(item)}>
           <ThemeProvider theme={theme}>
             <MenuItem
+              ref={forwardedRefOptions}
               sx={{
                 "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
               }}
@@ -113,6 +124,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
 
   return (
     <CustomSelect
+      ref={forwardedRef}
       size="small"
       disabled={disabled}
       displayEmpty
@@ -129,7 +141,7 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
         background: "white",
         fontWeight: 500,
         fontSize: 14,
-        width: "37%",
+        width: "18vh",
         letterSpacing: 0.25,
         color: COLORS.purpleblue,
         borderRadius: "10px",

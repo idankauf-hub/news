@@ -34,8 +34,7 @@ const Search: React.FC<SearchProps> = ({
     <SearchFormContainer>
       <SearchButton>{Icon && <Icon />}</SearchButton>
       <Input
-
-        style={{ width: "350px" }}
+        style={{ width: "100%"}}
         ref={forwardedRef}
         onBlur={onBlur}
         onFocus={onFocus}

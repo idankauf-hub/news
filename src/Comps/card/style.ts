@@ -41,6 +41,7 @@ export const DataContainer = styled.div`
   height: 100%;
 `;
 export const DateDiv = styled(DisplayRow)`
+  margin-top: 16px;
   margin-bottom: 16px;
   font-size: 14px;
   overflow: hidden;
@@ -57,8 +58,10 @@ export const DateText = styled(H1LightGray)`
 `;
 export const Title = styled(BoldTitleBluishBlack)`
   width: 80%;
-  height: 42px;
+  // height: 42px;
   margin-top: 19.25px;
+  margin-bottom: 16px;
+  max-height: 42px;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
@@ -68,7 +71,6 @@ export const AuthorName = styled(H1LightGray)`
   align-items: center;
   letter-spacing: 0.25px;
   margin-bottom: 16px;
-  margin-top: 16px;
 `;
 export const Description = styled(H1DarkPurple)`
   height: 50px;

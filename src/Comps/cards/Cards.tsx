@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 
 interface ISourcesData {
-  setGraphsData: (e: [], totalResults: number,articalsLength:number) => void;
+  setGraphsData: (e: [], totalResults: number, articalsLength: number) => void;
 }
 
 const Cards = ({ setGraphsData }: ISourcesData) => {
@@ -38,7 +38,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
   );
 
   useEffect(() => {
-    setGraphsData(articles, totalResults,articles.length);
+    setGraphsData(articles, totalResults, articles.length);
   }, [articles, Query]);
 
   const changeDateForamt = (value: string) => {
@@ -58,21 +58,22 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
             urlToImage: any;
             url: string | undefined;
             title: string | undefined;
+            source:{id:string,name:string}
           },
           index: number
         ) => {
           if (articles.length === index + 1) {
-            console.log(article);
+            console.log(article.author);
             return (
               <Card
                 refLastArticle={lastArticleElementRef}
                 key={index}
                 description={
-                  Query.query.filters.country === "il"
-                    ? article.content
+                  article.description === null
+                    ? "No Description"
                     : article.description
                 }
-                author={article.author || ""}
+                author={article.source.name}
                 publishedAt={changeDateForamt(article.publishedAt)}
                 urlToImage={
                   article.urlToImage === null
@@ -88,11 +89,11 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
               <Card
                 key={index}
                 description={
-                  Query.query.filters.country === "il"
-                    ? article.description
-                    : article.content
+                  article.description === null
+                    ? "No Description"
+                    : article.description
                 }
-                author={article.author || ""}
+                author={article.source.name}
                 publishedAt={changeDateForamt(article.publishedAt)}
                 urlToImage={
                   article.urlToImage === null
