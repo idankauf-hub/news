@@ -24,6 +24,11 @@ const RecentSearches: React.FC<ISearch> = ({ value, setInput, setClear }) => {
     event: { preventDefault: () => void }
   ) => {
     event.preventDefault();
+    var storage = JSON.parse(localStorage.getItem("lastSearches") || "[]");
+    storage.splice(item, 1);
+    localStorage.setItem("lastSearches", JSON.stringify(storage));
+    setLastSearches(storage);
+    console.log(storage);
   };
 
   useEffect(() => {

@@ -37,13 +37,17 @@ export const SearchMainPage = () => {
 
   const debouncedValue = useDebounce<string>(input, 500);
   const placeholders = ["Top Headlines", "Everything"];
-  const storage: string = localStorage.getItem("lastSearches") || "";
+  const dispatch = useDispatch();
 
   const addItemToLocalStorage = (input: string) => {
-    if (input) setSearches([...searches, input]);
-    localStorage.setItem("lastSearches", JSON.stringify(searches));
+    if (input) {
+      var storage = JSON.parse(localStorage.getItem("lastSearches") || "[]");
+      if (storage.indexOf(input) == -1) {
+        storage.push(input);
+        localStorage.setItem("lastSearches", JSON.stringify(storage));
+      }
+    }
   };
-  const dispatch = useDispatch();
 
   const handleChange = (value: string) => {
     setInput(value);
