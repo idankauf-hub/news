@@ -25,7 +25,7 @@ export const SearchMainPage = () => {
 
   const [searches, setSearches] = useState<string[]>([]);
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [isLastSearchesEmpty, setIsLastSearchesEmpty] =
+  const [isLastSearchesExists, setIsLastSearchesExists] =
     useState<boolean>(false);
 
   const inputRef = useRef<any>(null);
@@ -107,12 +107,12 @@ export const SearchMainPage = () => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem("lastSearches") === "[]") {
-      setIsLastSearchesEmpty((lastState) => !lastState);
+    if (localStorage.getItem("lastSearches") === null) {
+      setIsLastSearchesExists(false);
     } else {
-      setIsLastSearchesEmpty(false);
+      setIsLastSearchesExists(true);
     }
-  }, [Query.query.search]);
+  }, [isFocus]);
 
   useEffect(() => {
     addItemToLocalStorage(input);
@@ -167,7 +167,7 @@ export const SearchMainPage = () => {
             placeholder={placeholders[0]}
           />
         </Container>
-        {isFocus && (
+        {isFocus && isLastSearchesExists && (
           <RecentSearches
             value={inputRecent}
             setInput={setInput}
