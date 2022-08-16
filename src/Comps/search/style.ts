@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import  {COLORS}  from "../../styles/colors";
+import { COLORS } from "../../styles/colors";
 
 export const SearchFormContainer = styled.form`
   display: flex;
-  width: 55%;
+  width: 75%;
   // left: 1px;
   height: 50px;
   position: relative;
-  
 `;
 
 export const SearchButton = styled.button.attrs({
@@ -26,7 +25,7 @@ export const Input = styled.input.attrs(({ placeholder }) => ({
   type: "input",
   placeholder: placeholder,
 }))`
-  width: 100%;
+  // width: "10%";
   border-radius: 10px;
   padding: 9px 4px 9px 56px;
   border: 0;
@@ -41,6 +40,4 @@ export const VerticalLine = styled.div`
   height: 0px;
   opacity: 0.5;
   transform: rotate(90deg);
-  
-
 `;

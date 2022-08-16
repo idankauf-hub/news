@@ -84,23 +84,23 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     return <div style={{marginLeft:"45%",justifyContent:"center",marginTop:"25%"}}><CircularProgress /></div>;
   }
   if (Status.error || data.length === 0) {
-    return <NotFoundChart />;
+    return <><NotFoundChart /></>;
   }
   return (
     <GraphT>
-      <PieChart width={200} height={124}>
+      <PieChart width={180} height={104}>
         <Pie
           cx={"50%"}
           cy={"50%"}
           data={sourcesData || []}
-          innerRadius={50}
-          outerRadius={60}
+          innerRadius={40}
+          outerRadius={50}
           fill="#FFFFFF"
           paddingAngle={0}
           dataKey="value"
         >
           <Label
-            value={placeholder}
+            value={data.length}
             position="center"
             style={{
               fontFamily: "Mulish",

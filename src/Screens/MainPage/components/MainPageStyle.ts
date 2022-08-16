@@ -7,7 +7,7 @@ export const Container = styled(DisplayColumn)`
   justify-content: center;
   padding: 0px 240px 10px;
   gap: 20px;
-  background: ${COLORS.ghostwhite};
+  background-color: ${COLORS.ghostwhite};
 `;
 export const Row = styled(DisplayRow)`
   align-items: flex-start;
@@ -17,15 +17,27 @@ export const Row = styled(DisplayRow)`
 export const ColumnGraphs = styled(DisplayColumn)`
   align-items: flex-start;
   gap: 24px;
-  width: 40%;
-  height: 757px;
+  width: 30%;
+  height: 100vh;
 `;
 export const ColumnCards = styled(DisplayColumn)`
   align-items: flex-start;
-  padding: 0px;
+  overflow-y: auto;
+  padding: 0px 17px 0px 0px;
   gap: 24px;
-  width: 60%;
-  height: 1231px;
+  width: 70%;
+  height: 100vh;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #a0a3bd;
+    -webkit-border-radius: 10px;
+  }
 `;
 
 export const UnderLine = styled.div`

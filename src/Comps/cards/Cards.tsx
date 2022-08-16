@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 
 interface ISourcesData {
-  setGraphsData: (e: [], totalResults: number) => void;
+  setGraphsData: (e: [], totalResults: number, articalsLength: number) => void;
 }
 
 const Cards = ({ setGraphsData }: ISourcesData) => {
@@ -38,7 +38,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
   );
 
   useEffect(() => {
-    setGraphsData(articles, totalResults);
+    setGraphsData(articles, totalResults, articles.length);
   }, [articles, Query]);
 
   const changeDateForamt = (value: string) => {
@@ -51,12 +51,14 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
       {articles.map(
         (
           article: {
+            content: any;
             description: any;
             author: any;
             publishedAt: string;
             urlToImage: any;
             url: string | undefined;
             title: string | undefined;
+            source:{id:string,name:string}
           },
           index: number
         ) => {
@@ -65,10 +67,18 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
               <Card
                 refLastArticle={lastArticleElementRef}
                 key={index}
-                description={article.description || ""}
-                author={article.author || ""}
+                description={
+                  article.description === null
+                    ? "No Description"
+                    : article.description
+                }
+                author={article.source.name}
                 publishedAt={changeDateForamt(article.publishedAt)}
-                urlToImage={article.urlToImage || ""}
+                urlToImage={
+                  article.urlToImage === null
+                    ? "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+                    : article.urlToImage
+                }
                 urlToNews={article.url}
                 title={article.title}
               />
@@ -77,10 +87,18 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
             return (
               <Card
                 key={index}
-                description={article.description || ""}
-                author={article.author || ""}
+                description={
+                  article.description === null
+                    ? "No Description"
+                    : article.description
+                }
+                author={article.source.name}
                 publishedAt={changeDateForamt(article.publishedAt)}
-                urlToImage={article.urlToImage || ""}
+                urlToImage={
+                  article.urlToImage === null
+                    ? "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+                    : article.urlToImage
+                }
                 urlToNews={article.url}
                 title={article.title}
               />
@@ -93,7 +111,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
           <CircularProgress />
         </div>
       )}
-      {error && <NotFound />}
+      {(error || articles.length === 0) && <NotFound />}
     </CardsContainer>
   );
 };

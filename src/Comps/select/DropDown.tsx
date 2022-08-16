@@ -1,26 +1,48 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import { ForwardIcon } from "../../Icons";
 
+import { ForwardIcon } from "../../Icons";
 import { COLORS } from "../../styles/colors";
 import { CustomSelect } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { selectCountry, selectSources } from "../../store/selectedDropDown";
 import { updateFilters } from "../../store/query";
+import { createTheme, makeStyles, ThemeProvider } from "@mui/material";
+import { blue } from "@mui/material/colors";
 
 interface SelectProps {
   placeholder: string;
   onSelect: (e: string) => void;
   data: any[];
+  forwardedRef?: any;
+  forwardedRefOptions?: any;
 }
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: "Mulish",
+      textTransform: "none",
+      fontSize: 12,
+      fontWeight: 400,
+      color: "#5A5A89",
+    },
+  },
+});
 
-const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
+const DropDown = ({
+  onSelect,
+  data,
+  placeholder,
+  forwardedRef,
+  forwardedRefOptions,
+}: SelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [val, setVal] = useState<string>(placeholder || "");
   const [disabled, setDisabled] = useState<boolean>(false);
   const dispatch = useDispatch();
   const SelectedState = useSelector((state: RootState) => state.selected);
+  const Query = useSelector((state: RootState) => state.query);
 
   let dropDowns;
 
@@ -28,9 +50,18 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
     dropDowns = data?.map((item: any, i) => {
       return (
         <div key={i} onClick={() => handleSourceClick(item.id, item.name)}>
-          <MenuItem key={i} value={item.id}>
-            {item.name}
-          </MenuItem>
+          <ThemeProvider theme={theme}>
+            <MenuItem
+              ref={forwardedRefOptions}
+              sx={{
+                "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" }
+              }}
+              key={i}
+              value={item.id}
+            >
+              {item.name}
+            </MenuItem>
+          </ThemeProvider>
         </div>
       );
     });
@@ -38,9 +69,18 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
     dropDowns = data?.map((item, i) => {
       return (
         <div key={i} onClick={() => handleClick(item)}>
-          <MenuItem key={i} value={item}>
-            {item}
-          </MenuItem>
+          <ThemeProvider theme={theme}>
+            <MenuItem
+              ref={forwardedRefOptions}
+              sx={{
+                "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
+              }}
+              key={i}
+              value={item}
+            >
+              {item}
+            </MenuItem>
+          </ThemeProvider>
         </div>
       );
     });
@@ -78,26 +118,46 @@ const DropDown = ({ onSelect, data, placeholder }: SelectProps) => {
       setDisabled(false);
     }
   }, [SelectedState.sources]);
+  useEffect(() => {
+    setDisabled(false);
+  }, [Query.query.endpoint]);
 
   return (
     <CustomSelect
+      ref={forwardedRef}
+      size="small"
       disabled={disabled}
       displayEmpty
       id="select"
-      defaultValue={''}
+      defaultValue={""}
       value={val || ""}
       onClick={() => setIsOpen(!isOpen)}
-      fullWidth
+      // fullWidth
+      MenuProps={{
+        PaperProps: { sx: { maxHeight: 300 } },
+      }}
       open={isOpen}
       sx={{
         background: "white",
         fontWeight: 500,
-        fontSize: 14,
-        width: "37%",
+        fontSize: "0.85rem",
+        wordWrap:"break-word",
+        width: "19vh",
         letterSpacing: 0.25,
         color: COLORS.purpleblue,
+        borderRadius: "10px",
         "& .MuiOutlinedInput-notchedOutline": {
           borderColor: "white",
+        },
+        "& .MuiPaper-root": {
+          transition: "none !important",
+          outlineColor: "white",
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          border: "none",
+        },
+        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+          border: "none",
         },
       }}
       IconComponent={ForwardIcon}

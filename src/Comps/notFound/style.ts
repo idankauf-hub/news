@@ -14,14 +14,15 @@ export const NotFoundContainer = styled(DisplayColumn)`
 export const NotFoundText = styled(H3)``;
 
 export const NotFoundChartContainer = styled(DisplayCetnerColumn)`
-  padding: 0px;
+  padding: 5vh;
   gap: 16px;
-  width: 372px;
-  height: 247px;
+  width: 100%;
+  height: 100%;
   flex: none;
   order: 1;
   align-self: stretch;
   flex-grow: 1;
+
 `;
 
 export const NotFoundChartText = styled(H3)``;

@@ -23,9 +23,11 @@ const DropDowns: React.FC = () => {
   const Query = useSelector((state: RootState) => state.query);
 
   useEffect(() => {
-    getAllTopHeadlinesSources(Query.query.filters.country).then((value:any) => {
-      setSources(value);
-    });
+    getAllTopHeadlinesSources(Query.query.filters.country).then(
+      (value: any) => {
+        setSources(value);
+      }
+    );
   }, [Query.query.filters.country]);
 
   //convert Countries and Languages code to names and names to code
@@ -83,7 +85,7 @@ const DropDowns: React.FC = () => {
         break;
       case "Country":
         let Countries: string[] = CountryData.map((country: string) =>
-          countries.getName(country, "en")
+          countries.getName(country, "en", { select: "alias" })
         );
         return Countries;
         break;
@@ -99,7 +101,7 @@ const DropDowns: React.FC = () => {
     Query.query.endpoint == "everything"
       ? setFilters(() => everythingFilters)
       : setFilters(() => topHeadlinesFilters);
-      dispatch(resetFilters());
+    dispatch(resetFilters());
   }, [Query.query.endpoint]);
 
   return (
