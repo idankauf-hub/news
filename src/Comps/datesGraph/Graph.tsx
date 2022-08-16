@@ -15,6 +15,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
       frequency: number;
     }[]
   >([]);
+
   const [interval, setIntervals] = useState<number>(0);
   const Status = useSelector((state: RootState) => state.apiStatus);
 
@@ -23,11 +24,17 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     const sourcesDateSum = sumSourcesDate(sources);
     const sourcesDatesWithOutDuplicates = removeDuplicates(sourcesDateSum);
     if (sourcesDatesWithOutDuplicates.length === 1) {
-      // sourcesDatesWithOutDuplicates.push(sourcesDatesWithOutDuplicates[0]);
       dateByHour = sumSourcesByHour(sources);
-      const dateByHourWitouDuplicates = removeDuplicates(dateByHour);
-      setIntervals(1);
-      setDates(dateByHourWitouDuplicates.reverse());
+      const dateByHoursWitoutDuplicates = removeDuplicates(dateByHour);
+      if (dateByHoursWitoutDuplicates.length === 1) {
+        let dateByMinute;
+        dateByMinute = sumSourcesByMinute(sources);
+        const dateByHoursWitouDuplicates = removeDuplicates(dateByMinute);
+        setDates(dateByHoursWitouDuplicates.reverse());
+        setIntervals(2);
+      } else {
+        setDates(dateByHoursWitoutDuplicates.reverse());
+      }
     } else {
       setDates(sourcesDatesWithOutDuplicates.reverse());
     }
@@ -69,6 +76,25 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
 
     return sourcesSum;
   };
+  const sumSourcesByMinute = (data: any) => {
+    let sourcesSum = [];
+    let count = 0;
+    for (const x in data) {
+      const formatted = dayjs(data[x].publishedAt).format("H:m D/M");
+      for (const x in data) {
+        if (formatted === dayjs(data[x].publishedAt).format("H:m D/M")) {
+          count++;
+        }
+      }
+      sourcesSum.push({
+        month: formatted,
+        frequency: count,
+      });
+      count = 0;
+    }
+
+    return sourcesSum;
+  };
   const removeDuplicates = (sourcesSum: any) => {
     const ids = sourcesSum.map((o: { month: any }) => o.month);
     const filtered = sourcesSum.filter(
@@ -77,7 +103,6 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
 
     return filtered;
   };
-
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -148,7 +173,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
         <AreaChart
           data={dates}
           margin={{
-            top: 10,
+            top: 20,
             right: 17,
             left: 18,
             bottom: 0,
@@ -168,8 +193,13 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
             fontWeight={"bold"}
             fontSize={"13px"}
             fontFamily={"Roboto"}
-            interval={0}
-            tick={{ fontSize: "11px", width: "10px",height:"50px",fontWeight:"700px"}}
+            interval={interval}
+            tick={{
+              fontSize: "11px",
+              width: "10px",
+              height: "100px",
+              fontWeight: "700px",
+            }}
 
             // tick={<CustomTick/>}
           />
