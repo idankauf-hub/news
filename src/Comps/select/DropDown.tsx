@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { selectCountry, selectSources } from "../../store/selectedDropDown";
 import { updateFilters } from "../../store/query";
-import { createTheme, makeStyles, ThemeProvider } from "@mui/material";
+import { createTheme, makeStyles, ThemeProvider, Tooltip } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
 interface SelectProps {
@@ -56,6 +56,7 @@ const DropDown = ({
   const SelectedState = useSelector((state: RootState) => state.selected);
   const Query = useSelector((state: RootState) => state.query);
   let dropDownsValues;
+  const [disabledTooltipText, setDisabledTooltipText] = useState<string>("");
 
   if (placeholder == "Sources" && data.length !== 0) {
     dropDownsValues = data?.map((item: any, i) => {
@@ -136,12 +137,18 @@ const DropDown = ({
     if (placeholder === "Sources" && SelectedState.country) setDisabled(true);
     else if (placeholder === "Sources") {
       setDisabled(false);
+      setDisabledTooltipText(
+        `Cannot choose ${placeholder.toLowerCase()} if a country has been selected`
+      );
     }
   }, [SelectedState.country, SelectedState.sources]);
 
   useEffect(() => {
     if (placeholder === "Country" && SelectedState.sources) {
       setDisabled(true);
+      setDisabledTooltipText(
+        `Cannot choose ${placeholder.toLowerCase()} if a sources has been selected`
+      );
     } else if (placeholder === "Country") {
       setDisabled(false);
     }
@@ -152,53 +159,58 @@ const DropDown = ({
 
   return (
     <ThemeProvider theme={iconTheme}>
-      <CustomSelect
-        ref={forwardedRef}
-        size="small"
-        disabled={disabled}
-        id="select"
-        defaultValue={""}
-        value={val || ""}
-        onClick={() => setIsOpen(!isOpen)}
-        MenuProps={{
-          PaperProps: { sx: { maxHeight: 300 } },
-        }}
-        open={isOpen}
-        sx={{
-          background: "white",
-          fontWeight: 500,
-          fontSize: "0.85rem",
-          width: "20vh",
-          letterSpacing: 0.25,
-          color: COLORS.purpleblue,
-          borderRadius: "10px",
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "white",
-          },
-          "& .MuiPaper-root": {
-            transition: "none !important",
-            outlineColor: "white",
-          },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            border: "none",
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            border: "none",
-          },
-          "&:MuiSelect-icon": {
-            marginRight: "4px",
-            background: "red",
-            right: "40px",
-          },
-        }}
-        IconComponent={ForwardIcon}
-        native={false}
-        renderValue={(value: any) => {
-          return <div>{value}</div>;
-        }}
-      >
-        {dropDownsValues}
-      </CustomSelect>
+      <Tooltip title={disabled ? disabledTooltipText : ""}>
+        <CustomSelect
+          ref={forwardedRef}
+          size="small"
+          disabled={disabled}
+          id="select"
+          defaultValue={""}
+          value={val || ""}
+          onClick={() => setIsOpen(!isOpen)}
+          MenuProps={{
+            PaperProps: { sx: { maxHeight: 300 } },
+          }}
+          open={isOpen}
+          sx={{
+            background: "white",
+            fontWeight: 500,
+            fontSize: "0.85rem",
+            width: "20vh",
+            letterSpacing: 0.25,
+            color: COLORS.purpleblue,
+            borderRadius: "10px",
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "white",
+            },
+            "& .MuiPaper-root": {
+              transition: "none !important",
+              outlineColor: "white",
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              border: "none",
+            },
+            "&:hover .Mui-disabled": {
+              cursor: "not-allowed",
+            },
+            "&.Mui-disabled .MuiOutlinedInput-notchedOutline": {
+              borderColor: "white",
+              outlineColor: "white",
+              border: "none",
+            },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              border: "none",
+            },
+          }}
+          IconComponent={ForwardIcon}
+          native={false}
+          renderValue={(value: any) => {
+            return <div>{value}</div>;
+          }}
+        >
+          {dropDownsValues}
+        </CustomSelect>
+      </Tooltip>
     </ThemeProvider>
   );
 };
