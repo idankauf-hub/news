@@ -43,18 +43,17 @@ const DropDown = ({
   const dispatch = useDispatch();
   const SelectedState = useSelector((state: RootState) => state.selected);
   const Query = useSelector((state: RootState) => state.query);
+  let dropDownsValues;
 
-  let dropDowns;
-
-  if (placeholder == "Sources") {
-    dropDowns = data?.map((item: any, i) => {
+  if (placeholder == "Sources" && data.length !== 0) {
+    dropDownsValues = data?.map((item: any, i) => {
       return (
         <div key={i} onClick={() => handleSourceClick(item.id, item.name)}>
           <ThemeProvider theme={theme}>
             <MenuItem
               ref={forwardedRefOptions}
               sx={{
-                "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" }
+                "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
               }}
               key={i}
               value={item.id}
@@ -65,8 +64,8 @@ const DropDown = ({
         </div>
       );
     });
-  } else {
-    dropDowns = data?.map((item, i) => {
+  } else if (data.length !== 0) {
+    dropDownsValues = data?.map((item, i) => {
       return (
         <div key={i} onClick={() => handleClick(item)}>
           <ThemeProvider theme={theme}>
@@ -82,6 +81,23 @@ const DropDown = ({
             </MenuItem>
           </ThemeProvider>
         </div>
+      );
+    });
+  } else {
+    dropDownsValues = [`No ${placeholder.toLowerCase()}`].map((item, i) => {
+      return (
+        <ThemeProvider theme={theme}>
+          <MenuItem
+            ref={forwardedRefOptions}
+            sx={{
+              "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
+            }}
+            key={i}
+            value={item}
+          >
+            {item}
+          </MenuItem>
+        </ThemeProvider>
       );
     });
   }
@@ -127,12 +143,10 @@ const DropDown = ({
       ref={forwardedRef}
       size="small"
       disabled={disabled}
-      displayEmpty
       id="select"
       defaultValue={""}
       value={val || ""}
       onClick={() => setIsOpen(!isOpen)}
-      // fullWidth
       MenuProps={{
         PaperProps: { sx: { maxHeight: 300 } },
       }}
@@ -141,7 +155,6 @@ const DropDown = ({
         background: "white",
         fontWeight: 500,
         fontSize: "0.85rem",
-        wordWrap:"break-word",
         width: "19vh",
         letterSpacing: 0.25,
         color: COLORS.purpleblue,
@@ -166,7 +179,7 @@ const DropDown = ({
         return <div>{value}</div>;
       }}
     >
-      {dropDowns}
+      {dropDownsValues}
     </CustomSelect>
   );
 };
