@@ -74,30 +74,35 @@ export const SearchMainPage = () => {
       // setWidthInput("423px");
     }
   };
-  // useOutsideAlerter(inputRef, dropDownRef, optionsRef);
+  useOutsideAlerter(inputRef, dropDownRef, optionsRef);
   function useOutsideAlerter(ref: any, dropDownRef: any, optionsRef: any) {
     useEffect(() => {
       function handleClickOutside(event: any) {
-        console.log(dropDownRef.current);
-        console.log(ref.current);
-        console.log("option", optionsRef.current);
-        if (dropDownRef.current)
-          if (ref.current && !ref.current.contains(event.target)) {
-            if (
-              dropDownRef.current &&
-              !dropDownRef.current.contains(event.target)
-            )
-              if (
-                optionsRef.current &&
-                !optionsRef.current.contains(event.target)
-              )
-                setWidthInput("623px");
-              else {
-                setWidthInput("423px");
-              }
-          } else {
-            setWidthInput("623px");
-          }
+        // if (dropDownRef.current)
+        if (ref.current && !ref.current.contains(event.target)) {
+          setWidthInput("423px");
+
+          // if (
+          //   dropDownRef.current &&
+          //   !dropDownRef.current.contains(event.target)
+          // ) {
+          //   console.log("Outside");
+          //   setWidthInput("423px");
+          // } else if (
+          //   dropDownRef.current &&
+          //   !dropDownRef.current.contains(event.target) &&
+          //   ref.current &&
+          //   !ref.current.contains(event.target)
+          // ) {
+          //   console.log("dropDown pressed");
+          //   setWidthInput("623px");
+          // }
+          // // setWidthInput("423px");
+          // // console.log("Out Side pressed 2");
+        } else {
+          setWidthInput("623px");
+          console.log("Input pressed");
+        }
       }
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
