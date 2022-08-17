@@ -176,7 +176,10 @@ const DropDown = ({
             background: "white",
             fontWeight: 500,
             fontSize: "0.85rem",
-            width: "20vh",
+            width: "25vh",
+            "@media (min-width: 600px)": {
+              width: "15vw",
+            },
             letterSpacing: 0.25,
             color: COLORS.purpleblue,
             borderRadius: "10px",

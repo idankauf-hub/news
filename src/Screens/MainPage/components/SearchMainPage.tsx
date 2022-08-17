@@ -35,7 +35,7 @@ export const SearchMainPage = () => {
 
   const Query = useSelector((state: RootState) => state.query);
 
-  const debouncedValue = useDebounce<string>(input, 500);
+  const debouncedValue = useDebounce<string>(input, 1000);
   const placeholders = ["Top Headlines", "Everything"];
   const dispatch = useDispatch();
 

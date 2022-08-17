@@ -6,7 +6,7 @@ export const DisplayRowWithGap = styled(DisplayRow)`
   padding: 0px;
   gap: 20px;
   max-width: 70vh;
-  height: 47px;
+  height: 5.5vh;
 `;
 
 export const Input = styled.input`

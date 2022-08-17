@@ -35,8 +35,6 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <CardContainer ref={refLastArticle}>
-      {/* <CardImage urlImage={urlToImage}></CardImage> */}
-
       <CardMedia
         component="img"
         sx={{
@@ -55,7 +53,7 @@ const Card: React.FC<CardProps> = ({
         </DateDiv>
         <Title>{title}</Title>
         <AuthorName>{author}</AuthorName>
-          <Description>{description}</Description>
+        <Description>{description}</Description>
         <BtnDiv>
           <Button
             href={urlToNews || ""}
