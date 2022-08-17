@@ -8,7 +8,8 @@ import { RootState } from "../../store/store";
 import { GraphProps } from "../../types/types";
 import NotFoundChart from "../notFound/NotFoundChart";
 
-const Graph: React.FC<GraphProps> = ({ data }) => {
+const Graph: React.FC<GraphProps> = ({ graphData }) => {
+  const [data, setData] = useState<any>(graphData);
   const [dates, setDates] = useState<
     {
       month: string;
@@ -144,7 +145,7 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     setSumOfSources(data);
   }, [data]);
 
-  if (Status.error || data.length === 0) {
+  if (Status.error || data?.length === 0 || data === undefined) {
     return <NotFoundChart />;
   }
   if (Status.loading) {

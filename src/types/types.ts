@@ -117,5 +117,5 @@ export type NewsApiData = {
 
 export interface GraphProps {
   placeholder?: string;
-  data: NewsApiData[];
+  graphData: NewsApiData[];
 }

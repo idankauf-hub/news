@@ -11,7 +11,8 @@ import { NotFounedChartIcon } from "../../Icons";
 import NotFoundChart from "../notFound/NotFoundChart";
 import { parse } from "path";
 
-const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
+const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) => {
+  const [data, setData] = useState<any>(graphData);
   const [sourcesData, setSourcesData] = useState<
     { name: string; value: number; total: number; fill: string }[]
   >([]);
@@ -31,9 +32,9 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     let nameToSum = "";
 
     for (const x in data) {
-      nameToSum = data[x].source.name;
+      nameToSum = data[x].source?.name;
       for (const x in data) {
-        if (nameToSum === data[x].source.name) {
+        if (nameToSum === data[x].source?.name) {
           count++;
         }
       }
@@ -71,40 +72,55 @@ const SourcesGraph: React.FC<GraphProps> = ({ data, placeholder = "Sum" }) => {
     }
     sortedTopSources.push({
       name: "Others",
-      value: data.length - sum,
-      total: data.length,
+      value: data?.length - sum,
+      total: data?.length,
     });
   };
 
   useEffect(() => {
+    console.log(data)
     setSumOfSources(data);
   }, [data]);
 
   if (Status.loading) {
-    return <div style={{marginLeft:"45%",justifyContent:"center",marginTop:"25%"}}><CircularProgress /></div>;
+    return (
+      <div
+        style={{
+          marginLeft: "45%",
+          justifyContent: "center",
+          marginTop: "25%",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   }
-  if (Status.error || data.length === 0) {
-    return <><NotFoundChart /></>;
+  if (Status.error || data?.length === 0 || data===undefined) {
+    return (
+      <>
+        <NotFoundChart />
+      </>
+    );
   }
   return (
     <GraphT>
-      <PieChart width={180} height={104}>
+      <PieChart width={180} height={150}>
         <Pie
           cx={"50%"}
           cy={"50%"}
           data={sourcesData || []}
-          innerRadius={40}
-          outerRadius={50}
+          innerRadius={50}
+          outerRadius={60}
           fill="#FFFFFF"
           paddingAngle={0}
           dataKey="value"
         >
           <Label
-            value={data.length}
+            value={data?.length + " articals"}
             position="center"
             style={{
               fontFamily: "Mulish",
-              fontSize: "12px",
+              fontSize: "1em",
               fill: "#030035",
               fontWeight: "400",
               lineHeight: "16px",

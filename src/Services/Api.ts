@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingGlobal, setErrorGlobal } from "../store/apiStatus";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "5529c1884ca1461388de52aa5845d8e7";
+export const API_KEY = "9ce231647996401e92c8f127de8255e1";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -36,10 +36,19 @@ export const getAllTopHeadlinesSources = async (
       return sourcesName;
     });
 };
-export const getArticles = async (QueryUrl: string): Promise<[]> => {
-  return await axios
+export const getArticles =  (QueryUrl: string): Promise<any[]> => {
+
+  QueryUrl = QueryUrl.replace("&pageSize=10", "&pageSize=100");
+  QueryUrl = QueryUrl.replace(
+    "&sortBy=popularity" || "&sortBy=publishedAt" || "&sortBy=relevancy",
+    ""
+  );
+
+  console.log(QueryUrl);
+  return axios
     .get(QueryUrl)
     .then((response) => {
+      console.log(response.data)
       return response.data;
     })
     .catch((error) => {
@@ -72,9 +81,7 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
         setArticles((prevArticles: any) => {
           return [...prevArticles, ...response.data.articles];
         });
-        setHasMore(
-          response.data.totalResults / 10 > pageNumber && pageNumber < 10
-        );
+        setHasMore(pageNumber < 10);
       })
       .catch((err) => {
         setLoading(false);

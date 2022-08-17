@@ -16,7 +16,7 @@ import {
 import { dateData } from "../../../mockData";
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
-import { getLocation } from "../../../Services/Api";
+import { getArticles, getLocation } from "../../../Services/Api";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFilters } from "../../../store/query";
 
@@ -42,10 +42,24 @@ const MainPage = () => {
     articalsLength: number
   ) => {
     setTotalResults(totalResults);
-    setSources(value);
-    setDates(value);
+    // setSources(value);
+    // setDates(value);
     setArticalsLen(articalsLength);
   };
+
+  useEffect(() => {
+    getArticles(Query.query.queryUrl).then((value: any) => {
+      console.log(value.articles);
+      setSources(value.articles);
+      setDates(value.articles);
+    });
+  }, [
+    Query.query.endpoint,
+    Query.query.filters,
+    Query.query.search,
+    Query.query.queryUrl,
+  ]);
+
   useEffect(() => {
     setTitle(
       <Title
@@ -120,11 +134,11 @@ const MainPage = () => {
           <ColumnGraphs>
             <GraphCard
               title="Sources"
-              GraphElement={() => <SourcesGraph data={sources} />}
+              GraphElement={() => <SourcesGraph graphData={sources} />}
             />
             <GraphCard
               title="Dates"
-              GraphElement={() => <Graph data={dates} />}
+              GraphElement={() => <Graph graphData={dates} />}
             />
           </ColumnGraphs>
         </Row>
