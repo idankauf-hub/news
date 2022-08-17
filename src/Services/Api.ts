@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingGlobal, setErrorGlobal } from "../store/apiStatus";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "5f64a0997ab9487680979856e3b64dc2";
+export const API_KEY = "6678381eaab84a7983f130d746a4f13e";
 
 export async function getLocation(): Promise<string> {
   return await axios
