@@ -8,8 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { selectCountry, selectSources } from "../../store/selectedDropDown";
 import { updateFilters } from "../../store/query";
-import { createTheme, makeStyles, ThemeProvider, Tooltip } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { createTheme, ThemeProvider, Tooltip } from "@mui/material";
 
 interface SelectProps {
   placeholder: string;
@@ -55,8 +54,8 @@ const DropDown = ({
   const dispatch = useDispatch();
   const SelectedState = useSelector((state: RootState) => state.selected);
   const Query = useSelector((state: RootState) => state.query);
-  let dropDownsValues;
   const [disabledTooltipText, setDisabledTooltipText] = useState<string>("");
+  let dropDownsValues;
 
   if (placeholder == "Sources" && data.length !== 0) {
     dropDownsValues = data?.map((item: any, i) => {
@@ -68,7 +67,7 @@ const DropDown = ({
               sx={{
                 "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
               }}
-              key={i}
+              key={item.id}
               value={item.id}
             >
               {item.name}
@@ -87,7 +86,7 @@ const DropDown = ({
               sx={{
                 "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
               }}
-              key={i}
+              key={item + " " + i}
               value={item}
             >
               {item}
@@ -105,7 +104,7 @@ const DropDown = ({
             sx={{
               "&:hover": { backgroundColor: "rgba(223, 224, 235, 0.41)" },
             }}
-            key={i}
+            key={"no Data"}
             value={item}
           >
             {item}
@@ -162,6 +161,7 @@ const DropDown = ({
       <Tooltip title={disabled ? disabledTooltipText : ""}>
         <CustomSelect
           ref={forwardedRef}
+          key={placeholder}
           size="small"
           disabled={disabled}
           id="select"
@@ -176,9 +176,8 @@ const DropDown = ({
             background: "white",
             fontWeight: 500,
             fontSize: "0.85rem",
-            width: "25vh",
             "@media (min-width: 600px)": {
-              width: "15vw",
+              width: "11vw",
             },
             letterSpacing: 0.25,
             color: COLORS.purpleblue,
@@ -208,7 +207,7 @@ const DropDown = ({
           IconComponent={ForwardIcon}
           native={false}
           renderValue={(value: any) => {
-            return <div>{value}</div>;
+            return <div key={value}>{value}</div>;
           }}
         >
           {dropDownsValues}

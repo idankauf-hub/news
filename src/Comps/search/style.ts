@@ -25,7 +25,6 @@ export const Input = styled.input.attrs(({ placeholder }) => ({
   type: "input",
   placeholder: placeholder,
 }))`
-  // width: "10%";
   border-radius: 10px;
   padding: 9px 4px 9px 56px;
   border: 0;

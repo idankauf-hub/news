@@ -2,7 +2,7 @@ import * as React from "react";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { updateFilters } from "../../store/query";
 import { useDispatch } from "react-redux";
@@ -41,7 +41,7 @@ const Dates = () => {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                width: "35%",
+                width: "11vw",
                 alignItems: "center",
                 background: "white",
                 padding: "15px",

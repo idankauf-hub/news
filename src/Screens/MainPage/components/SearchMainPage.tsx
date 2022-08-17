@@ -144,7 +144,7 @@ export const SearchMainPage = () => {
 
   return (
     <>
-      <FormControl fullWidth>
+      <FormControl>
         <Container width={widthInput} ref={searchContainerRef}>
           <Search
             onFocus={handleInputFocus}

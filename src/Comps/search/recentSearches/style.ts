@@ -5,10 +5,10 @@ export const Container = styled.div`
   overflow: hidden;
   margin-top: 5.5vh;
   // width: 39.5%;
-  width: 25.2%;
+  width: 22vw;
   @media (max-width: 1440px) {
     margin-top: 7vh;
-    width: 35%;
+    width: 29.3vw;
   }
   max-height: 132px;
   background: #ffffff;
