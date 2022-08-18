@@ -32,7 +32,7 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
         dateByMinute = sumSourcesByMinute(sources);
         const dateByHoursWitouDuplicates = removeDuplicates(dateByMinute);
         setDates(dateByHoursWitouDuplicates.reverse());
-        setIntervals(2);
+        setIntervals(4);
       } else {
         setDates(dateByHoursWitoutDuplicates.reverse());
       }

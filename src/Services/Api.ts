@@ -1,4 +1,4 @@
-import { Sources } from "../types/types";
+import { NewsApiData, Sources } from "../types/types";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingGlobal, setErrorGlobal } from "../store/apiStatus";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "9ce231647996401e92c8f127de8255e1";
+export const API_KEY = "54ac5dd85b4144dd98cb6bd59a6391c9";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -36,7 +36,8 @@ export const getAllTopHeadlinesSources = async (
       return sourcesName;
     });
 };
-export const getArticles =  (QueryUrl: string): Promise<any[]> => {
+export function useGetArticles(QueryUrl: string) {
+  const [articles, setArticles] = useState<any>([]);
 
   QueryUrl = QueryUrl.replace("&pageSize=10", "&pageSize=100");
   QueryUrl = QueryUrl.replace(
@@ -44,17 +45,19 @@ export const getArticles =  (QueryUrl: string): Promise<any[]> => {
     ""
   );
 
-  console.log(QueryUrl);
-  return axios
-    .get(QueryUrl)
-    .then((response) => {
-      console.log(response.data)
-      return response.data;
-    })
-    .catch((error) => {
-      return error;
-    });
-};
+  useEffect(() => {
+    axios
+      .get(QueryUrl)
+      .then((response) => {
+        console.log(response.data);
+        setArticles(response.data.articles);
+      })
+      .catch((error) => {
+        return error;
+      });
+  }, [QueryUrl]);
+  return articles;
+}
 
 export default function useArticlesSearch(query: string, pageNumber: number) {
   const [articles, setArticles] = useState<any>([]);

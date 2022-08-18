@@ -16,7 +16,12 @@ import {
 import { dateData } from "../../../mockData";
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
-import { getArticles, getLocation } from "../../../Services/Api";
+import {
+  API_KEY,
+  BASE_URL,
+  getLocation,
+  useGetArticles,
+} from "../../../Services/Api";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFilters } from "../../../store/query";
 
@@ -25,40 +30,44 @@ import { RootState } from "../../../store/store";
 const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
   const ApiStatus = useSelector((state: RootState) => state.apiStatus);
-  const [dates, setDates] = useState<[]>([]);
-  const [sources, setSources] = useState<[]>([]);
+
   const [totalResults, setTotalResults] = useState<number>(0);
   const [articalsLen, setArticalsLen] = useState<number>(0);
+  const [queryUrl, setQueryUrl] = useState<string>("");
 
   const [title, setTitle] = useState<JSX.Element>(<></>);
 
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
+  const graphData = useGetArticles(queryUrl);
+
   const dispatch = useDispatch();
 
-  const setGraphsData = (
-    value: [],
-    totalResults: number,
-    articalsLength: number
-  ) => {
+  const setGraphsData = (totalResults: number, articalsLength: number) => {
     setTotalResults(totalResults);
-    // setSources(value);
-    // setDates(value);
     setArticalsLen(articalsLength);
   };
 
+  const isQueryEmpty = () => {
+    return Query.query.search.length === 0;
+  };
+
+  const buildApiQuery = () => {
+    let queryUrl = "";
+    if (Query.query.endpoint === "top-headlines") {
+      if (isQueryEmpty()) {
+        queryUrl = `${BASE_URL}${Query.query.endpoint}?country=${Query.query.filters.country}&category=${Query.query.filters.category}&sources=${Query.query.filters.sources}&pageSize=10&apiKey=${API_KEY}`;
+      } else {
+        queryUrl = `${BASE_URL}${Query.query.endpoint}?sources=${Query.query.filters.sources}&country=${Query.query.filters.country}&q=${Query.query.search}&category=${Query.query.filters.category}&pageSize=10&apiKey=${API_KEY}`;
+      }
+    } else {
+      queryUrl = `${BASE_URL}${Query.query.endpoint}?q=${Query.query.search}&sortBy=${Query.query.sortby}&from=${Query.query.filters.date}&to=${Query.query.filters.date}&sources=${Query.query.filters.sources}&language=${Query.query.filters.language}&pageSize=10&apiKey=${API_KEY}`;
+    }
+    setQueryUrl(queryUrl);
+  };
   useEffect(() => {
-    getArticles(Query.query.queryUrl).then((value: any) => {
-      console.log(value.articles);
-      setSources(value.articles);
-      setDates(value.articles);
-    });
-  }, [
-    Query.query.endpoint,
-    Query.query.filters,
-    Query.query.search,
-    Query.query.queryUrl,
-  ]);
+    buildApiQuery();
+  }, [Query.query.endpoint, Query.query.filters, Query.query.search]);
 
   useEffect(() => {
     setTitle(
@@ -67,6 +76,7 @@ const MainPage = () => {
       />
     );
   }, []);
+
   useEffect(() => {
     if (
       Query.query.endpoint === "top-headlines" ||
@@ -134,11 +144,11 @@ const MainPage = () => {
           <ColumnGraphs>
             <GraphCard
               title="Sources"
-              GraphElement={() => <SourcesGraph graphData={sources} />}
+              GraphElement={() => <SourcesGraph graphData={graphData} />}
             />
             <GraphCard
               title="Dates"
-              GraphElement={() => <Graph graphData={dates} />}
+              GraphElement={() => <Graph graphData={graphData} />}
             />
           </ColumnGraphs>
         </Row>

@@ -11,12 +11,11 @@ interface ColorProps {
   color: string | undefined;
 }
 export const CustomeLegend = styled(DisplayColumn)`
-  margin-top: 2vh;
   margin-left: 2vh;
   width: 80%;
   height: 15vh;
   overflow: scroll;
-  padding: 1vh;
+  padding: 1.5vh;
 `;
 export const GraphT = styled(DisplayCetnerColumn)`
   padding: 0px;

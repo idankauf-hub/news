@@ -9,9 +9,9 @@ import { RootState } from "../../store/store";
 import { CircularProgress } from "@mui/material";
 import { NotFounedChartIcon } from "../../Icons";
 import NotFoundChart from "../notFound/NotFoundChart";
-import { parse } from "path";
 
 const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) => {
+  console.log(graphData)
   const [data, setData] = useState<any>(graphData);
   const [sourcesData, setSourcesData] = useState<
     { name: string; value: number; total: number; fill: string }[]
@@ -78,7 +78,6 @@ const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) 
   };
 
   useEffect(() => {
-    console.log(data)
     setSumOfSources(data);
   }, [data]);
 

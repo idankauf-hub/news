@@ -98,8 +98,6 @@ export interface Sources {
 }
 
 export type NewsApiData = {
-  status: string;
-  totalResults: number;
   articles: {
     author: string;
     content: string;

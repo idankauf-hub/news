@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 
 interface ISourcesData {
-  setGraphsData: (e: [], totalResults: number, articalsLength: number) => void;
+  setGraphsData: (totalResults: number, articalsLength: number) => void;
 }
 
 const Cards = ({ setGraphsData }: ISourcesData) => {
@@ -38,7 +38,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
   );
 
   useEffect(() => {
-    setGraphsData(articles, totalResults, articles.length);
+    setGraphsData(totalResults, articles.length);
   }, [articles, Query]);
 
   const changeDateForamt = (value: string) => {
@@ -58,7 +58,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
             urlToImage: any;
             url: string | undefined;
             title: string | undefined;
-            source:{id:string,name:string}
+            source: { id: string; name: string };
           },
           index: number
         ) => {
