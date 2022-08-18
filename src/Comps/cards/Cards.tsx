@@ -50,7 +50,7 @@ const Cards = () => {
     
     <CardsContainer>
 
-      {articles.map(
+      {articles && articles.map(
         (
           article: {
             content: any;
