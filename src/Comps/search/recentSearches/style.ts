@@ -4,11 +4,18 @@ export const Container = styled.div`
   position: absolute;
   overflow: hidden;
   margin-top: 5.5vh;
-  // width: 39.5%;
   width: 22vw;
+  
   @media (max-width: 1440px) {
     margin-top: 7vh;
-    width: 29.3vw;
+    margin-left: 8vw;
+    width: 29.8vw;
+  }
+  @media (min-width: 1441px) {
+    margin-top: 5.7vh;
+    margin-left: 9vw;
+
+    width: 22.1vw;
   }
   max-height: 132px;
   background: #ffffff;

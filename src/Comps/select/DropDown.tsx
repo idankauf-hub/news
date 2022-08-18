@@ -179,6 +179,11 @@ const DropDown = ({
             "@media (min-width: 600px)": {
               width: "11vw",
             },
+            "@media (max-width: 1450px)": {
+              width: "16vw",
+              fontSize: "0.74rem",
+            },
+
             letterSpacing: 0.25,
             color: COLORS.purpleblue,
             borderRadius: "10px",

@@ -78,9 +78,7 @@ export const SearchMainPage = () => {
   function useOutsideAlerter(ref: any, dropDownRef: any, optionsRef: any) {
     useEffect(() => {
       function handleClickOutside(event: any) {
-        console.log(dropDownRef.current);
-        console.log(ref.current);
-        console.log("option", optionsRef.current);
+
         if (dropDownRef.current)
           if (ref.current && !ref.current.contains(event.target)) {
             if (

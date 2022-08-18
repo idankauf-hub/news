@@ -13,18 +13,14 @@ import {
   TotalResults,
 } from "./MainPageStyle";
 
-import { dateData } from "../../../mockData";
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
 import {
   API_KEY,
   BASE_URL,
-  getLocation,
   useGetArticles,
 } from "../../../Services/Api";
-import { useDispatch, useSelector } from "react-redux";
-import { updateFilters } from "../../../store/query";
-
+import {useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 
 const MainPage = () => {

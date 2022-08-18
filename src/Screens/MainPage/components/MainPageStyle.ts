@@ -5,7 +5,7 @@ import { H2 } from "../../../styles/typography";
 
 export const Container = styled(DisplayColumn)`
   justify-content: center;
-  padding: 0px 240px 10px;
+  padding: 0px 12.5%;
   gap: 20px;
   background-color: ${COLORS.ghostwhite};
 `;
@@ -41,6 +41,12 @@ export const ColumnCards = styled(DisplayColumn)`
 `;
 
 export const UnderLine = styled.div`
+@media (max-width: 1441px) {
+  width: 100%;
+}
+@media (min-width: 1440px) {
+  width: 94%;
+}
   width: 100%;
   height: 0px;
   opacity: 0.5;

@@ -10,9 +10,11 @@ import { CircularProgress } from "@mui/material";
 import { NotFounedChartIcon } from "../../Icons";
 import NotFoundChart from "../notFound/NotFoundChart";
 
-const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) => {
-  console.log(graphData)
-  const [data, setData] = useState<any>(graphData);
+const SourcesGraph: React.FC<GraphProps> = ({
+  graphData,
+  placeholder = "Sum",
+}) => {
+  // const [data, setData] = useState<any>(graphData);
   const [sourcesData, setSourcesData] = useState<
     { name: string; value: number; total: number; fill: string }[]
   >([]);
@@ -22,7 +24,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) 
     const sourcesSum = sumSources(sources);
     const sourcesSumWithOutDuplicates = removeDuplicates(sourcesSum);
     const sortedTopSources = getTop4Sources(sourcesSumWithOutDuplicates);
-    addOthers(sortedTopSources, data);
+    addOthers(sortedTopSources, graphData);
     const sortedTopSourcesWithColors = addColorsToArray(sortedTopSources);
     setSourcesData(sortedTopSourcesWithColors);
   };
@@ -30,7 +32,6 @@ const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) 
     let sourcesSum = [];
     let count = 0;
     let nameToSum = "";
-
     for (const x in data) {
       nameToSum = data[x].source?.name;
       for (const x in data) {
@@ -78,8 +79,8 @@ const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) 
   };
 
   useEffect(() => {
-    setSumOfSources(data);
-  }, [data]);
+    setSumOfSources(graphData);
+  }, [graphData]);
 
   if (Status.loading) {
     return (
@@ -94,7 +95,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) 
       </div>
     );
   }
-  if (Status.error || data?.length === 0 || data===undefined) {
+  if (Status.error || graphData?.length === 0 || graphData === undefined) {
     return (
       <>
         <NotFoundChart />
@@ -115,7 +116,7 @@ const SourcesGraph: React.FC<GraphProps> = ({ graphData, placeholder = "Sum" }) 
           dataKey="value"
         >
           <Label
-            value={data?.length + " articals"}
+            value={graphData?.length + " articals"}
             position="center"
             style={{
               fontFamily: "Mulish",
