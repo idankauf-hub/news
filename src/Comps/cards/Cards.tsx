@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Card from "../card/Card";
-import { CardsContainer } from "./style";
+import { CardsContainer, TotalResults } from "./style";
 import { RootState } from "../../store/store";
 import useArticlesSearch from "../../Services/Api";
 import NotFound from "../notFound/NotFound";
@@ -47,7 +47,9 @@ const Cards = () => {
   };
 
   return (
+    
     <CardsContainer>
+
       {articles.map(
         (
           article: {

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
 import { DisplayColumn } from "../../styles/layouts";
+import { H2 } from "../../styles/typography";
 
 export const CardsContainer = styled(DisplayColumn)`
   align-items: flex-start;
@@ -13,3 +14,8 @@ export const CardsContainer = styled(DisplayColumn)`
   // overflow-y: auto;
 
 `;
+export const TotalResults = styled(H2)`
+  letter-spacing: 0.25px;
+  color: rgba(90, 90, 137, 0.5);
+`;
+

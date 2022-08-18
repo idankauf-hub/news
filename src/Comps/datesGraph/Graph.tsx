@@ -24,6 +24,10 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
     let dateByHour;
     const sourcesDateSum = sumSourcesDate(sources);
     const sourcesDatesWithOutDuplicates = removeDuplicates(sourcesDateSum);
+    if (sourcesDatesWithOutDuplicates.length >= 10) {
+      setIntervals(4);
+    }
+
     if (sourcesDatesWithOutDuplicates.length === 1) {
       dateByHour = sumSourcesByHour(sources);
       const dateByHoursWitoutDuplicates = removeDuplicates(dateByHour);
