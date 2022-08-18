@@ -9,11 +9,7 @@ import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 
-interface ISourcesData {
-  setGraphsData: (totalResults: number, articalsLength: number) => void;
-}
-
-const Cards = ({ setGraphsData }: ISourcesData) => {
+const Cards = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const Query = useSelector((state: RootState) => state.query);
 
@@ -22,10 +18,13 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
     Query.query.queryUrl,
     pageNumber
   );
-  console.log(articles)
+  console.log(articles);
 
   const lastArticleElementRef = useCallback(
     (node: any): void => {
+      if (error) {
+        return;
+      }
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
@@ -39,8 +38,8 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
   );
 
   useEffect(() => {
-    setGraphsData(totalResults, articles.length);
-  }, [articles, Query]);
+    setPageNumber(1);
+  }, [Query]);
 
   const changeDateForamt = (value: string) => {
     const formatted = dayjs(value).format("dddd MMM D, YYYY");

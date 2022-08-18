@@ -30,7 +30,6 @@ import { RootState } from "../../../store/store";
 const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
   const ApiStatus = useSelector((state: RootState) => state.apiStatus);
-
   const [totalResults, setTotalResults] = useState<number>(0);
   const [articalsLen, setArticalsLen] = useState<number>(0);
   const [queryUrl, setQueryUrl] = useState<string>("");
@@ -43,15 +42,10 @@ const MainPage = () => {
 
   const dispatch = useDispatch();
 
-  const setGraphsData = (totalResults: number, articalsLength: number) => {
-    setTotalResults(totalResults);
-    setArticalsLen(articalsLength);
-  };
-
   const isQueryEmpty = () => {
     return Query.query.search.length === 0;
   };
-
+  
   const buildApiQuery = () => {
     let queryUrl = "";
     if (Query.query.endpoint === "top-headlines") {
@@ -139,7 +133,7 @@ const MainPage = () => {
         )}
         <Row>
           <ColumnCards>
-            <Cards setGraphsData={setGraphsData} />
+            <Cards/>
           </ColumnCards>
           <ColumnGraphs>
             <GraphCard

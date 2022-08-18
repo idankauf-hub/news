@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingGlobal, setErrorGlobal } from "../store/apiStatus";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "e8262826814247808657b79ee20e3dfa";
+export const API_KEY = "38e4c82230ae43f6bfaa032dc942d694";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -68,15 +68,15 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setError(false);
+  }, []);
+
+  useEffect(() => {
     setArticles([]);
-    setError(false)
+    console.log(query);
   }, [query]);
 
   useEffect(() => {
-    // console.log(error)
-    if (error) {
-      return;
-    }
     setLoading(true);
     axios
       .get(query + "&page=" + pageNumber)
@@ -89,7 +89,10 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
         setArticles((prevArticles: any) => {
           return [...prevArticles, ...response.data.articles];
         });
-        setHasMore(pageNumber < 10);
+        if (totalResults === response.data.articles.length) {
+          return;
+        }
+        setHasMore(pageNumber < 10 && response.data.articles.length !== 0);
       })
       .catch((err) => {
         setLoading(false);
