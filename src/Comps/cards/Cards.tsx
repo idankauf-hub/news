@@ -22,6 +22,7 @@ const Cards = ({ setGraphsData }: ISourcesData) => {
     Query.query.queryUrl,
     pageNumber
   );
+  console.log(articles)
 
   const lastArticleElementRef = useCallback(
     (node: any): void => {

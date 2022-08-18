@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingGlobal, setErrorGlobal } from "../store/apiStatus";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "54ac5dd85b4144dd98cb6bd59a6391c9";
+export const API_KEY = "e8262826814247808657b79ee20e3dfa";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -69,9 +69,14 @@ export default function useArticlesSearch(query: string, pageNumber: number) {
 
   useEffect(() => {
     setArticles([]);
+    setError(false)
   }, [query]);
 
   useEffect(() => {
+    // console.log(error)
+    if (error) {
+      return;
+    }
     setLoading(true);
     axios
       .get(query + "&page=" + pageNumber)
