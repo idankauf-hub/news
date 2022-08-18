@@ -28,8 +28,6 @@ export const CardImage = styled.img<ImageProps>`
 
   border-radius: 20px 0px 0px 20px;
   border-right: 1px solid ${COLORS.lightgray};
-  background-image: url(${(props) => props.urlImage});
-  background-size: 100% 100%;
 `;
 
 export const DataContainer = styled.div`
@@ -41,7 +39,7 @@ export const DataContainer = styled.div`
   height: 100%;
 `;
 export const DateDiv = styled(DisplayRow)`
-  margin-top: 16px;
+  margin-top: 14px;
   margin-bottom: 16px;
   font-size: 14px;
   overflow: hidden;

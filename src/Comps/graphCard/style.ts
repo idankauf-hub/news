@@ -7,7 +7,7 @@ export const CardContainer = styled.div`
   position: relative;
   width: 100%;
   @media (min-width: 1450px) {
-    width: 80%;
+    width: 85%;
   }
   height: 355px;
   background: ${COLORS.white};

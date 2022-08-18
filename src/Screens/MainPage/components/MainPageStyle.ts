@@ -18,6 +18,9 @@ export const ColumnGraphs = styled(DisplayColumn)`
   align-items: flex-start;
   gap: 24px;
   width: 30%;
+  @media (max-width: 1441px) {
+    width: 28%;
+  }
   height: 100vh;
 `;
 export const ColumnCards = styled(DisplayColumn)`
@@ -27,6 +30,11 @@ export const ColumnCards = styled(DisplayColumn)`
   gap: 24px;
   width: 70%;
   height: 100vh;
+
+  @media (max-width: 1441px) {
+    width: 72%;
+
+  }
 
   ::-webkit-scrollbar {
     width: 10px;

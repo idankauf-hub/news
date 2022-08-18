@@ -61,14 +61,22 @@ const Card: React.FC<CardProps> = ({
             variant="contained"
             endIcon={<RightArrow />}
             sx={{
+              "@media (max-width: 855px)": {
+                width: "13vw",
+                fontSize: "0.5vw",
+              },
+              "@media (max-width: 730px)": {
+                width: "10vw",
+                fontSize: "1vw",
+              },
               bgcolor: "#0058B9",
               borderRadius: 20,
-              width: 226,
+              width: "17vw",
               height: 36,
               textAlign: "center",
               fontFamily: "Roboto",
               fontWeight: 500,
-              fontSize: 14,
+              fontSize: "1vw",
               lineHeight: 26,
               display: "flex",
             }}
