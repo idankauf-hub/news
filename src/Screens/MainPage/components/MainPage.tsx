@@ -30,22 +30,16 @@ import { RootState } from "../../../store/store";
 const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
   const ApiStatus = useSelector((state: RootState) => state.apiStatus);
-  const [totalResults, setTotalResults] = useState<number>(0);
-  const [articalsLen, setArticalsLen] = useState<number>(0);
   const [queryUrl, setQueryUrl] = useState<string>("");
-
-  const [title, setTitle] = useState<JSX.Element>(<></>);
 
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
   const graphData = useGetArticles(queryUrl);
 
-  const dispatch = useDispatch();
-
   const isQueryEmpty = () => {
     return Query.query.search.length === 0;
   };
-  
+
   const buildApiQuery = () => {
     let queryUrl = "";
     if (Query.query.endpoint === "top-headlines") {
@@ -62,39 +56,6 @@ const MainPage = () => {
   useEffect(() => {
     buildApiQuery();
   }, [Query.query.endpoint, Query.query.filters, Query.query.search]);
-
-  useEffect(() => {
-    setTitle(
-      <Title
-        city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
-      />
-    );
-  }, []);
-
-  useEffect(() => {
-    if (
-      Query.query.endpoint === "top-headlines" ||
-      Query.query.search.length === 0 ||
-      Query.query.filters.category.length === 0 ||
-      Query.query.filters.country === "us" ||
-      Query.query.filters.sources.length === 0
-    ) {
-      setTitle(
-        <Title
-          city={regionNames.of(Query.query.filters.country.toUpperCase()) || ""}
-        />
-      );
-    } else {
-      setTitle(
-        <TotalResults>
-          <>
-            {ApiStatus.error || ApiStatus.loading ? 0 : totalResults}
-            Total results
-          </>
-        </TotalResults>
-      );
-    }
-  }, [Query.query.endpoint]);
 
   return (
     <>
@@ -113,27 +74,23 @@ const MainPage = () => {
           Query.query.endpoint === "top-headlines" && (
             <TotalResults>
               <>
-                {ApiStatus.error || ApiStatus.loading || articalsLen === 0
-                  ? 0
-                  : totalResults}{" "}
+                {ApiStatus.error || ApiStatus.loading ? 0 : graphData.length}{" "}
                 Total results
               </>
             </TotalResults>
           )
         )}
-        {Query.query.endpoint === "everything" && ApiStatus.error != true && (
+        {Query.query.endpoint === "everything" && !ApiStatus.error && (
           <TotalResults>
             <>
-              {ApiStatus.error || ApiStatus.loading || articalsLen === 0
-                ? 0
-                : totalResults}{" "}
+              {ApiStatus.error || ApiStatus.loading ? 0 : graphData.length}{" "}
               Total results
             </>
           </TotalResults>
         )}
         <Row>
           <ColumnCards>
-            <Cards/>
+            <Cards />
           </ColumnCards>
           <ColumnGraphs>
             <GraphCard

@@ -167,7 +167,7 @@ const DropDown = ({
           id="select"
           defaultValue={""}
           value={val || ""}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => (disabled ? setIsOpen(false) : setIsOpen(!isOpen))}
           MenuProps={{
             PaperProps: { sx: { maxHeight: 300 } },
           }}

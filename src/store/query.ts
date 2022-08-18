@@ -9,6 +9,7 @@ import {
 
 interface IQuery {
   query: {
+    sources: any;
     search: string;
     endpoint: EndPoints;
     filters: {

@@ -4,8 +4,7 @@ import { LogoIcon } from "../../Icons";
 import { SearchMainPage } from "../../Screens/MainPage/components/SearchMainPage";
 
 export const Navbar = () => {
-  const [value, setValue] = useState<string>("");
-
+  console.log("------------")
   return (
     <NavBarContainer>
       <Logo>

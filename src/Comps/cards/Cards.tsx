@@ -18,7 +18,6 @@ const Cards = () => {
     Query.query.queryUrl,
     pageNumber
   );
-  console.log(articles);
 
   const lastArticleElementRef = useCallback(
     (node: any): void => {
@@ -47,9 +46,9 @@ const Cards = () => {
   };
 
   return (
-    
+    <>
+    {/* <TotalResults>Total resualts {totalResults}</TotalResults> */}
     <CardsContainer>
-
       {articles && articles.map(
         (
           article: {
@@ -115,6 +114,7 @@ const Cards = () => {
       )}
       {(error || articles.length === 0) && <NotFound />}
     </CardsContainer>
+    </>
   );
 };
 
