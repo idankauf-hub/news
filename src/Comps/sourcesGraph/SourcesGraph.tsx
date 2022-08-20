@@ -70,6 +70,9 @@ const SourcesGraph: React.FC<GraphProps> = ({
     for (const x in sortedTopSources) {
       sum += sortedTopSources[x].value;
     }
+    if(data?.length - sum === 0){
+      return
+    }
     sortedTopSources.push({
       name: "Others",
       value: data?.length - sum,

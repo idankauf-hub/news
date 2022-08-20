@@ -33,6 +33,7 @@ const Card: React.FC<CardProps> = ({
   urlToImage,
   urlToNews,
 }) => {
+  
   return (
     <CardContainer ref={refLastArticle}>
       <CardMedia

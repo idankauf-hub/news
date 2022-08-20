@@ -18,6 +18,7 @@ const Cards = () => {
     Query.query.queryUrl,
     pageNumber
   );
+  console.log(articles);
 
   const lastArticleElementRef = useCallback(
     (node: any): void => {
@@ -41,13 +42,16 @@ const Cards = () => {
   }, [Query]);
 
   const changeDateForamt = (value: string) => {
+    console.log("before format ", value);
+
     const formatted = dayjs(value).format("dddd MMM D, YYYY");
+    console.log("after format ", formatted);
+
     return formatted;
   };
 
   return (
     <>
-      {/* <TotalResults>Total resualts {totalResults}</TotalResults> */}
       <CardsContainer>
         {articles &&
           articles.map(
@@ -64,6 +68,7 @@ const Cards = () => {
               },
               index: number
             ) => {
+              console.log("before sent to foramt ", article.publishedAt);
               if (articles.length === index + 1) {
                 return (
                   <Card
@@ -113,10 +118,8 @@ const Cards = () => {
             <CircularProgress />
           </div>
         )}
-        {((error && !loading)) && <NotFound />}
-        {
-          (articles.length === 0 && !loading) && <NotFound/>
-        }
+        {error && !loading && <NotFound />}
+        {articles.length === 0 && !loading && <NotFound />}
       </CardsContainer>
     </>
   );

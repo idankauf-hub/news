@@ -15,7 +15,7 @@ export type Languages =
   | "zh"
   | "";
 
-export type SortBy = "relevancy" | "popularity" | "publishedAt";
+export type SortBy = "Relevancy" | "Popularity" | "Published at";
 export type EndPoints = "everything" | "top-headlines";
 export type Categories =
   | "business"

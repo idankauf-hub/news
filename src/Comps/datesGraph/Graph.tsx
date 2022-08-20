@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { XAxis, ResponsiveContainer, AreaChart, Area, Tooltip } from "recharts";
 
 import { RootState } from "../../store/store";
-import { GraphProps } from "../../types/types";
+import { GraphProps, NewsApiData } from "../../types/types";
 import NotFoundChart from "../notFound/NotFoundChart";
 
 const Graph: React.FC<GraphProps> = ({ graphData }) => {
@@ -55,9 +55,10 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
 
     return null;
   };
-
-  useEffect(() => {
-    const result: { [key: string]: number } = {};
+  const orderByDate = (
+    graphData: NewsApiData[],
+    result: { [key: string]: number }
+  ) => {
     for (let i = 0; i < graphData?.length; i++) {
       const date = graphData[i]?.publishedAt;
       const day = date.substring(0, 10);
@@ -79,31 +80,47 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
           frequency: value,
         };
       });
+
+    return datesGraphData;
+  };
+  const orderByHour = (
+    graphData: NewsApiData[],
+    result: { [key: string]: number }
+  ) => {
+    for (let i = 0; i < graphData?.length; i++) {
+      const date = graphData[i]?.publishedAt;
+      const day = dayjs(date).format("H A D MMM");
+      const resolution = day;
+      if (result[resolution] === undefined) {
+        result[resolution] = 1;
+      } else {
+        result[resolution] = result[resolution] + 1;
+      }
+    }
+    const hourGraphData = Object.entries(result)
+      .sort()
+      .map(([key, value]: any) => {
+        return {
+          month: key,
+          frequency: value,
+        };
+      });
+    if (hourGraphData.length >= 10) {
+      setIntervals(5);
+    }
+    return hourGraphData;
+  };
+
+  useEffect(() => {
+    const result: { [key: string]: number } = {};
+    const datesGraphData = orderByDate(graphData, result);
     if (datesGraphData.length === 1) {
       const result: { [key: string]: number } = {};
-
-      for (let i = 0; i < graphData?.length; i++) {
-        const date = graphData[i]?.publishedAt;
-        const day = dayjs(date).format("H A D MMM");
-        const resolution = day;
-        if (result[resolution] === undefined) {
-          result[resolution] = 1;
-        } else {
-          result[resolution] = result[resolution] + 1;
-        }
-      }
-      const datesGraph2Data = Object.entries(result)
-        .sort()
-        .map(([key, value]: any) => {
-          return {
-            month: key,
-            frequency: value,
-          };
-        });
-      if (datesGraph2Data.length >= 10) {
+      const hourGraphData = orderByHour(graphData, result);
+      if (hourGraphData.length >= 10) {
         setIntervals(5);
       }
-      setDates(datesGraph2Data);
+      setDates(hourGraphData);
     } else {
       if (datesGraphData.length >= 10) {
         setIntervals(5);

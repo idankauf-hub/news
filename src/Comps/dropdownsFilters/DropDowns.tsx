@@ -42,7 +42,11 @@ const DropDowns: React.FC = () => {
   const HandleDropDowns = (value: string, filter: string) => {
     switch (filter) {
       case "Sort by":
-        dispatch(updateSortBy(value));
+        if (value === "Published at") {
+          dispatch(updateSortBy("publishedAt"));
+        } else {
+          dispatch(updateSortBy(value.toLowerCase()));
+        }
         break;
 
       case "Sources":

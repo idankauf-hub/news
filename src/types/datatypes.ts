@@ -1,6 +1,6 @@
 import { SortBy, Categories, Country, Languages } from "./types";
 
-export const SortbyData: SortBy[] = ["relevancy", "popularity", "publishedAt"];
+export const SortbyData: SortBy[] = ["Relevancy", "Popularity", "Published at"];
 
 export const CategoryData: Categories[] = [
   "business",
