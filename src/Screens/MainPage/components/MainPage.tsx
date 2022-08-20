@@ -15,12 +15,8 @@ import {
 
 import Title from "../../../Comps/title/Title";
 import DropDowns from "../../../Comps/dropdownsFilters/DropDowns";
-import {
-  API_KEY,
-  BASE_URL,
-  useGetArticles,
-} from "../../../Services/Api";
-import {useSelector } from "react-redux";
+import { API_KEY, BASE_URL, useGetArticles } from "../../../Services/Api";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 
 const MainPage = () => {
@@ -30,7 +26,7 @@ const MainPage = () => {
 
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
-  const graphData = useGetArticles(queryUrl);
+  const { graphData, totalResults } = useGetArticles(queryUrl);
 
   const isQueryEmpty = () => {
     return Query.query.search.length === 0;
@@ -51,7 +47,7 @@ const MainPage = () => {
   };
   useEffect(() => {
     buildApiQuery();
-}, [Query]);
+  }, [Query]);
 
   return (
     <>
@@ -70,8 +66,8 @@ const MainPage = () => {
           Query.query.endpoint === "top-headlines" && (
             <TotalResults>
               <>
-                {ApiStatus.error || ApiStatus.loading ? 0 : graphData?.length}{" "}
-                Total results
+                {ApiStatus.error || ApiStatus.loading ? 0 : totalResults}
+                {" "} Total results
               </>
             </TotalResults>
           )
@@ -79,8 +75,8 @@ const MainPage = () => {
         {Query.query.endpoint === "everything" && !ApiStatus.error && (
           <TotalResults>
             <>
-              {ApiStatus.error || ApiStatus.loading ? 0 : graphData?.length}{" "}
-              Total results
+              {ApiStatus.error || ApiStatus.loading ? 0 : totalResults}
+              {" "}Total results
             </>
           </TotalResults>
         )}

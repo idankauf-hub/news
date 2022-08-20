@@ -37,20 +37,23 @@ export const getAllTopHeadlinesSources = async (
     });
 };
 export function useGetArticles(QueryUrl: string) {
-  const [articles, setArticles] = useState<any>([]);
+  const [graphData, setGraphData] = useState<any>([]);
+  const [totalResults, setTotalResults] = useState<number>(0);
+
   QueryUrl = QueryUrl.replace("&pageSize=10", "&pageSize=100");
 
   useEffect(() => {
     axios
       .get(QueryUrl)
       .then((response) => {
-        setArticles(response.data.articles);
+        setGraphData(response.data.articles);
+        setTotalResults(response.data.totalResults)
       })
       .catch((error) => {
         return error;
       });
   }, [QueryUrl]);
-  return articles;
+  return {graphData,totalResults};
 }
 
 export default function useArticlesSearch(query: string, pageNumber: number) {

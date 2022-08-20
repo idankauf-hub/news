@@ -9,6 +9,7 @@ import { GraphProps, NewsApiData } from "../../types/types";
 import NotFoundChart from "../notFound/NotFoundChart";
 
 const Graph: React.FC<GraphProps> = ({ graphData }) => {
+  console.log(graphData)
   const [data, setData] = useState<any>(graphData);
   const [dates, setDates] = useState<
     {
