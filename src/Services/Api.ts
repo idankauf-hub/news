@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingGlobal, setErrorGlobal } from "../store/apiStatus";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "55cdd76f73574a7b993f40fef81b0b44";
+export const API_KEY = "55afe1ce41ab4e1ba2cadbc8c29a9b7f";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -39,27 +39,33 @@ export const getAllTopHeadlinesSources = async (
 export function useGetArticles(QueryUrl: string) {
   const [graphData, setGraphData] = useState<any>([]);
   const [totalResults, setTotalResults] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState(false);
 
   QueryUrl = QueryUrl.replace("&pageSize=10", "&pageSize=100");
 
   useEffect(() => {
+    setLoading(true)
     axios
       .get(QueryUrl)
       .then((response) => {
+        setLoading(false)
         setGraphData(response.data.articles);
         setTotalResults(response.data.totalResults)
+
       })
       .catch((error) => {
+        setError(true)
         return error;
       });
   }, [QueryUrl]);
-  return {graphData,totalResults};
+  return {graphData,totalResults,loading,error};
 }
 
 export default function useArticlesSearch(query: string, pageNumber: number) {
   const [articles, setArticles] = useState<any>([]);
   const [hasMore, setHasMore] = useState(false);
-  const [loading, setLoading] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(false);
   const [totalResults, setTotalResults] = useState<number>(0);
   const dispatch = useDispatch();

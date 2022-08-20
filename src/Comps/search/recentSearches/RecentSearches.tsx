@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Container, Row, Title, ClearButton, Search } from "./style";
+import { Container, Row, Title, ClearButton, Search, LastSearchesTitle } from "./style";
 import { DeleteIcon } from "../../../Icons/index";
 
 type ISearch = {
@@ -43,10 +43,10 @@ const RecentSearches: React.FC<ISearch> = ({ value, setInput, setClear }) => {
 
   return (
     <Container>
-      <Row>
+      <LastSearchesTitle>
         <Title>RECENT SEARCHES</Title>
         <ClearButton onMouseDown={clearSearches}>CLEAR</ClearButton>
-      </Row>
+      </LastSearchesTitle>
       {lastSearches &&
         lastSearches.map((item: string, i: number) => (
           <Row key={i}>

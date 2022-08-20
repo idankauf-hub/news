@@ -5,9 +5,9 @@ export const Container = styled.div`
   overflow: hidden;
   margin-top: 5.5vh;
   width: 22vw;
-  
+
   @media (max-width: 1440px) {
-    margin-top: 7vh;
+    margin-top: 7.5vh;
     margin-left: 8vw;
     width: 29.8vw;
   }
@@ -26,6 +26,19 @@ export const Container = styled.div`
   padding: 10px 15px 10px 2.52%;
 `;
 
+
+export const LastSearchesTitle = styled.div`
+  @media (max-width: 1440px) {
+    margin-bottom: 1.7vh;
+  }
+  @media (min-width: 1441px) {
+    margin-bottom: 1.7vh;
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+`;
 export const Row = styled.div`
   display: flex;
   flex-direction: row;

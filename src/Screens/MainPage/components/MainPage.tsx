@@ -21,12 +21,11 @@ import { RootState } from "../../../store/store";
 
 const MainPage = () => {
   const Query = useSelector((state: RootState) => state.query);
-  const ApiStatus = useSelector((state: RootState) => state.apiStatus);
   const [queryUrl, setQueryUrl] = useState<string>("");
 
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
-  const { graphData, totalResults } = useGetArticles(queryUrl);
+  const { graphData, totalResults, loading, error } = useGetArticles(queryUrl);
 
   const isQueryEmpty = () => {
     return Query.query.search.length === 0;
@@ -63,21 +62,16 @@ const MainPage = () => {
             }
           />
         ) : (
-          Query.query.endpoint === "top-headlines" && (
+          Query.query.endpoint === "top-headlines" &&
+          (!error || !loading) && (
             <TotalResults>
-              <>
-                {ApiStatus.error || ApiStatus.loading ? 0 : totalResults}
-                {" "} Total results
-              </>
+              <>{totalResults} Total results</>
             </TotalResults>
           )
         )}
-        {Query.query.endpoint === "everything" && !ApiStatus.error && (
+        {Query.query.endpoint === "everything" && (!error || !loading) && (
           <TotalResults>
-            <>
-              {ApiStatus.error || ApiStatus.loading ? 0 : totalResults}
-              {" "}Total results
-            </>
+            <>{totalResults} Total results</>
           </TotalResults>
         )}
         <Row>
