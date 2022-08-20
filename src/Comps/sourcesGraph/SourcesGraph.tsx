@@ -14,7 +14,6 @@ const SourcesGraph: React.FC<GraphProps> = ({
   graphData,
   placeholder = "Sum",
 }) => {
-  // const [data, setData] = useState<any>(graphData);
   const [sourcesData, setSourcesData] = useState<
     { name: string; value: number; total: number; fill: string }[]
   >([]);
@@ -116,7 +115,7 @@ const SourcesGraph: React.FC<GraphProps> = ({
           dataKey="value"
         >
           <Label
-            value={graphData?.length + " articals"}
+            value={graphData?.length + " articles"}
             position="center"
             style={{
               fontFamily: "Mulish",

@@ -67,7 +67,7 @@ const Card: React.FC<CardProps> = ({
               },
               "@media (max-width: 730px)": {
                 width: "10vw",
-                fontSize: "1vw",
+                fontSize: "0.5vw",
               },
               bgcolor: "#0058B9",
               borderRadius: 20,
@@ -76,7 +76,7 @@ const Card: React.FC<CardProps> = ({
               textAlign: "center",
               fontFamily: "Roboto",
               fontWeight: 500,
-              fontSize: "1vw",
+              fontSize: "0.8vw",
               lineHeight: 26,
               display: "flex",
             }}

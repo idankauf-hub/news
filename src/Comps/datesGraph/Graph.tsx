@@ -20,95 +20,6 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
   const [interval, setIntervals] = useState<number>(0);
   const Status = useSelector((state: RootState) => state.apiStatus);
 
-  const setSumOfSources = (sources: any) => {
-    let dateByHour;
-    const sourcesDateSum = sumSourcesDate(sources);
-    const sourcesDatesWithOutDuplicates = removeDuplicates(sourcesDateSum);
-    if (sourcesDatesWithOutDuplicates.length >= 10) {
-      setIntervals(4);
-    }
-
-    if (sourcesDatesWithOutDuplicates.length === 1) {
-      dateByHour = sumSourcesByHour(sources);
-      const dateByHoursWitoutDuplicates = removeDuplicates(dateByHour);
-      if (dateByHoursWitoutDuplicates.length === 1) {
-        let dateByMinute;
-        dateByMinute = sumSourcesByMinute(sources);
-        const dateByHoursWitouDuplicates = removeDuplicates(dateByMinute);
-        setDates(dateByHoursWitouDuplicates.reverse());
-        setIntervals(4);
-      } else {
-        setDates(dateByHoursWitoutDuplicates.reverse());
-      }
-    } else {
-      setDates(sourcesDatesWithOutDuplicates.reverse());
-    }
-  };
-  const sumSourcesDate = (data: any) => {
-    let sourcesSum = [];
-    let count = 0;
-    for (const x in data) {
-      const formatted = dayjs(data[x].publishedAt).format("D MMM");
-      for (const x in data) {
-        if (formatted === dayjs(data[x].publishedAt).format("D MMM")) {
-          count++;
-        }
-      }
-      sourcesSum.push({
-        month: formatted,
-        frequency: count,
-      });
-      count = 0;
-    }
-    return sourcesSum;
-  };
-  const sumSourcesByHour = (data: any) => {
-    let sourcesSum = [];
-    let count = 0;
-    for (const x in data) {
-      const formatted = dayjs(data[x].publishedAt).format("H A D MMM");
-      for (const x in data) {
-        if (formatted === dayjs(data[x].publishedAt).format("H A D MMM")) {
-          count++;
-        }
-      }
-      sourcesSum.push({
-        month: formatted,
-        frequency: count,
-      });
-      count = 0;
-    }
-
-    return sourcesSum;
-  };
-  const sumSourcesByMinute = (data: any) => {
-    let sourcesSum = [];
-    let count = 0;
-    for (const x in data) {
-      const formatted = dayjs(data[x].publishedAt).format("H:m D/M");
-      for (const x in data) {
-        if (formatted === dayjs(data[x].publishedAt).format("H:m D/M")) {
-          count++;
-        }
-      }
-      sourcesSum.push({
-        month: formatted,
-        frequency: count,
-      });
-      count = 0;
-    }
-
-    return sourcesSum;
-  };
-  const removeDuplicates = (sourcesSum: any) => {
-    const ids = sourcesSum.map((o: { month: any }) => o.month);
-    const filtered = sourcesSum.filter(
-      ({ month }: any, index: number) => !ids.includes(month, index + 1)
-    );
-
-    return filtered;
-  };
-
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -135,7 +46,7 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
                 fontWeight: "noraml",
               }}
             >
-              Total Articals:{` ${payload[0].value}`}
+              Total Articles:{` ${payload[0].value}`}
             </p>
           </div>
         </div>
@@ -146,8 +57,60 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
   };
 
   useEffect(() => {
-    setSumOfSources(data);
-  }, [data]);
+    const result: { [key: string]: number } = {};
+    for (let i = 0; i < graphData?.length; i++) {
+      const date = graphData[i]?.publishedAt;
+      const day = date.substring(0, 10);
+      const resolution = day;
+      if (result[resolution] === undefined) {
+        result[resolution] = 1;
+      } else {
+        result[resolution] = result[resolution] + 1;
+      }
+    }
+    const datesGraphData = Object.entries(result)
+      .sort()
+      .map(([key, value]: any) => {
+        return {
+          month: new Date(key).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "numeric",
+          }),
+          frequency: value,
+        };
+      });
+    if (datesGraphData.length === 1) {
+      const result: { [key: string]: number } = {};
+
+      for (let i = 0; i < graphData?.length; i++) {
+        const date = graphData[i]?.publishedAt;
+        const day = dayjs(date).format("H A D MMM");
+        const resolution = day;
+        if (result[resolution] === undefined) {
+          result[resolution] = 1;
+        } else {
+          result[resolution] = result[resolution] + 1;
+        }
+      }
+      const datesGraph2Data = Object.entries(result)
+        .sort()
+        .map(([key, value]: any) => {
+          return {
+            month: key,
+            frequency: value,
+          };
+        });
+      if (datesGraph2Data.length >= 10) {
+        setIntervals(5);
+      }
+      setDates(datesGraph2Data);
+    } else {
+      if (datesGraphData.length >= 10) {
+        setIntervals(5);
+      }
+      setDates(datesGraphData);
+    }
+  }, [graphData]);
 
   if (Status.error || data?.length === 0 || data === undefined) {
     return <NotFoundChart />;

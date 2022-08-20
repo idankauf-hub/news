@@ -47,73 +47,77 @@ const Cards = () => {
 
   return (
     <>
-    {/* <TotalResults>Total resualts {totalResults}</TotalResults> */}
-    <CardsContainer>
-      {articles && articles.map(
-        (
-          article: {
-            content: any;
-            description: any;
-            author: any;
-            publishedAt: string;
-            urlToImage: any;
-            url: string | undefined;
-            title: string | undefined;
-            source: { id: string; name: string };
-          },
-          index: number
-        ) => {
-          if (articles.length === index + 1) {
-            return (
-              <Card
-                refLastArticle={lastArticleElementRef}
-                key={index}
-                description={
-                  article.description === null
-                    ? "No Description"
-                    : article.description
-                }
-                author={article.source.name}
-                publishedAt={changeDateForamt(article.publishedAt)}
-                urlToImage={
-                  article.urlToImage === null
-                    ? "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
-                    : article.urlToImage
-                }
-                urlToNews={article.url}
-                title={article.title}
-              />
-            );
-          } else {
-            return (
-              <Card
-                key={index}
-                description={
-                  article.description === null
-                    ? "No Description"
-                    : article.description
-                }
-                author={article.source.name}
-                publishedAt={changeDateForamt(article.publishedAt)}
-                urlToImage={
-                  article.urlToImage === null
-                    ? "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
-                    : article.urlToImage
-                }
-                urlToNews={article.url}
-                title={article.title}
-              />
-            );
-          }
+      {/* <TotalResults>Total resualts {totalResults}</TotalResults> */}
+      <CardsContainer>
+        {articles &&
+          articles.map(
+            (
+              article: {
+                content: any;
+                description: any;
+                author: any;
+                publishedAt: string;
+                urlToImage: any;
+                url: string | undefined;
+                title: string | undefined;
+                source: { id: string; name: string };
+              },
+              index: number
+            ) => {
+              if (articles.length === index + 1) {
+                return (
+                  <Card
+                    refLastArticle={lastArticleElementRef}
+                    key={index}
+                    description={
+                      article.description === null
+                        ? "No Description"
+                        : article.description
+                    }
+                    author={article.source.name}
+                    publishedAt={changeDateForamt(article.publishedAt)}
+                    urlToImage={
+                      article.urlToImage === null
+                        ? "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+                        : article.urlToImage
+                    }
+                    urlToNews={article.url}
+                    title={article.title}
+                  />
+                );
+              } else {
+                return (
+                  <Card
+                    key={index}
+                    description={
+                      article.description === null
+                        ? "No Description"
+                        : article.description
+                    }
+                    author={article.source.name}
+                    publishedAt={changeDateForamt(article.publishedAt)}
+                    urlToImage={
+                      article.urlToImage === null
+                        ? "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+                        : article.urlToImage
+                    }
+                    urlToNews={article.url}
+                    title={article.title}
+                  />
+                );
+              }
+            }
+          )}
+        {loading && (
+          <div style={{ marginLeft: "50%" }}>
+            <CircularProgress />
+          </div>
+        )}
+        {((error && !loading)) && <NotFound />}
+        {
+          (articles.length === 0 && !loading) && <NotFound/>
         }
-      )}
-      {loading && (
-        <div style={{ marginLeft: "50%" }}>
-          <CircularProgress />
-        </div>
-      )}
-      {(error || articles.length === 0) && <NotFound />}
-    </CardsContainer>
+      </CardsContainer>
     </>
   );
 };

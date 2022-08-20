@@ -13,9 +13,9 @@ interface ColorProps {
 export const CustomeLegend = styled(DisplayColumn)`
   margin-left: 2vh;
   width: 90%;
-  height: 15vh;
+  height: 16vh;
   overflow: scroll;
-  padding: 1.5vh;
+  padding: 1.3vh;
 `;
 export const GraphT = styled(DisplayCetnerColumn)`
   padding: 0px;

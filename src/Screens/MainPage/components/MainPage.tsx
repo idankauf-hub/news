@@ -51,7 +51,7 @@ const MainPage = () => {
   };
   useEffect(() => {
     buildApiQuery();
-  }, [Query.query.endpoint, Query.query.filters, Query.query.search]);
+}, [Query]);
 
   return (
     <>
@@ -70,7 +70,7 @@ const MainPage = () => {
           Query.query.endpoint === "top-headlines" && (
             <TotalResults>
               <>
-                {ApiStatus.error || ApiStatus.loading ? 0 : graphData.length}{" "}
+                {ApiStatus.error || ApiStatus.loading ? 0 : graphData?.length}{" "}
                 Total results
               </>
             </TotalResults>
@@ -79,7 +79,7 @@ const MainPage = () => {
         {Query.query.endpoint === "everything" && !ApiStatus.error && (
           <TotalResults>
             <>
-              {ApiStatus.error || ApiStatus.loading ? 0 : graphData.length}{" "}
+              {ApiStatus.error || ApiStatus.loading ? 0 : graphData?.length}{" "}
               Total results
             </>
           </TotalResults>

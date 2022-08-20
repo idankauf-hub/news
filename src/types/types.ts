@@ -98,6 +98,7 @@ export interface Sources {
 }
 
 export type NewsApiData = {
+  publishedAt: any;
   articles: {
     author: string;
     content: string;

@@ -39,10 +39,6 @@ export const getAllTopHeadlinesSources = async (
 export function useGetArticles(QueryUrl: string) {
   const [articles, setArticles] = useState<any>([]);
   QueryUrl = QueryUrl.replace("&pageSize=10", "&pageSize=100");
-  QueryUrl = QueryUrl.replace(
-    "&sortBy=popularity" || "&sortBy=publishedAt" || "&sortBy=relevancy",
-    ""
-  );
 
   useEffect(() => {
     axios
