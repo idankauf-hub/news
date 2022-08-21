@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { Input } from "./style";
 import { DateIcon } from "../../Icons/index";
 import dayjs from "dayjs";
+import { COLORS } from "../../styles/colors";
 
 interface DatesProps {
   data: string[];
@@ -40,7 +41,14 @@ const Dates = () => {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                width: "11vw",
+   
+                "@media (min-width: 1401px)": {
+                  width: "190px",
+                  fontSize: "0.72rem",
+
+    
+                },
+                width: "15vw",
                 alignItems: "center",
                 background: "white",
                 padding: "15px",
@@ -54,7 +62,6 @@ const Dates = () => {
                 placeholder={"Dates"}
                 style={{
                   border: "none",
-                  width: "6.5vw",
                 }}
               />
               {InputProps?.endAdornment}

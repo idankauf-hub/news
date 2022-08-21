@@ -51,9 +51,9 @@ const Cards = () => {
     const tmp = new Date(value).toLocaleDateString("en-GB", {
       day: "numeric",
       month: "numeric",
-    })
+    });
     console.log(tmp);
-    
+
     return formatted;
   };
 
@@ -124,8 +124,9 @@ const Cards = () => {
           <CircularProgress />
         </div>
       )}
-      {error && !loading && <NotFound />}
-      {articles.length === 0 && !loading && <NotFound />}
+      {((error && !loading) || (articles.length === 0 && !loading)) && (
+        <NotFound />
+      )}
     </CardsContainer>
   );
 };
