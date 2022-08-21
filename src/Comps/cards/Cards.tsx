@@ -4,6 +4,7 @@ import { CardsContainer, TotalResults } from "./style";
 import { RootState } from "../../store/store";
 import useArticlesSearch from "../../Services/Api";
 import NotFound from "../notFound/NotFound";
+import utc from "dayjs/plugin/utc";
 
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
@@ -18,10 +19,6 @@ const Cards = () => {
     Query.query.queryUrl,
     pageNumber
   );
-  var utc = require("dayjs/plugin/utc");
-  var timezone = require("dayjs/plugin/timezone");
-  dayjs.extend(utc);
-  dayjs.extend(timezone);
 
   const lastArticleElementRef = useCallback(
     (node: any): void => {
@@ -45,15 +42,8 @@ const Cards = () => {
   }, [Query]);
 
   const changeDateForamt = (value: string) => {
-    // console.log("before format ", value);
-    const formatted = dayjs(value).format("dddd MMM D, YYYY");
-    // console.log("after format ", formatted);
-    const tmp = new Date(value).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "numeric",
-    });
-    console.log(tmp);
-
+    dayjs.extend(utc);
+    const formatted = dayjs(value).utc().format("dddd MMM D, YYYY");
     return formatted;
   };
 
