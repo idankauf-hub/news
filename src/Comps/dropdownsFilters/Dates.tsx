@@ -32,7 +32,6 @@ const Dates = () => {
         value={date}
         onChange={(value) => {
           setDate(value || "");
-          changeDateForamt(value || "");
           dispatch(updateFilters({ date: changeDateForamt(value || "") }));
         }}
         renderInput={({ inputRef, inputProps, InputProps }) => (
@@ -55,7 +54,7 @@ const Dates = () => {
                 placeholder={"Dates"}
                 style={{
                   border: "none",
-                  width: "75px",
+                  width: "6.5vw",
                 }}
               />
               {InputProps?.endAdornment}

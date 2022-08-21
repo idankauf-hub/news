@@ -181,7 +181,7 @@ const DropDown = ({
             },
             "@media (max-width: 1450px)": {
               width: "16vw",
-              fontSize: "0.74rem",
+              fontSize: "0.73rem",
             },
 
             letterSpacing: 0.25,

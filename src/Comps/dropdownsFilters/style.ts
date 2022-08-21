@@ -2,10 +2,13 @@ import styled from "styled-components";
 import { DisplayRow } from "../../styles/layouts";
 
 export const DisplayRowWithGap = styled(DisplayRow)`
-  "@media (max-width: 1450px)": {
-    max-width: 1000vh;
+
+  @media (max-width: 1441px) {
+    margin-top: 20px;
     padding: 0px;
-    background:red
+    gap: 20px;
+    max-width: 85vh;
+    height: 5.5vh;
   }
   margin-top: 20px;
   padding: 0px;
