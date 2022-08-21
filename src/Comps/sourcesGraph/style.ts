@@ -14,7 +14,17 @@ export const CustomeLegend = styled(DisplayColumn)`
   margin-left: 2vh;
   width: 90%;
   height: 16vh;
-  overflow: scroll;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #a0a3bd;
+    -webkit-border-radius: 10px;
+  }
   padding: 1.3vh;
 `;
 export const GraphT = styled(DisplayCetnerColumn)`
