@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingGlobal, setErrorGlobal } from "../store/apiStatus";
 
 export const BASE_URL = "https://newsapi.org/v2/";
-export const API_KEY = "55cdd76f73574a7b993f40fef81b0b44";
+export const API_KEY = "2a5441b702574eb7a46be4530f98798a";
 
 export async function getLocation(): Promise<string> {
   return await axios
@@ -45,21 +45,20 @@ export function useGetArticles(QueryUrl: string) {
   QueryUrl = QueryUrl.replace("&pageSize=10", "&pageSize=100");
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     axios
       .get(QueryUrl)
       .then((response) => {
-        setLoading(false)
+        setLoading(false);
         setGraphData(response.data.articles);
-        setTotalResults(response.data.totalResults)
-
+        setTotalResults(response.data.totalResults);
       })
       .catch((error) => {
-        setError(true)
+        setError(true);
         return error;
       });
   }, [QueryUrl]);
-  return {graphData,totalResults,loading,error};
+  return { graphData, totalResults, loading, error };
 }
 
 export default function useArticlesSearch(query: string, pageNumber: number) {

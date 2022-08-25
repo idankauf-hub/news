@@ -8,7 +8,7 @@ export const Container = styled.div`
 
   @media (max-width: 1440px) {
     margin-top: 7.5vh;
-    margin-left: 8vw;
+    margin-left: 4vw;
     width: 29.8vw;
   }
   @media (min-width: 1441px) {
@@ -25,7 +25,6 @@ export const Container = styled.div`
   overflow-y: auto;
   padding: 10px 15px 10px 2.52%;
 `;
-
 
 export const LastSearchesTitle = styled.div`
   @media (max-width: 1440px) {

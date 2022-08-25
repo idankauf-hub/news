@@ -176,7 +176,7 @@ const DropDown = ({
             background: "white",
             fontWeight: 500,
             fontSize: "0.85rem",
-            "@media (min-width: 1401px)": {
+            "@media (min-width: 1452px)": {
               width: "190px",
               fontSize: "0.8rem",
               "& .MuiSelect-select": {
@@ -184,7 +184,6 @@ const DropDown = ({
                 borderRadius: "10px",
                 whiteSpace: "unset",
                 wordBreak: "break-word",
-                marginRight: "2px",
               },
             },
             "@media (max-width: 1451px)": {
@@ -192,7 +191,6 @@ const DropDown = ({
               fontSize: "0.8rem",
               "& .MuiSelect-select": {
                 padding: "20px 14px ",
-                marginRight: "2%",
                 borderRadius: "10px",
                 whiteSpace: "unset",
                 wordBreak: "break-word",
@@ -237,7 +235,18 @@ const DropDown = ({
           IconComponent={ForwardIcon}
           native={false}
           renderValue={(value: any) => {
-            return <div key={value}>{value}</div>;
+            return (
+              <div
+                style={{
+                  maxWidth: "100%",
+                  whiteSpace: "normal",
+                  wordBreak: "break-word",
+                }}
+                key={value}
+              >
+                {value}
+              </div>
+            );
           }}
         >
           {dropDownsValues}
