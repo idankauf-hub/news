@@ -169,7 +169,7 @@ const DropDown = ({
           value={val || ""}
           onClick={() => (disabled ? setIsOpen(false) : setIsOpen(!isOpen))}
           MenuProps={{
-            PaperProps: { sx: { maxHeight: 126,wordWrap:"break-word" } },
+            PaperProps: { sx: { maxHeight: 126, wordWrap: "break-word" } },
           }}
           open={isOpen}
           sx={{
@@ -183,17 +183,19 @@ const DropDown = ({
                 padding: "25px 14px",
                 borderRadius: "10px",
                 whiteSpace: "unset",
-                wordBreak: "break-word"
+                wordBreak: "break-word",
+                marginRight: "2px",
               },
             },
             "@media (max-width: 1451px)": {
               width: "13vw",
               fontSize: "0.8rem",
               "& .MuiSelect-select": {
-                padding: "20px 14px",
+                padding: "20px 14px ",
+                marginRight: "2%",
                 borderRadius: "10px",
                 whiteSpace: "unset",
-                wordBreak: "break-word"
+                wordBreak: "break-word",
               },
             },
             "@media (max-width: 1200px)": {
@@ -203,7 +205,7 @@ const DropDown = ({
                 padding: "20px 14px",
                 borderRadius: "10px",
                 whiteSpace: "unset",
-                wordBreak: "break-word"
+                wordBreak: "break-word",
               },
             },
 
@@ -235,11 +237,7 @@ const DropDown = ({
           IconComponent={ForwardIcon}
           native={false}
           renderValue={(value: any) => {
-            return (
-              <div key={value}>
-                {value}
-              </div>
-            );
+            return <div key={value}>{value}</div>;
           }}
         >
           {dropDownsValues}

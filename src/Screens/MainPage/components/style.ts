@@ -9,7 +9,7 @@ export const Container = styled.div<Props>`
   flex-direction: row;
   width: ${(props) => props.width};
   @media (max-width: 1450px) {
-    margin-left: 8.2vw;
+    margin-left: 4vw;
   }
   margin-left: 9vw;
   height: 50px;

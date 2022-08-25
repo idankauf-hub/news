@@ -150,6 +150,7 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
   return (
     <div
       style={{
+        marginTop:"5%",
         height: "28vh",
         width: "100%",
         padding: 10,
@@ -159,7 +160,7 @@ const Graph: React.FC<GraphProps> = ({ graphData }) => {
         <AreaChart
           data={dates}
           margin={{
-            top: 20,
+            top: 15,
             right: 17,
             left: 18,
             bottom: 0,

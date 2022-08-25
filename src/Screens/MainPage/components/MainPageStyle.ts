@@ -8,9 +8,6 @@ export const Container = styled(DisplayColumn)`
   @media (max-width: 1441px) {
     padding: 0px 8.5%;
   }
-  @media (max-width: 1441px) {
-    padding: 0px 8.5%;
-  }
   padding: 0px 12.5%;
   gap: 20px;
   background-color: ${COLORS.ghostwhite};

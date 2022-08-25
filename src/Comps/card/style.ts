@@ -84,7 +84,7 @@ export const BtnDiv = styled(DisplayCenterRow)`
   width: 100%;
   justify-content: flex-end;
   padding: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   gap: 10px;
   height: 5vh;
 `;
