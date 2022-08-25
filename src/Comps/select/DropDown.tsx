@@ -169,7 +169,7 @@ const DropDown = ({
           value={val || ""}
           onClick={() => (disabled ? setIsOpen(false) : setIsOpen(!isOpen))}
           MenuProps={{
-            PaperProps: { sx: { maxHeight: 300 } },
+            PaperProps: { sx: { maxHeight: 126,wordWrap:"break-word" } },
           }}
           open={isOpen}
           sx={{
@@ -177,13 +177,34 @@ const DropDown = ({
             fontWeight: 500,
             fontSize: "0.85rem",
             "@media (min-width: 1401px)": {
-              width: "200px",
-              fontSize: "0.72rem",
-
+              width: "190px",
+              fontSize: "0.8rem",
+              "& .MuiSelect-select": {
+                padding: "25px 14px",
+                borderRadius: "10px",
+                whiteSpace: "unset",
+                wordBreak: "break-word"
+              },
             },
-            "@media (max-width: 1401px)": {
-              width: "16vw",
-              fontSize: "0.70rem",
+            "@media (max-width: 1451px)": {
+              width: "13vw",
+              fontSize: "0.8rem",
+              "& .MuiSelect-select": {
+                padding: "20px 14px",
+                borderRadius: "10px",
+                whiteSpace: "unset",
+                wordBreak: "break-word"
+              },
+            },
+            "@media (max-width: 1200px)": {
+              width: "14vw",
+              fontSize: "0.7rem",
+              "& .MuiSelect-select": {
+                padding: "20px 14px",
+                borderRadius: "10px",
+                whiteSpace: "unset",
+                wordBreak: "break-word"
+              },
             },
 
             letterSpacing: 0.25,
@@ -214,7 +235,11 @@ const DropDown = ({
           IconComponent={ForwardIcon}
           native={false}
           renderValue={(value: any) => {
-            return <div key={value}>{value}</div>;
+            return (
+              <div key={value}>
+                {value}
+              </div>
+            );
           }}
         >
           {dropDownsValues}
