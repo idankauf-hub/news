@@ -8,6 +8,9 @@ export const Container = styled(DisplayColumn)`
   @media (max-width: 1441px) {
     padding: 0px 8.5%;
   }
+  @media (max-width: 990px) {
+    padding: 0px;
+  }
   padding: 0px 12.5%;
   gap: 20px;
   background-color: ${COLORS.ghostwhite};
@@ -21,6 +24,10 @@ export const ColumnGraphs = styled(DisplayColumn)`
   align-items: flex-start;
   gap: 24px;
   width: 30%;
+  @media (max-width: 990px) {
+    padding: 0px;
+    display:none;
+  }
   @media (max-width: 1441px) {
     width: 28%;
   }
@@ -34,6 +41,9 @@ export const ColumnCards = styled(DisplayColumn)`
   width: 70%;
   height: 100vh;
 
+  @media (max-width: 990px) {
+    min-width: 100%;
+  }
   @media (max-width: 1441px) {
     width: 72%;
   }

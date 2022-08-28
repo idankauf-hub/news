@@ -11,6 +11,9 @@ export const Container = styled.div<Props>`
   @media (max-width: 1450px) {
     margin-left: 4vw;
   }
+  @media (max-width: 600px) {
+   width:70vw;
+  }
   margin-left: 9vw;
   height: 50px;
   background: #ffffff;

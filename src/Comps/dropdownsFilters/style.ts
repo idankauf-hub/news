@@ -9,6 +9,10 @@ export const DisplayRowWithGap = styled(DisplayRow)`
     max-width: 62vw;
     height: 5.5vh;
   }
+  @media (max-width: 600px) {
+    display:none;
+  }
+
   @media (min-width: 1551px) {
     margin-top: 20px;
     padding: 0px;

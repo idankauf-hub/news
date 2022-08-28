@@ -9,12 +9,12 @@ export const Container = styled.div`
   @media (max-width: 1440px) {
     margin-top: 7.5vh;
     margin-left: 4vw;
-    width: 29.8vw;
+    width: 29.4vw;
   }
+
   @media (min-width: 1441px) {
     margin-top: 5.7vh;
     margin-left: 9vw;
-
     width: 22.1vw;
   }
   max-height: 132px;

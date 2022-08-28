@@ -33,7 +33,6 @@ const Card: React.FC<CardProps> = ({
   urlToImage,
   urlToNews,
 }) => {
-  
   return (
     <CardContainer ref={refLastArticle}>
       <CardMedia
@@ -63,12 +62,16 @@ const Card: React.FC<CardProps> = ({
             endIcon={<RightArrow />}
             sx={{
               "@media (max-width: 855px)": {
-                width: "13vw",
-                fontSize: "0.5vw",
+                width: "25vw",
+                fontSize: "0.5rem",
               },
               "@media (max-width: 730px)": {
-                width: "10vw",
-                fontSize: "0.5vw",
+                width: "25vw",
+                fontSize: "0.5rem",
+              },
+              "@media (max-width: 600px)": {
+                width: "100%",
+                fontSize: "1rem",
               },
               bgcolor: "#0058B9",
               borderRadius: 20,
