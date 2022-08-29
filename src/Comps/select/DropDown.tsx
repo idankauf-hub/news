@@ -180,7 +180,7 @@ const DropDown = ({
               width: "190px",
               fontSize: "0.8rem",
               "& .MuiSelect-select": {
-                padding: "25px 14px",
+                padding: "22px 14px",
                 borderRadius: "10px",
                 whiteSpace: "unset",
                 wordBreak: "break-word",
